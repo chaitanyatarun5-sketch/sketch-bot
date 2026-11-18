@@ -173,7 +173,7 @@ app.add_handler(CommandHandler("joke", joke))
 app.add_handler(CommandHandler("shayari", shayari))
 app.add_handler(CommandHandler("ping", ping))
 app.add_handler(CommandHandler("tagall", tagall)) 
-from telegram import InlineQueryResultArticle, InputTextContent
+from telegram import InlineQueryResultArticle, InputTextMessageContent
 import uuid, random
 
 jokes_list = [
