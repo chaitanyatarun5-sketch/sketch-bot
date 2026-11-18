@@ -13,18 +13,24 @@ def run_web():
 
 threading.Thread(target=run_web, daemon=True).start()
 
-import random, os, asyncio
+import random, os, asyncio, time
 from telegram import Update, InlineQueryResultArticle, InputTextMessageContent
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, InlineQueryHandler
 import uuid
 
 TOKEN = os.getenv("TOKEN")
-ALLOWED_USER_IDS = [8532606474, 9239452757]
+
+OWNER_ID = 8532606474
+SUDO_USERS = {9239452757}
+
+def is_owner(user_id):
+    return user_id == OWNER_ID
 
 def is_allowed(update):
     if update.effective_user is None:
         return False
-    return update.effective_user.id in ALLOWED_USER_IDS
+    uid = update.effective_user.id
+    return uid == OWNER_ID or uid in SUDO_USERS
 
 JOKES = [
     "😂 TEACHER: KAL SCHOOL KYU NAHI AAYE? STUDENT: GIRLFRIEND SE MILNE GAYA THA 😜",
@@ -125,6 +131,9 @@ ROASTS = [
     "🤣 TU ITNA FAMOUS HAI, SIRF TERI MUMMY JANTI HAI 😂"
 ]
 
+async def myid_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(f"TERI ID: {update.effective_user.id}\nNAAM: {update.effective_user.first_name}")
+
 async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
         return
@@ -133,7 +142,32 @@ async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
         return
-    await update.message.reply_text("/START - BOT START\n/HELP - COMMANDS\n/PAPA - PAPA WALA REPLY\n/SHAYARI - 30 ME SE 1 SHAYARI ❤️\n/JOKE - 30 ME SE 1 JOKE 😂\n/RAID 10 - 10 BAAR FUNNY ROAST 😂\nINLINE - KISI BHI CHAT ME @demon_17_099_bot JOKE / SHAYARI LIKH")
+    await update.message.reply_text("/START - BOT START\n/HELP - COMMANDS\n/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - 30 ME SE 1 SHAYARI ❤️\n/JOKE - 30 ME SE 1 JOKE 😂\n/RAID 10 - 10 BAAR FUNNY ROAST 😂\n/ADDSUDO - REPLY KARKE SUDO BANAO (SIRF OWNER)\n/DELSUDO - REPLY KARKE SUDO HATAO (SIRF OWNER)\n/SUDOLIST - SUDO LIST DEKHO")
+
+async def ping_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    start = time.time()
+    msg = await update.message.reply_text("PINGING... ⚡")
+    ping_ms = (time.time() - start) * 1000
+    # SUDO number nikalna
+    uid = update.effective_user.id
+    if uid == OWNER_ID:
+        sudo_tag = "OWNER 👑"
+    else:
+        sudo_list = list(SUDO_USERS)
+        try:
+            sudo_tag = f"SUDO {sudo_list.index(uid)+1}"
+        except:
+            sudo_tag = "SUDO"
+    # Mode ping ke hisaab se
+    if ping_ms < 500:
+        mode = "FAST ⚡"
+    elif ping_ms < 1000:
+        mode = "MEDIUM"
+    else:
+        mode = "SLOW 🐢"
+    await msg.edit_text(f"TARUN ❤️\nBOT ON HAI BOSS BATAO KISKO UDAANA HAI 🔥\nPING: {ping_ms:.2f}MS | Mode: {mode}\n[{sudo_tag}]")
 
 async def papa_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
@@ -169,7 +203,70 @@ async def raid_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"{i+1}. {random.choice(ROASTS)}")
         await asyncio.sleep(0.5)
 
+async def addsudo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_owner(update.effective_user.id):
+        await update.message.reply_text("❌ ONLY OWNER CAN ADD SUDO USERS!")
+        return
+    target_id = None
+    target_name = ""
+    if update.message.reply_to_message:
+        target_id = update.message.reply_to_message.from_user.id
+        target_name = update.message.reply_to_message.from_user.first_name
+    elif context.args:
+        try:
+            target_id = int(context.args[0])
+            target_name = str(target_id)
+        except:
+            await update.message.reply_text("SAHI ID DAAL YA REPLY KARKE /ADDSUDO LIKH")
+            return
+    else:
+        await update.message.reply_text("KISI KE MESSAGE PE REPLY KARKE /ADDSUDO LIKH YA /ADDSUDO <ID> LIKH")
+        return
+    if target_id == OWNER_ID:
+        await update.message.reply_text("WO TO OWNER HI HAI BHAI!")
+        return
+    SUDO_USERS.add(target_id)
+    await update.message.reply_text(f"✅ {target_name} AB SUDO BAN GAYA!\nID: {target_id}")
+
+async def delsudo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_owner(update.effective_user.id):
+        await update.message.reply_text("❌ ONLY OWNER CAN REMOVE SUDO USERS!")
+        return
+    target_id = None
+    target_name = ""
+    if update.message.reply_to_message:
+        target_id = update.message.reply_to_message.from_user.id
+        target_name = update.message.reply_to_message.from_user.first_name
+    elif context.args:
+        try:
+            target_id = int(context.args[0])
+            target_name = str(target_id)
+        except:
+            await update.message.reply_text("SAHI ID DAAL YA REPLY KARKE /DELSUDO LIKH")
+            return
+    else:
+        await update.message.reply_text("KISI KE MESSAGE PE REPLY KARKE /DELSUDO LIKH YA /DELSUDO <ID> LIKH")
+        return
+    if target_id in SUDO_USERS:
+        SUDO_USERS.remove(target_id)
+        await update.message.reply_text(f"❌ {target_name} KA SUDO HATA DIYA!\nID: {target_id}")
+    else:
+        await update.message.reply_text("WO SUDO ME HAI HI NAHI!")
+
+async def sudolist_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    if not SUDO_USERS:
+        await update.message.reply_text(f"OWNER: {OWNER_ID}\nKOI SUDO NAHI HAI!")
+        return
+    text = f"👑 OWNER: {OWNER_ID}\n\n🔥 SUDO LIST:\n"
+    for i, uid in enumerate(SUDO_USERS, 1):
+        text += f"{i}. {uid}\n"
+    await update.message.reply_text(text)
+
 async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.inline_query.from_user.id != OWNER_ID and update.inline_query.from_user.id not in SUDO_USERS:
+        return
     query = update.inline_query.query.lower().strip()
     results = []
     if "shayari" in query:
@@ -186,10 +283,15 @@ def main():
     app_bot = ApplicationBuilder().token(TOKEN).build()
     app_bot.add_handler(CommandHandler("start", start_cmd))
     app_bot.add_handler(CommandHandler("help", help_cmd))
+    app_bot.add_handler(CommandHandler("myid", myid_cmd))
+    app_bot.add_handler(CommandHandler("ping", ping_cmd))
     app_bot.add_handler(CommandHandler("papa", papa_cmd))
     app_bot.add_handler(CommandHandler("shayari", shayari_cmd))
     app_bot.add_handler(CommandHandler("joke", joke_cmd))
     app_bot.add_handler(CommandHandler("raid", raid_cmd))
+    app_bot.add_handler(CommandHandler("addsudo", addsudo_cmd))
+    app_bot.add_handler(CommandHandler("delsudo", delsudo_cmd))
+    app_bot.add_handler(CommandHandler("sudolist", sudolist_cmd))
     app_bot.add_handler(InlineQueryHandler(inline_query))
     app_bot.run_polling()
 
