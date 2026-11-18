@@ -113,11 +113,45 @@ async def fun(update, context):
 
 async def joke(update, context):
     import random
-    jokes = ["Teacher: Kal kyu nahi aaye? Student: Girlfriend se milne gaya tha 😂", "Zindagi me 2 hi sukh hai, ek neend, dusra fir se neend 😴"]
+    jokes = [
+    "Teacher: Kal kyu nahi aaye? Student: Girlfriend se milne gaya tha 😂",
+    "Zindagi me 2 hi sukh hai, ek neend, dusra fir se neend 😴",
+    "Pati: Tum pehle jaisi nahi rahi. Patni: Pehle tum bhi Ameer nahi the 😜",
+    "Exam me fail hone ka dukh nahi, dost ke pass hone ka zyada dukh hai 😭",
+    "Wifi slow ho to lagta hai zindagi hi ruk gayi hai 📶",
+    "Mummy: Beta padh le. Main: Haan mummy, phone me hi padh raha hu 😎",
+    "Dost ke paise wapas mangna matlab dosti khatam karna 💸",
+    "Subah uthna mushkil nahi, bistar chhodna mushkil hai 🛏️",
+    "Pyar me dhoka khane ke baad ladke shayar ban jate hai 😅",
+    "Aaj kal log photo me gore dikhne ke liye filter lagate hai, pehle haldi lagate the 😂",
+    "Bhai ka birthday bhool jao, par uska udhaar mat bhoolna 😜",
+    "School me jo topper tha, aaj wo mere yaha job karta hai 😎",
+    "Girlfriend ka reply late aaye to lagta hai breakup ho gaya 💔",
+    "Petrol itna mehenga hai, ab cycle hi best hai 🚲",
+    "Raat ko neend nahi aati, din me aankh nahi khulti 😴"
+    ]
     await update.message.reply_text(random.choice(jokes))
 
 async def shayari(update, context):
-    await update.message.reply_text("Teri yaad me humne chai bhi thandi pi li ☕")
+    import random
+    shayari_list = [
+    "Teri yaad me humne chai bhi thandi pi li ☕",
+    "Tum mile to laga, zindagi me kuch kami nahi thi, bas tumhari kami thi ❤️",
+    "Mohabbat me humne dil haar diya, ab kehte hai hum hi bewafa hai 💔",
+    "Chandni raat me teri yaad aayi, dil ne kaha kash tu paas hoti 🌙",
+    "Teri muskan pe fida hai ye dil, tu hanse to jahan has jaye 😊",
+    "Dil tod ke jaane wale, kabhi to yaad karoge hume 💔",
+    "Teri galiyon me aana jaana, ab aadat si ho gayi hai ❤️",
+    "Zindagi ki har khushi ek taraf, tera saath ek taraf ✨",
+    "Teri bina jeena mushkil hai, ye dil ab kehta hai 🥺",
+    "Raat bhar teri yaad me jagte hai, subah tujhe yaad karke sote hai 🌙",
+    "Tu mile ya na mile, mohabbat to tujhse hi rahegi ❤️",
+    "Teri ek jhalak ke liye, hum zamana bhool jate hai 😍",
+    "Dil me basi hai teri yaadein, kaise bhulaye tujhe 💭",
+    "Mohabbat ka koi mol nahi, ye dil se hoti hai ❤️",
+    "Teri yaad aaye to dil ro deta hai, tu paas ho to dil has deta hai 😢"
+    ]
+    await update.message.reply_text(random.choice(shayari_list))
 
 async def ping(update, context):
     await update.message.reply_text("⚡ Bot LIVE hai bhai!")
