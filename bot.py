@@ -173,6 +173,65 @@ app.add_handler(CommandHandler("joke", joke))
 app.add_handler(CommandHandler("shayari", shayari))
 app.add_handler(CommandHandler("ping", ping))
 app.add_handler(CommandHandler("tagall", tagall)) 
+from telegram import InlineQueryResultArticle, InputTextContent
+import uuid, random
+
+jokes_list = [
+"Teacher: Kal kyu nahi aaye? Student: Girlfriend se milne gaya tha 😂",
+"Zindagi me 2 hi sukh hai, ek neend, dusra fir se neend 😴",
+"Wifi slow ho to lagta hai zindagi hi ruk gayi hai 📶",
+"Papa: Beta result kaisa raha? Beta: Papa, 2 khushkhabri hai, ek fail ho gaya, dusri bhi fail ho gaya 😅",
+"Girlfriend: Tum mujhe kabhi ghumane nahi le jate. Boyfriend: Le jata hu na, roz sapno me 😍",
+"Exams aate hi dosti bhi topper se ho jati hai 📚",
+"Mummy: Beta khana kha le. Beta: Pehle wifi ka password batao, khana to baad me bhi kha lunga 😋",
+"Dost: Bhai breakup ho gaya. Main: Chal party karte hai, ek bojh kam hua 😂",
+"Jab tak phone me charge hai, tab tak zindagi me sukh hai 🔋",
+"Padhai karne baitho to neend aati hai, aur sone jao to padhai yaad aati hai 🤦",
+"Single rehne ka ek fayda hai, koi puchega nahi 'kaha ho, khana khaya?' 😎",
+"Teacher: Tum itne late kyu aaye? Student: Sir, sapne me school jaldi aa gaya tha, isliye late ho gaya 😂",
+"Paise ho to log puchte hai 'kaise ho', na ho to puchte bhi nahi 🤑",
+"Girlfriend ka gussa aur Mumbai ki baarish, kabhi bhi aa sakti hai 🌧️",
+"Subah uthna sabse bada struggle hai, alarm se bada dushman koi nahi ⏰",
+"Dost ke paise udhar lena aasan hai, wapas dena sabse mushkil 😭",
+"Sharma ji ka beta to topper hai, humara beta to meme banane me topper hai 😂",
+"Jab koi kahe '5 minute me aaya' to samajh jao 1 ghanta pakka hai ⌚",
+"Love me padna aasan hai, usse bahar nikalna mushkil hai 💔",
+"Phone girne pe dil se zyada screen tutne ka dard hota hai 📱"
+]
+
+shayari_list = [
+"Teri yaad me humne chai bhi thandi pi li ☕",
+"Chandni raat me teri yaad aayi, dil ne kaha kash tu paas hoti 🌙",
+"Tum mile to laga, zindagi me kuch kami nahi thi, bas tumhari kami thi ❤️",
+"Door rehkar bhi tu dil ke paas hai, teri yaad hi meri har saans hai 🫶",
+"Na chahiye daulat, na chahiye shoharat, bas ek tu chahiye, aur teri mohabbat ❤️",
+"Teri muskaan pe fida hai ye dil, tu mile to lage duniya mil gayi 🌹",
+"Raaton ko neend nahi aati, teri yaad bahut satati hai 😔",
+"Tu jo mile to laga, khuda ne meri sun li, warna dua me to humne tujhe hi manga tha 🤲",
+"Mohabbat me humne khud ko mita diya, tune kaha alvida aur humne maan liya 💔",
+"Teri ek jhalak ke liye tarasta hai dil, tu na mile to udaas rehta hai dil 🥺",
+"Zindagi guzar gayi tujhe chahte chahte, tu ek pal bhi na samajh paya hume chahte chahte 💭",
+"Chai se zyada nasha teri yaado me hai, peeke bhi utarta nahi ☕❤️",
+"Tu door hai to kya hua, teri yaadein to paas hai, dil me basi teri har baat hai 💌",
+"Humne to bas tujhe chaha tha, tune to zamana hi badal diya 🥀",
+"Khushboo ki tarah guzar gaya koi, yaadein chhod gaya, dil tod gaya 🌸",
+"Tujhe dekh kar dil ne ye farmaya, tu hi hai meri duniya, tu hi hai meri dua ✨",
+"Barish me teri yaad aur bhi badh jati hai, boondon me teri tasveer nazar aati hai 🌧️",
+"Na din ko chain hai, na raat ko neend hai, bas teri yaad me dil ka ye haal hai 😢",
+"Teri baatein sunne ko tarasta hu, teri ek awaaz pe marta hu 🎧❤️",
+"Tu mile ya na mile, mohabbat to hum karte rahenge, tujhe yaad karke hum jeete rahenge 💖"
+]
+
+async def inline_query(update, context):
+    q = update.inline_query.query.lower()
+    if "shayari" in q or "syri" in q or "sayar" in q:
+        text = random.choice(shayari_list)
+    else:
+        text = random.choice(jokes_list)
+    results = [InlineQueryResultArticle(id=str(uuid.uuid4()), title="Bhejne ke liye click karo 👈", input_message_content=InputTextContent(text))]
+    await update.inline_query.answer(results)
+
+app.add_handler(InlineQueryHandler(inline_query))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_handle))
 
 print("Bot chal raha hai...")
