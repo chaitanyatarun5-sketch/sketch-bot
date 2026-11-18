@@ -95,7 +95,7 @@ SHAYARI = [
 async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
         return
-    await update.message.reply_text("BOT ON HAI! 🔥 /HELP LIKH KE COMMANDS DEKH.\nINLINE KE LIYE KISI BHI CHAT ME @BOTUSERNAME JOKE LIKH.")
+    await update.message.reply_text("BOT ON HAI! 🔥 /HELP LIKH KE COMMANDS DEKH.")
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
@@ -130,7 +130,7 @@ async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
             results.append(InlineQueryResultArticle(id=str(uuid.uuid4()), title=f"JOKE {i+1} 😂", input_message_content=InputTextMessageContent(text), description=text[:60]))
     await update.inline_query.answer(results, cache_time=0)
 
-async def main():
+def main():
     app_bot = ApplicationBuilder().token(TOKEN).build()
     app_bot.add_handler(CommandHandler("start", start_cmd))
     app_bot.add_handler(CommandHandler("help", help_cmd))
@@ -138,8 +138,7 @@ async def main():
     app_bot.add_handler(CommandHandler("shayari", shayari_cmd))
     app_bot.add_handler(CommandHandler("joke", joke_cmd))
     app_bot.add_handler(InlineQueryHandler(inline_query))
-    await app_bot.run_polling()
+    app_bot.run_polling()
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+    main()
