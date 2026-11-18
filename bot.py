@@ -11,7 +11,7 @@ def run_web():
 threading.Thread(target=run_web, daemon=True).start()
 import json, random, os
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters, InlineQueryHandler
 
 TOKEN = os.getenv("TOKEN")
 
