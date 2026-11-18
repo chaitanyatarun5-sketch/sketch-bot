@@ -142,7 +142,7 @@ async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
         return
-    await update.message.reply_text("/START - BOT START\n/HELP - COMMANDS\n/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - 30 ME SE 1 SHAYARI ❤️\n/JOKE - 30 ME SE 1 JOKE 😂\n/RAID 10 - 10 BAAR FUNNY ROAST 😂\n/ADDSUDO - REPLY KARKE SUDO BANAO (SIRF OWNER)\n/DELSUDO - REPLY KARKE SUDO HATAO (SIRF OWNER)\n/SUDOLIST - SUDO LIST DEKHO")
+    await update.message.reply_text("/START - BOT START\n/HELP - COMMANDS\n/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - 30 ME SE 1 SHAYARI ❤️\n/JOKE - 30 ME SE 1 JOKE 😂\n/RAID 10 - 10 BAAR FUNNY ROAST 😂\n/SPAM 5 BYYEE - JO LIKHOGE WO 5 BAAR BHEJEGA 🔥\n/ADDSUDO - REPLY KARKE SUDO BANAO (SIRF OWNER)\n/DELSUDO - REPLY KARKE SUDO HATAO (SIRF OWNER)\n/SUDOLIST - SUDO LIST DEKHO")
 
 async def ping_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
@@ -150,7 +150,6 @@ async def ping_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     start = time.time()
     msg = await update.message.reply_text("PINGING... ⚡")
     ping_ms = (time.time() - start) * 1000
-    # SUDO number nikalna
     uid = update.effective_user.id
     if uid == OWNER_ID:
         sudo_tag = "OWNER 👑"
@@ -160,7 +159,6 @@ async def ping_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
             sudo_tag = f"SUDO {sudo_list.index(uid)+1}"
         except:
             sudo_tag = "SUDO"
-    # Mode ping ke hisaab se
     if ping_ms < 500:
         mode = "FAST ⚡"
     elif ping_ms < 1000:
@@ -201,6 +199,27 @@ async def raid_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"🔥 RAID START! {count} BAAR ROAST AAYEGA 😂")
     for i in range(count):
         await update.message.reply_text(f"{i+1}. {random.choice(ROASTS)}")
+        await asyncio.sleep(0.5)
+
+async def spam_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    if len(context.args) < 2:
+        await update.message.reply_text("AISE LIKH BHAI: /spam 5 BYYEE")
+        return
+    try:
+        count = int(context.args[0])
+    except:
+        await update.message.reply_text("PEHLE NUMBER DAAL: /spam 5 BYYEE")
+        return
+    if count < 1:
+        count = 1
+    if count > 50:
+        count = 50
+        await update.message.reply_text("MAX 50 BAAR HI HOGA BHAI! 😂")
+    text = " ".join(context.args[1:])
+    for i in range(count):
+        await update.message.reply_text(text)
         await asyncio.sleep(0.5)
 
 async def addsudo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -289,6 +308,7 @@ def main():
     app_bot.add_handler(CommandHandler("shayari", shayari_cmd))
     app_bot.add_handler(CommandHandler("joke", joke_cmd))
     app_bot.add_handler(CommandHandler("raid", raid_cmd))
+    app_bot.add_handler(CommandHandler("spam", spam_cmd))
     app_bot.add_handler(CommandHandler("addsudo", addsudo_cmd))
     app_bot.add_handler(CommandHandler("delsudo", delsudo_cmd))
     app_bot.add_handler(CommandHandler("sudolist", sudolist_cmd))
