@@ -13,7 +13,7 @@ def run_web():
 
 threading.Thread(target=run_web, daemon=True).start()
 
-import random, os
+import random, os, asyncio
 from telegram import Update, InlineQueryResultArticle, InputTextMessageContent
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, InlineQueryHandler
 import uuid
@@ -92,6 +92,39 @@ SHAYARI = [
     "🌹 ZINDAGI KA SAFAR TU HI HAI, MERI HAR KHUSHI TU HI HAI 💖"
 ]
 
+ROASTS = [
+    "😂 TU ITNA SLOW HAI, GOOGLE BHI TERA NAAM SEARCH KARNE ME THAK JATA HAI 🐢",
+    "🤣 TERA DIMAG ITNA SLOW HAI, WIFI SE BHI SLOW CHALTA HAI 📶",
+    "😂 TU PADHAI ME ITNA AAGE HAI, KI PEECHE SE NUMBER 1 HAI 🏆",
+    "🤣 TERI SHAKAL DEKH KE TO AAINA BHI BOLTA HAI, BHAI MUJHE TOD DE 🪞",
+    "😂 TU ITNA KANJOOS HAI, KANJOOS BHI TUJHSE UDHAR MANGTA HAI 💸",
+    "🤣 TERA JOKES SUN KE TO JOKES BHI RO PADTE HAI 😭",
+    "😂 TU ITNA BHULAKKAD HAI, APNA NAAM BHI YAAD KARNE KE LIYE AADHAR CARD DEKHTA HAI 🪪",
+    "🤣 TERI ENGLISH SUN KE TO ENGLISH BHI HINDI BOLNE LAGTI HAI 😅",
+    "😂 TU GAME ME ITNA NOOB HAI, BOT BHI TUJHSE JEET JATA HAI 🎮",
+    "🤣 TERA PHONE ITNA PURANA HAI, MUSEUM ME RAKHNE LAYAK HAI 📱",
+    "😂 TU ITNA AALSI HAI, AALS PAN BHI TUJHSE SEEKHTA HAI 😴",
+    "🤣 TERA STYLE DEKH KE TO FASHION BHI SHARMA JATA HAI 👕",
+    "😂 TU ITNA BHOOKHA HAI, KHANA DEKH KE HI PET BHAR JATA HAI 🍛",
+    "🤣 TERI AWAAZ SUN KE TO MIC BHI BAND HO JATA HAI 🎤",
+    "😂 TU ITNA LATE AATA HAI, LATE BHI TUJHSE LATE HO JATA HAI ⏰",
+    "🤣 TERA MATHS ITNA KHARAB HAI, CALCULATOR BHI HAAR MAAN JATA HAI 🧮",
+    "😂 TU ITNA DARTA HAI, CHIPKALI DEKH KE BHI CHILLATA HAI 🦎",
+    "🤣 TERI SELFIE DEKH KE TO CAMERA BHI BLUR HO JATA HAI 📸",
+    "😂 TU ITNA BHOLA HAI, CHUTKULA SAMAJHNE ME 2 DIN LAGTA HAI 🤔",
+    "🤣 TERA NET ITNA SLOW HAI, MESSAGE KAL PAHUNCHTA HAI 📩",
+    "😂 TU ITNA CHOTA HAI, GOOGLE MAPS ME BHI NAHI MILTA 📍",
+    "🤣 TERI YAADDAASHT ITNI KAMZOR HAI, KAL KI BAAT AAJ BHOOL JATA HAI 🧠",
+    "😂 TU ITNA ZYADA BOLTA HAI, RADIO BHI TUJHSE HAAR JATA HAI 📻",
+    "🤣 TERA LUCK ITNA KHARAB HAI, LOTTERY ME BHI TUJHSE PAISE LE LETE HAI 🎟️",
+    "😂 TU ITNA MOTU HAI, TARA ZOO DEKH KE BHI DAR JATA HAI 🐘",
+    "🤣 TERI DANCE DEKH KE TO DJ BHI GAANA BAND KAR DETA HAI 💃",
+    "😂 TU ITNA CONFUSED HAI, KHUD KO BHI BHOOL JATA HAI 😵",
+    "🤣 TERA ATTITUDE DEKH KE TO ATTITUDE BHI DOWN HO JATA HAI 😎",
+    "😂 TU ITNA NAKHRE WALA HAI, LADKIYAN BHI TUJHSE SEEKHTI HAI 💅",
+    "🤣 TU ITNA FAMOUS HAI, SIRF TERI MUMMY JANTI HAI 😂"
+]
+
 async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
         return
@@ -100,7 +133,7 @@ async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
         return
-    await update.message.reply_text("/START - BOT START\n/HELP - COMMANDS\n/PAPA - PAPA WALA REPLY\n/SHAYARI - 30 ME SE 1 SHAYARI ❤️\n/JOKE - 30 ME SE 1 JOKE 😂\nINLINE - KISI BHI CHAT ME @BOTUSERNAME JOKE / SHAYARI LIKH")
+    await update.message.reply_text("/START - BOT START\n/HELP - COMMANDS\n/PAPA - PAPA WALA REPLY\n/SHAYARI - 30 ME SE 1 SHAYARI ❤️\n/JOKE - 30 ME SE 1 JOKE 😂\n/RAID 10 - 10 BAAR FUNNY ROAST 😂\nINLINE - KISI BHI CHAT ME @demon_17_099_bot JOKE / SHAYARI LIKH")
 
 async def papa_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
@@ -116,6 +149,25 @@ async def joke_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_allowed(update):
         return
     await update.message.reply_text(random.choice(JOKES))
+
+async def raid_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    count = 5
+    if context.args:
+        try:
+            count = int(context.args[0])
+        except:
+            count = 5
+    if count < 1:
+        count = 1
+    if count > 50:
+        count = 50
+        await update.message.reply_text("MAX 50 BAAR HI HOGA BHAI! 😂")
+    await update.message.reply_text(f"🔥 RAID START! {count} BAAR ROAST AAYEGA 😂")
+    for i in range(count):
+        await update.message.reply_text(f"{i+1}. {random.choice(ROASTS)}")
+        await asyncio.sleep(0.5)
 
 async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.inline_query.query.lower().strip()
@@ -137,6 +189,7 @@ def main():
     app_bot.add_handler(CommandHandler("papa", papa_cmd))
     app_bot.add_handler(CommandHandler("shayari", shayari_cmd))
     app_bot.add_handler(CommandHandler("joke", joke_cmd))
+    app_bot.add_handler(CommandHandler("raid", raid_cmd))
     app_bot.add_handler(InlineQueryHandler(inline_query))
     app_bot.run_polling()
 
