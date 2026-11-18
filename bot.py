@@ -1,246 +1,145 @@
 from flask import Flask
 import threading
 app = Flask(__name__)
+
 @app.route('/')
 def home():
     return "Bot chal raha hai..."
+
 def run_web():
     import os
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host='0.0.0.0', port=port)
+
 threading.Thread(target=run_web, daemon=True).start()
-import json, random, os
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters, InlineQueryHandler
+
+import random, os
+from telegram import Update, InlineQueryResultArticle, InputTextMessageContent
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, InlineQueryHandler
+import uuid
 
 TOKEN = os.getenv("TOKEN")
+ALLOWED_USER_IDS = [8532606474, 9239452757]
 
-ALLOWED_USER_IDS = [8532606474, 9239452757] 
-FILE = "settings.json"
+def is_allowed(update):
+    if update.effective_user is None:
+        return False
+    return update.effective_user.id in ALLOWED_USER_IDS
 
-
-def load():
-    if os.path.exists(FILE):
-        with open(FILE) as f: return json.load(f)
-    return {"reply": "Hello! Bot chal gaya", "pic": None, "react": True, "dm": True, "autoreply": True}
-
-def save(data):
-    with open(FILE, "w") as f: json.dump(data, f)
-
-data = load()
-EMOJIS = ["??", "??", "??", "??", "??", "??", "??", "??"]
-
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):    
-    if update.effective_user.id not in ALLOWED_USER_IDS:
-        await update.message.reply_text("Abbee baap ka bot nahi hai Tarun papa ko baap bol ke aa tab acces milega.")
-        return
-    await update.message.reply_text("Bot ON hai! /papa likh ke command dekh")
-
-async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE ):   
-        if update.effective_user.id not in ALLOWED_USER_IDS:
-            await update.message.reply_text("Sorry, ye bot sirf owner aur uske VIP ke liye hai.")
-            return
-    await update.message.reply_text(
-        "/setreply <text> - Auto reply set karo\n"
-        "/setpic - Kisi photo pe reply karke ye likho, wo pic set ho jayegi\n"
-        "/autoreact on/off - GC me auto react on/off\n"
-        "/setdm on/off - DM me auto reply on/off\n"
-        "/autoreply on/off - Auto reply on/off\n"
-        "/show - Kya set hai wo dekho\n"
-        "/clearpic - Pic hatao"
-    )
-
-async def setreply(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args:
-        await update.message.reply_text("Aise likh: /setreply Hello bhai kya haal hai")
-        return
-    data["reply"] = " ".join(context.args)
-    save(data)
-    await update.message.reply_text(f"Ho gaya! Ab ye reply jayega:\n{data['reply']}")
-
-async def setpic(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.message.reply_to_message and update.message.reply_to_message.photo:
-        data["pic"] = update.message.reply_to_message.photo[-1].file_id
-        save(data)
-        await update.message.reply_text("Pic set ho gayi! Ab reply ke sath ye pic jayegi")
-    else:
-        await update.message.reply_text("Kisi photo pe reply karke /setpic likho")
-
-async def autoreact(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args: return
-    data["react"] = context.args[0].lower() == "on"
-    save(data)
-    await update.message.reply_text(f"Auto React: {'ON' if data['react'] else 'OFF'}")
-
-async def setdm(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args: return
-    data["dm"] = context.args[0].lower() == "on"
-    save(data)
-    await update.message.reply_text(f"DM Auto Reply: {'ON' if data['dm'] else 'OFF'}")
-
-async def autoreply_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args: return
-    data["autoreply"] = context.args[0].lower() == "on"
-    save(data)
-    await update.message.reply_text(f"Auto Reply: {'ON' if data['autoreply'] else 'OFF'}")
-
-async def show(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"Reply: {data['reply']}\nPic: {'Set hai' if data['pic'] else 'Nahi hai'}\nReact: {data['react']}\nDM: {data['dm']}\nAutoReply: {data['autoreply']}")
-
-async def clearpic(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    data["pic"] = None
-    save(data)
-    await update.message.reply_text("Pic hata di")
-
-async def auto_handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not update.message or not update.message.text: return
-    if update.message.text.startswith("/"): return
-    if not data["autoreply"]: return
-
-    chat_type = update.message.chat.type
-    is_group = chat_type in ["group", "supergroup"]
-
-    # GC me Auto React
-    if is_group and data["react"]:
-        try:
-            await context.bot.set_message_reaction(update.message.chat_id, update.message.message_id, [random.choice(EMOJIS)])
-        except: pass
-
-    # DM check
-    if chat_type == "private" and not data["dm"]:
-        return
-
-    # Auto Reply + Pic
-    if data["pic"]:
-        await update.message.reply_photo(photo=data["pic"], caption=data["reply"])
-    else:
-        await update.message.reply_text(data["reply"])
-
-async def fun(update, context):
-    await update.message.reply_text("✨ FUN MENU ✨\n\n/joke - Joke\n/shayari - Shayari\n/ping - Bot live hai?")
-
-async def joke(update, context):
-    import random
-    jokes = [
-    "Teacher: Kal kyu nahi aaye? Student: Girlfriend se milne gaya tha 😂",
-    "Zindagi me 2 hi sukh hai, ek neend, dusra fir se neend 😴",
-    "Pati: Tum pehle jaisi nahi rahi. Patni: Pehle tum bhi Ameer nahi the 😜",
-    "Exam me fail hone ka dukh nahi, dost ke pass hone ka zyada dukh hai 😭",
-    "Wifi slow ho to lagta hai zindagi hi ruk gayi hai 📶",
-    "Mummy: Beta padh le. Main: Haan mummy, phone me hi padh raha hu 😎",
-    "Dost ke paise wapas mangna matlab dosti khatam karna 💸",
-    "Subah uthna mushkil nahi, bistar chhodna mushkil hai 🛏️",
-    "Pyar me dhoka khane ke baad ladke shayar ban jate hai 😅",
-    "Aaj kal log photo me gore dikhne ke liye filter lagate hai, pehle haldi lagate the 😂",
-    "Bhai ka birthday bhool jao, par uska udhaar mat bhoolna 😜",
-    "School me jo topper tha, aaj wo mere yaha job karta hai 😎",
-    "Girlfriend ka reply late aaye to lagta hai breakup ho gaya 💔",
-    "Petrol itna mehenga hai, ab cycle hi best hai 🚲",
-    "Raat ko neend nahi aati, din me aankh nahi khulti 😴"
-    ]
-    await update.message.reply_text(random.choice(jokes))
-
-async def shayari(update, context):
-    import random
-    shayari_list = [
-    "Teri yaad me humne chai bhi thandi pi li ☕",
-    "Tum mile to laga, zindagi me kuch kami nahi thi, bas tumhari kami thi ❤️",
-    "Mohabbat me humne dil haar diya, ab kehte hai hum hi bewafa hai 💔",
-    "Chandni raat me teri yaad aayi, dil ne kaha kash tu paas hoti 🌙",
-    "Teri muskan pe fida hai ye dil, tu hanse to jahan has jaye 😊",
-    "Dil tod ke jaane wale, kabhi to yaad karoge hume 💔",
-    "Teri galiyon me aana jaana, ab aadat si ho gayi hai ❤️",
-    "Zindagi ki har khushi ek taraf, tera saath ek taraf ✨",
-    "Teri bina jeena mushkil hai, ye dil ab kehta hai 🥺",
-    "Raat bhar teri yaad me jagte hai, subah tujhe yaad karke sote hai 🌙",
-    "Tu mile ya na mile, mohabbat to tujhse hi rahegi ❤️",
-    "Teri ek jhalak ke liye, hum zamana bhool jate hai 😍",
-    "Dil me basi hai teri yaadein, kaise bhulaye tujhe 💭",
-    "Mohabbat ka koi mol nahi, ye dil se hoti hai ❤️",
-    "Teri yaad aaye to dil ro deta hai, tu paas ho to dil has deta hai 😢"
-    ]
-    await update.message.reply_text(random.choice(shayari_list))
-
-async def ping(update, context):
-    await update.message.reply_text("⚡ Bot LIVE hai bhai!")
-
-async def tagall(update, context):
-    await update.message.reply_text("🔥 @all Sab aa jao! Photo bhejo, sketch bana dunga!")
-app = ApplicationBuilder().token(TOKEN).build()
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("help", help_cmd))
-app.add_handler(CommandHandler("setreply", setreply))
-app.add_handler(CommandHandler("setpic", setpic))
-app.add_handler(CommandHandler("autoreact", autoreact))
-app.add_handler(CommandHandler("setdm", setdm))
-app.add_handler(CommandHandler("autoreply", autoreply_cmd))
-app.add_handler(CommandHandler("show", show))
-app.add_handler(CommandHandler("clearpic", clearpic))
-app.add_handler(CommandHandler("fun", fun))
-app.add_handler(CommandHandler("joke", joke))
-app.add_handler(CommandHandler("shayari", shayari))
-app.add_handler(CommandHandler("ping", ping))
-app.add_handler(CommandHandler("tagall", tagall)) 
-from telegram import InlineQueryResultArticle, InputTextMessageContent
-import uuid, random
-
-jokes_list = [
-"Teacher: Kal kyu nahi aaye? Student: Girlfriend se milne gaya tha 😂",
-"Zindagi me 2 hi sukh hai, ek neend, dusra fir se neend 😴",
-"Wifi slow ho to lagta hai zindagi hi ruk gayi hai 📶",
-"Papa: Beta result kaisa raha? Beta: Papa, 2 khushkhabri hai, ek fail ho gaya, dusri bhi fail ho gaya 😅",
-"Girlfriend: Tum mujhe kabhi ghumane nahi le jate. Boyfriend: Le jata hu na, roz sapno me 😍",
-"Exams aate hi dosti bhi topper se ho jati hai 📚",
-"Mummy: Beta khana kha le. Beta: Pehle wifi ka password batao, khana to baad me bhi kha lunga 😋",
-"Dost: Bhai breakup ho gaya. Main: Chal party karte hai, ek bojh kam hua 😂",
-"Jab tak phone me charge hai, tab tak zindagi me sukh hai 🔋",
-"Padhai karne baitho to neend aati hai, aur sone jao to padhai yaad aati hai 🤦",
-"Single rehne ka ek fayda hai, koi puchega nahi 'kaha ho, khana khaya?' 😎",
-"Teacher: Tum itne late kyu aaye? Student: Sir, sapne me school jaldi aa gaya tha, isliye late ho gaya 😂",
-"Paise ho to log puchte hai 'kaise ho', na ho to puchte bhi nahi 🤑",
-"Girlfriend ka gussa aur Mumbai ki baarish, kabhi bhi aa sakti hai 🌧️",
-"Subah uthna sabse bada struggle hai, alarm se bada dushman koi nahi ⏰",
-"Dost ke paise udhar lena aasan hai, wapas dena sabse mushkil 😭",
-"Sharma ji ka beta to topper hai, humara beta to meme banane me topper hai 😂",
-"Jab koi kahe '5 minute me aaya' to samajh jao 1 ghanta pakka hai ⌚",
-"Love me padna aasan hai, usse bahar nikalna mushkil hai 💔",
-"Phone girne pe dil se zyada screen tutne ka dard hota hai 📱"
+JOKES = [
+    "😂 TEACHER: KAL SCHOOL KYU NAHI AAYE? STUDENT: GIRLFRIEND SE MILNE GAYA THA 😜",
+    "🤣 PAPPU: PAPA, EXAM ME FAIL HO GAYA. PAPA: KOI BAAT NAHI BETA, TU TO PAIDA HOTE HI FAIL THA 😅",
+    "😂 SANTA: DOCTOR SAHAB, MUJHE BHOOLNE KI BIMARI HAI. DOCTOR: KAB SE? SANTA: KAB SE KYA? 🤔",
+    "😜 EK LADKA LADKI SE: TUM BAHUT SUNDAR HO. LADKI: JHOOTH MAT BOLO. LADKA: THEEK HAI, TUM BAHUT GANDI HO 😂",
+    "🤣 PAPPU: YAAR YE WHATSAPP KYA HAI? CHINTU: JAHA LOG ONLINE REH KAR BHI REPLY NAHI KARTE 📱",
+    "😂 BIWI: SUNO, AGAR MAIN KAHIN KHO JAU TO KYA KAROGE? PATI: MAIN AKHBAR ME VIGYAPAN DUNGA. BIWI: KIS AKHBAR ME? PATI: SABSE SASTE WALE ME 📰",
+    "😜 TEACHER: BATAO, TAJ MAHAL KAHA HAI? PAPPU: SIR, GOOGLE MAPS ME 📍",
+    "🤣 SANTA KA BETA: PAPA, MAIN BADA HOKE KYA BANUNGA? SANTA: BETA, PEHLE BADA TO HO JA 😂",
+    "😂 LADKA: TUMHARI AANKHEN BAHUT SUNDAR HAI. LADKI: TO CHASHMA PEHEN LO, DIKHAYI NAHI DETA KYA? 👓",
+    "😜 PAPPU: MUMMY, AAJ SCHOOL ME MERI PITAI HUI. MUMMY: KYU? PAPPU: HOMEWORK NAHI KIYA THA 😭",
+    "🤣 EK AADMI DOCTOR KE PAAS GAYA: DOCTOR, MUJHE SAB KUCH DO-DO DIKHTA HAI. DOCTOR: BAITH JAO, TUM CHAR LOG EK SAATH MAT BAITHO 👀",
+    "😂 CHINTU: YAAR, MERI GIRLFRIEND NE MUJHE BLOCK KAR DIYA. PAPPU: TO NAYA ACCOUNT BANA LE. CHINTU: USNE MUJHE HI BLOCK KIYA HAI 🚫",
+    "😜 PATI: TUM KHANA BAHUT ACHHA BANATI HO. PATNI: TO KHANA KHA KE BARTAN BHI DHO DO 🍽️",
+    "🤣 TEACHER: AGAR TUMHE 100 RUPAYE MILEN TO KYA KAROGE? PAPPU: SIR, UDHAR WAPAS KAR DUNGA, BAHUT UDHAR HAI 💸",
+    "😂 SANTA: BANTA, YE MOBILE KA PASSWORD KYA HAI? BANTA: PATA NAHI, MAINE TO LOCK HI NAHI LAGAYA 🔓",
+    "😜 LADKA: I LOVE YOU. LADKI: MERE PAAS BOYFRIEND HAI. LADKA: TO KYA HUA, MERE PAAS BHI GIRLFRIEND HAI ❤️",
+    "🤣 PAPPU: PAPA, MUJHE CYCLE CHAHIYE. PAPA: PEHLE CYCLE CHALANA SEEKH, PHIR DILWA DUNGA 🚲",
+    "😂 BIWI: MUJHE 1000 RUPAYE CHAHIYE. PATI: KIS LIYE? BIWI: FACIAL KARWANA HAI. PATI: ARRE, CHEHRA TO WAHI RAHEGA 💄",
+    "😜 EK CHOR POLICE SE: SIR, MAINE CHORI NAHI KI. POLICE: TO YE TV TERE GHAR ME KAISE AAYA? CHOR: SIR, TV KHUD CHAL KE AAYA HAI 📺",
+    "🤣 TEACHER: TUM ITNE LATE KYU AAYE? STUDENT: SIR, SAPNA DEKH RAHA THA KI SCHOOL JA RAHA HU, UTHTE HI LATE HO GAYA 😴",
+    "😂 SANTA: YAAR, MERI BIWI MUJHSE BAHUT LADTI HAI. BANTA: MERI WALI TO LADTI BHI NAHI, SEEDHA BELAN MARTI HAI 😅",
+    "😜 PAPPU: YAAR, EXAM ME CHEATING KARTE PAKDA GAYA. CHINTU: TO KYA HUA? PAPPU: TEACHER NE BOLA, TUM TO TOPPER HO 😎",
+    "🤣 LADKI: TUM MUJHSE KITNA PYAR KARTE HO? LADKA: JITNA JIO KA NET, KABHI KHATAM NAHI HOTA 📶",
+    "😂 PATI: AAJ KHANE ME KYA HAI? PATNI: JO KAL THA. PATI: KAL KYA THA? PATNI: JO PARSO THA 🍛",
+    "😜 EK LADKA: BHAI, GIRLFRIEND KAISE PATAYE? DUSRA: BHAI, PEHLE PAISE KAMA, GIRLFRIEND KHUD PAT JAYEGI 💰",
+    "🤣 TEACHER: PAPPU, TUMHARE PAPA KYA KARTE HAI? PAPPU: SIR, JO MAIN KARTA HU, WO HI KARTE HAI - KUCH NAHI 😂",
+    "😂 SANTA: DOCTOR, MERI YAADDASHT KAMZOR HO GAYI HAI. DOCTOR: KITNE SAAL SE? SANTA: YAAD NAHI 🤯",
+    "😜 CHINTU: YAAR, KAL MAINE 100 RUPAYE KA NOTE DEKHA, UTHAYA NAHI. PAPPU: KYU? CHINTU: WO KISI AUR KA THA 💵",
+    "🤣 BIWI: TUM MUJHE KABHI GHUMANE NAHI LE JATE. PATI: LE TO JATA HU, ROZ SAPNE ME SWITZERLAND GHUMATA HU ✈️",
+    "😂 PAPPU: MUMMY, AAJ MAINE EK ACHHA KAAM KIYA. MUMMY: KYA? PAPPU: EK BUDHE AADMI KO ROAD CROSS KARWAYA. MUMMY: WO JANA NAHI CHAHTA THA TO? 👴"
 ]
 
-shayari_list = [
-"Teri yaad me humne chai bhi thandi pi li ☕",
-"Chandni raat me teri yaad aayi, dil ne kaha kash tu paas hoti 🌙",
-"Tum mile to laga, zindagi me kuch kami nahi thi, bas tumhari kami thi ❤️",
-"Door rehkar bhi tu dil ke paas hai, teri yaad hi meri har saans hai 🫶",
-"Na chahiye daulat, na chahiye shoharat, bas ek tu chahiye, aur teri mohabbat ❤️",
-"Teri muskaan pe fida hai ye dil, tu mile to lage duniya mil gayi 🌹",
-"Raaton ko neend nahi aati, teri yaad bahut satati hai 😔",
-"Tu jo mile to laga, khuda ne meri sun li, warna dua me to humne tujhe hi manga tha 🤲",
-"Mohabbat me humne khud ko mita diya, tune kaha alvida aur humne maan liya 💔",
-"Teri ek jhalak ke liye tarasta hai dil, tu na mile to udaas rehta hai dil 🥺",
-"Zindagi guzar gayi tujhe chahte chahte, tu ek pal bhi na samajh paya hume chahte chahte 💭",
-"Chai se zyada nasha teri yaado me hai, peeke bhi utarta nahi ☕❤️",
-"Tu door hai to kya hua, teri yaadein to paas hai, dil me basi teri har baat hai 💌",
-"Humne to bas tujhe chaha tha, tune to zamana hi badal diya 🥀",
-"Khushboo ki tarah guzar gaya koi, yaadein chhod gaya, dil tod gaya 🌸",
-"Tujhe dekh kar dil ne ye farmaya, tu hi hai meri duniya, tu hi hai meri dua ✨",
-"Barish me teri yaad aur bhi badh jati hai, boondon me teri tasveer nazar aati hai 🌧️",
-"Na din ko chain hai, na raat ko neend hai, bas teri yaad me dil ka ye haal hai 😢",
-"Teri baatein sunne ko tarasta hu, teri ek awaaz pe marta hu 🎧❤️",
-"Tu mile ya na mile, mohabbat to hum karte rahenge, tujhe yaad karke hum jeete rahenge 💖"
+SHAYARI = [
+    "❤️ TERI YAAD ME DIL NE YE KAHA, TU HI MERI DUNIYA HAI 🌍",
+    "💔 MOHABBAT ME HUMNE KHUD KO MITA DIYA, PHIR BHI TU MILA NAHI 😢",
+    "❤️ DIL TO PAGAL HAI, TUJHE HI CHAHTA HAI 😍",
+    "🌙 RAATEIN LAMBI HAI, YAADEIN TERI HAI, NEEND NAHI AATI, BAAT TERI HAI ✨",
+    "💖 TUM MILE TO LAGA, ZINDAGI MIL GAYI, TUM GAYE TO LAGA, SAB KUCH CHALA GAYA 😔",
+    "💔 ISHQ ME HUMNE JO PAYA, WO DARD HI PAYA, PHIR BHI DIL NE TUJHE HI CHAHA 🥺",
+    "😍 TERI MUSKAAN PE FIDA HU MAIN, TU MILE TO DUA HU MAIN 🙏",
+    "🌙 CHANDNI RAAT ME TERI YAAD AAYI, DIL NE KAHA TU HI MERI KHUSHBOO HAI 🌸",
+    "❤️ NA JAANE KYU DIL TUJHE HI CHAHTA HAI, HAR DUA ME TERA HI NAAM AATA HAI 🤲",
+    "😍 TUJHE DEKH KE DIL NE YE SOCHA, KAASH TU MERI HOTI 💭",
+    "💫 DOOR REH KAR BHI TU PAAS LAGTA HAI, YE ISHQ BHI KYA KAMAAL KARTA HAI ✨",
+    "🪄 TERI BAATON ME WO JAADU HAI, DIL HAR BAAR TERA HO JATA HAI 💖",
+    "❤️ ZINDAGI ME EK TU HI TO HAI, JISKE BINA SAB ADHURA HAI 🥺",
+    "💔 TERI YAADON KA SAHARA HAI, WARNA ZINDAGI ME KYA RAKHA HAI 😔",
+    "😜 MOHABBAT TO BAS EK BAHANA HAI, ASLI MAZA TO TUJHE SATANE ME HAI 😂",
+    "💓 DIL KI DHADKAN TU HAI, MERI HAR KHUSHI TU HAI 💖",
+    "🤲 TUJHSE MILNE KI TAMANNA HAI, TUJHE PANE KI DUA HAI ❤️",
+    "🌙 RAAT BHAR TERI YAAD ME JAGTE HAI, SUBAH HOTE HI PHIR SO JATE HAI 😴",
+    "😊 TU JO HANSE TO DUNIYA HANSE, TU JO ROYE TO DIL ROYE 💔",
+    "💔 ISHQ KIYA TO DARD MILA, DARD ME BHI SUKOON MILA 🌹",
+    "😍 TERI AANKHON ME DOOB JANE KA MANN KARTA HAI, TERI BAHON ME KHO JANE KA MANN KARTA HAI 🤗",
+    "💔 NA TU MILI, NA MAIN MILA, BAS YE DIL AKELE REH GAYA 😢",
+    "🥺 TERE BINA JEENA MUSHKIL HAI, TERE SAATH JEENA BHI MUSHKIL HAI ❤️",
+    "😍 CHUPKE SE DIL ME AA GAYE TUM, PATA BHI NA CHALA AUR CHHA GAYE TUM ✨",
+    "💖 TERI EK JHALAK KE LIYE, HUM ZAMANA BHOOL JATE HAI 🌍",
+    "❤️ DIL NE KAHA TU HI MERI MANZIL HAI, TU HI MERI RAAH HAI 🛤️",
+    "😊 TUJHE SOCH KE HI MUSKURATA HU, TU JO MILE TO KYA HOGA 💭",
+    "💔 PYAR ME HUMNE WAFA KI, TUMNE BEWAFAI KI, PHIR BHI DIL NE TUMHE HI CHAHA 😢",
+    "❤️ TERI YAAD AATI HAI TO DIL ROTA HAI, TU JO SAMNE AAYE TO DIL HANSTA HAI 😍",
+    "🌹 ZINDAGI KA SAFAR TU HI HAI, MERI HAR KHUSHI TU HI HAI 💖"
 ]
 
-async def inline_query(update, context):
-    q = update.inline_query.query.lower()
-    if "shayari" in q or "syri" in q or "sayar" in q:
-        text = random.choice(shayari_list)
+async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    await update.message.reply_text("BOT ON HAI! 🔥 /HELP LIKH KE COMMANDS DEKH.\nINLINE KE LIYE KISI BHI CHAT ME @BOTUSERNAME JOKE LIKH.")
+
+async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    await update.message.reply_text("/START - BOT START\n/HELP - COMMANDS\n/PAPA - PAPA WALA REPLY\n/SHAYARI - 30 ME SE 1 SHAYARI ❤️\n/JOKE - 30 ME SE 1 JOKE 😂\nINLINE - KISI BHI CHAT ME @BOTUSERNAME JOKE / SHAYARI LIKH")
+
+async def papa_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    await update.message.reply_text("BOT ON HAI! 🔥")
+
+async def shayari_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    await update.message.reply_text(random.choice(SHAYARI))
+
+async def joke_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_allowed(update):
+        return
+    await update.message.reply_text(random.choice(JOKES))
+
+async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.inline_query.query.lower().strip()
+    results = []
+    if "shayari" in query:
+        items = random.sample(SHAYARI, 5)
+        for i, text in enumerate(items):
+            results.append(InlineQueryResultArticle(id=str(uuid.uuid4()), title=f"SHAYARI {i+1} ❤️", input_message_content=InputTextMessageContent(text), description=text[:60]))
     else:
-        text = random.choice(jokes_list)
-    results = [InlineQueryResultArticle(id=str(uuid.uuid4()), title="Bhejne ke liye click karo 👈", input_message_content=InputTextContent(text))]
-    await update.inline_query.answer(results)
+        items = random.sample(JOKES, 5)
+        for i, text in enumerate(items):
+            results.append(InlineQueryResultArticle(id=str(uuid.uuid4()), title=f"JOKE {i+1} 😂", input_message_content=InputTextMessageContent(text), description=text[:60]))
+    await update.inline_query.answer(results, cache_time=0)
 
-app.add_handler(InlineQueryHandler(inline_query))
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_handle))
+async def main():
+    app_bot = ApplicationBuilder().token(TOKEN).build()
+    app_bot.add_handler(CommandHandler("start", start_cmd))
+    app_bot.add_handler(CommandHandler("help", help_cmd))
+    app_bot.add_handler(CommandHandler("papa", papa_cmd))
+    app_bot.add_handler(CommandHandler("shayari", shayari_cmd))
+    app_bot.add_handler(CommandHandler("joke", joke_cmd))
+    app_bot.add_handler(InlineQueryHandler(inline_query))
+    await app_bot.run_polling()
 
-print("Bot chal raha hai...")
-app.run_polling()
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
