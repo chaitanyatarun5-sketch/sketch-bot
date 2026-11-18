@@ -29,7 +29,7 @@ data = load()
 EMOJIS = ["??", "??", "??", "??", "??", "??", "??", "??"]
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Bot ON hai! /help likh ke command dekh")
+    await update.message.reply_text("Bot ON hai! /papa likh ke command dekh")
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -108,6 +108,22 @@ async def auto_handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text(data["reply"])
 
+async def fun(update, context):
+    await update.message.reply_text("✨ FUN MENU ✨\n\n/joke - Joke\n/shayari - Shayari\n/ping - Bot live hai?")
+
+async def joke(update, context):
+    import random
+    jokes = ["Teacher: Kal kyu nahi aaye? Student: Girlfriend se milne gaya tha 😂", "Zindagi me 2 hi sukh hai, ek neend, dusra fir se neend 😴"]
+    await update.message.reply_text(random.choice(jokes))
+
+async def shayari(update, context):
+    await update.message.reply_text("Teri yaad me humne chai bhi thandi pi li ☕")
+
+async def ping(update, context):
+    await update.message.reply_text("⚡ Bot LIVE hai bhai!")
+
+async def tagall(update, context):
+    await update.message.reply_text("🔥 @all Sab aa jao! Photo bhejo, sketch bana dunga!")
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_cmd))
@@ -118,6 +134,11 @@ app.add_handler(CommandHandler("setdm", setdm))
 app.add_handler(CommandHandler("autoreply", autoreply_cmd))
 app.add_handler(CommandHandler("show", show))
 app.add_handler(CommandHandler("clearpic", clearpic))
+app.add_handler(CommandHandler("fun", fun))
+app.add_handler(CommandHandler("joke", joke))
+app.add_handler(CommandHandler("shayari", shayari))
+app.add_handler(CommandHandler("ping", ping))
+app.add_handler(CommandHandler("tagall", tagall)) 
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_handle))
 
 print("Bot chal raha hai...")
