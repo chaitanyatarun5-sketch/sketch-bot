@@ -15,7 +15,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 
 TOKEN = os.getenv("TOKEN")
 
+ALLOWED_USER_IDS = [8532606474, 9239452757] 
 FILE = "settings.json"
+
 
 def load():
     if os.path.exists(FILE):
@@ -28,10 +30,16 @@ def save(data):
 data = load()
 EMOJIS = ["??", "??", "??", "??", "??", "??", "??", "??"]
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):    
+    if update.effective_user.id not in ALLOWED_USER_IDS:
+        await update.message.reply_text("Sorry, ye bot sirf owner aur uske VIP ke liye hai.")
+        return
     await update.message.reply_text("Bot ON hai! /papa likh ke command dekh")
 
-async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE ):   
+        if update.effective_user.id not in ALLOWED_USER_IDS:
+        await update.message.reply_text("Sorry, ye bot sirf owner aur uske VIP ke liye hai.")
+        return
     await update.message.reply_text(
         "/setreply <text> - Auto reply set karo\n"
         "/setpic - Kisi photo pe reply karke ye likho, wo pic set ho jayegi\n"
