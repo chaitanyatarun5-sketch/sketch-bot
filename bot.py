@@ -32,7 +32,7 @@ EMOJIS = ["??", "??", "??", "??", "??", "??", "??", "??"]
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):    
     if update.effective_user.id not in ALLOWED_USER_IDS:
-        await update.message.reply_text("Sorry, ye bot sirf owner aur uske VIP ke liye hai.")
+        await update.message.reply_text("Abbee baap ka bot nahi hai Tarun papa ko baap bol ke aa tab acces milega.")
         return
     await update.message.reply_text("Bot ON hai! /papa likh ke command dekh")
 
