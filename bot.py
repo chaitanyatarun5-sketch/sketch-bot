@@ -1,7 +1,7 @@
 import telebot, random
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
-BOT_TOKEN = "TERA_TOKEN_YAHA_DAAL"
+BOT_TOKEN = "9231054279:AAHGDTAW4Y9Zn5OfiFG5C4RVKQMUohkksKg"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 JOKES = [
