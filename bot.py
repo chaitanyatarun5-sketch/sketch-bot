@@ -1,11 +1,12 @@
-# ===== FULL BOT - BINDI ART + JOKE + SHAYARI + WATCH + SUDO + AUTOPIN =====
+# ===== FULL BOT - FINAL FIXED WALA =====
 # pip install python-telegram-bot
 
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 import random
+import os
 
-TOKEN = "9231054279:AAH_aBOKQmfHu4-cZMr4pxY-3ybQrHhFlQk"
+TOKEN = os.getenv("BOT_TOKEN", "APNA_TOKEN_YAHA_DALO")
 
 # ===== SUDO / OWNER =====
 SUDO_USERS = [123456789]  # Yaha apni Telegram ID dalo
@@ -13,7 +14,7 @@ SUDO_USERS = [123456789]  # Yaha apni Telegram ID dalo
 def is_sudo(user_id):
     return user_id in SUDO_USERS
 
-# ===== BINDI FONT - Choti Choti Bindi Se Bada Akshar =====
+# ===== BINDI FONT =====
 FONT = {
 'A': [" • ","• •","•••","• •","• •"],
 'B': ["•• ","• •","•• ","• •","•• "],
@@ -128,10 +129,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/ADD - Sudo add karo\n"
         "/SUDO - Sudo list\n\n"
         "📌 AUTO-PIN\n"
-        "/AUTOPIN ON <id> - Group me auto pin\n"
-        "/AUTOPIN OFF <id> - Band karo\n"
-        "/DMAUTOPIN ON <id> - DM me auto pin\n"
-        "/DMAUTOPIN OFF <id> - DM band\n\n"
+        "/AUTOPIN ON - Reply karke ON karo\n"
+        "/AUTOPIN OFF - Reply karke OFF karo\n"
+        "/DMAUTOPIN ON - DM me auto pin\n"
+        "/DMAUTOPIN OFF - DM band\n\n"
         "Sab kuch ek hi bot me hai!"
     )
 
@@ -205,9 +206,9 @@ async def sudo_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
         txt += f"• {uid}\n"
     await update.message.reply_text(txt)
 
-# ===== AUTO-PIN =====
+# ===== AUTO-PIN - FIXED WALA - REPLY + ON WALA BUG FIX =====
 async def autopin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args or len(context.args) < 2:
+    if not context.args:
         await update.message.reply_text(
             "⌬  ᴀᴜᴛᴏ-ᴘɪɴ\n"
             "──────────────────────────────────\n"
@@ -221,60 +222,77 @@ async def autopin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "  <ɪᴅ> ᴀᴄᴄᴇᴘᴛs ᴜsᴇʀ ɪᴅ, @ᴜsᴇʀɴᴀᴍᴇ\n"
             "  ᴏʀ ɢʀᴏᴜᴘ ɪᴅ (ᴇ.ɢ. -100…)\n"
             "──────────────────────────────────\n"
-            "  ᴛᴄs • ᴜsᴇʀʙᴏᴛ • ᴘʀɪᴍᴇ\n"
-            "\nUse: /AUTOPIN ON 123456 ya reply karke /AUTOPIN ON"
+            "  KASHYAP • ʙᴏᴛ • ᴘʀɪᴍᴇ
+            "\nUse: Reply karke /AUTOPIN ON likho ya /AUTOPIN ON PELU KAY"
         )
         return
+
     action = context.args[0].lower()
-    target = context.args[1]
-    try:
-        if target.startswith("@"):
-            if update.message.reply_to_message:
-                target_id = update.message.reply_to_message.from_user.id
+
+    target_id = None
+    if len(context.args) >= 2:
+        target = context.args[1]
+        try:
+            if target.startswith("@"):
+                if update.message.reply_to_message:
+                    target_id = update.message.reply_to_message.from_user.id
+                else:
+                    await update.message.reply_text("Reply karke likho bhai!")
+                    return
             else:
-                await update.message.reply_text("Bhai @username ke liye uske message pe reply karke likh, ya ID de de!")
-                return
+                target_id = int(target)
+        except:
+            await update.message.reply_text("ID sahi nahi hai!")
+            return
+    else:
+        # Sirf ON likha hai - Reply wale ka ID lo - YEHI FIX HAI
+        if update.message.reply_to_message:
+            target_id = update.message.reply_to_message.from_user.id
         else:
-            target_id = int(target)
-    except:
-        await update.message.reply_text("ID sahi se de bhai! Jaise -100123456 ya 123456789")
-        return
+            await update.message.reply_text("Bhai kisi ke message pe REPLY karke /AUTOPIN ON likho, ya ID do - /AUTOPIN ON 123456")
+            return
+
     chat_id = update.effective_chat.id
     if chat_id not in AUTOPIN_GROUPS:
         AUTOPIN_GROUPS[chat_id] = set()
+
     if action == "on":
         AUTOPIN_GROUPS[chat_id].add(target_id)
-        await update.message.reply_text(f"✅ AUTO-PIN ON ho gaya!\nAb {target} ka har naya message auto PIN hoga 📌")
+        await update.message.reply_text(f"✅ AUTO-PIN ON ho gaya!\nAb iska har naya message auto PIN hoga 📌")
     elif action == "off":
         AUTOPIN_GROUPS[chat_id].discard(target_id)
-        await update.message.reply_text(f"❌ AUTO-PIN OFF ho gaya!\nAb {target} ka message PIN nahi hoga.")
+        await update.message.reply_text(f"❌ AUTO-PIN OFF ho gaya!")
     else:
-        await update.message.reply_text("Sirf ON ya OFF likh bhai! /AUTOPIN ON <id>")
+        await update.message.reply_text("Sirf ON ya OFF likh bhai! /AUTOPIN ON")
 
+# DM wala bhi same fix
 async def dmautopin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args or len(context.args) < 2:
-        await update.message.reply_text("DM ke liye - /DMAUTOPIN ON @username ya /DMAUTOPIN OFF @username")
+    if not context.args:
+        await update.message.reply_text("Reply karke /DMAUTOPIN ON likho ya /DMAUTOPIN ON <id>")
         return
     action = context.args[0].lower()
-    target = context.args[1]
     if update.message.reply_to_message:
         target_id = update.message.reply_to_message.from_user.id
-    else:
+    elif len(context.args) >= 2:
         try:
-            target_id = int(target.replace("@",""))
+            target_id = int(context.args[1].replace("@",""))
         except:
-            await update.message.reply_text("DM ke liye uske message pe reply karke likh!")
+            await update.message.reply_text("Reply karke likho!")
             return
+    else:
+        await update.message.reply_text("Reply karke /DMAUTOPIN ON likho!")
+        return
+
     if action == "on":
         AUTOPIN_DM.add(target_id)
-        await update.message.reply_text(f"✅ DM AUTO-PIN ON!\nAb {target} ka DM aate hi PIN ho jayega 📌")
+        await update.message.reply_text(f"✅ DM AUTO-PIN ON ho gaya! 📌")
     else:
         AUTOPIN_DM.discard(target_id)
         await update.message.reply_text(f"❌ DM AUTO-PIN OFF!")
 
 async def auto_pin_watcher(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = update.message
-    if not msg:
+    if not msg or not msg.from_user:
         return
     chat_id = update.effective_chat.id
     user_id = msg.from_user.id
