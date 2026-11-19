@@ -46,7 +46,7 @@ async def need_admin(update):
         return False
     return True
 
-# ===== NAYA SYSTEM - WATCH + AUTOPIN + ART =====
+# ===== WATCH + AUTOPIN + ART =====
 WATCHED = set()
 AUTOPIN_CHATS = set()
 DMAUTOPIN = set()
@@ -77,7 +77,16 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not await check(update): return
     await send(update, "/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - SHAYARI ❤️\n/JOKE - JOKE 😂\n/PAPABOL - TRUTH / DARE KHELO 🎲\n/TRUTH - SACH WALA SAWAL\n/DARE - DARE WALA TASK\n/ADDSUDO - /ADDSUDO 123456\n/DELSUDO - /DELSUDO 123456\n/SUDOLIST - SUDO LIST DEKHO")
 async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await send(update, f"TERI ID: {update.effective_user.id}")
+    u = update.effective_user
+    name = u.first_name
+    username = f"@{u.username}" if u.username else "No Username"
+    if u.id == OWNER_ID:
+        tag = "Tu hi MALIK hai GURU! 😈👑"
+    elif u.id in SUDOS:
+        tag = "Tu SUDO hai GURU! 🔥"
+    else:
+        tag = "Tu Member hai GURU!"
+    await send(update, f"━━━━━━━━━━━━━━\n🔥 GURU ID CARD 🔥\n━━━━━━━━━━━━━━\n👤 NAAM: {name}\n🆔 ID: `{u.id}`\n📎 USERNAME: {username}\n🔗 LINK: tg://user?id={u.id}\n━━━━━━━━━━━━━━\n{tag}")
 async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not await check(update): return
     await send(update, "PING PONG! KASHYAP BOT LIVE 🔥")
@@ -130,11 +139,17 @@ async def bareme(update, context):
 async def tej(update, context):
     if not await check(update): return
     await send(update, "TEJ HU ME 🔥 PING PONG LIVE!")
-async def pehchan(update, context): await send(update, f"TERI ID: {update.effective_user.id}")
+async def pehchan(update, context):
+    u = update.effective_user
+    name = u.first_name
+    username = f"@{u.username}" if u.username else "No Username"
+    await send(update, f"━━━━━━━━━━━━━━\n🔥 PEHCHAN GURU 🔥\n━━━━━━━━━━━━━━\n👤 NAAM: {name}\n🆔 ID: `{u.id}`\n📎 USERNAME: {username}\n🔗 LINK: tg://user?id={u.id}\n━━━━━━━━━━━━━━")
 async def jankari(update, context):
     if not await check(update): return
     u = update.effective_user
-    await send(update, f"NAAM: {u.first_name}\nID: {u.id}\nUSERNAME: @{u.username}")
+    c = update.effective_chat
+    username = f"@{u.username}" if u.username else "No Username"
+    await send(update, f"━━━━━━━━━━━━━━\n📋 FULL JANKARI GURU 📋\n━━━━━━━━━━━━━━\n👤 NAAM: {u.first_name}\n🆔 ID: `{u.id}`\n📎 USERNAME: {username}\n💬 CHAT: {c.title if c.title else 'DM'}\n💬 CHAT ID: `{c.id}`\n🔗 LINK: tg://user?id={u.id}\n━━━━━━━━━━━━━━")
 async def groupid(update, context):
     if not await check(update): return
     await send(update, f"GROUP ID: {update.effective_chat.id}")
@@ -351,8 +366,6 @@ async def delsudo(update, context):
 async def sudolist(update, context):
     if not await check(update): return
     await send(update, "SUDO LIST:\n" + "\n".join(str(x) for x in SUDOS))
-
-# ===== NAYE COMMANDS - SCREENSHOT WALE =====
 async def watch(update, context):
     if not await check(update): return
     uid = None
@@ -365,7 +378,6 @@ async def watch(update, context):
         await send(update, "AISE: /WATCH 123456\nYa reply karke /WATCH"); return
     WATCHED.add(uid)
     await send(update, f"👀 WATCH ON! {uid} pe nazar hai GURU! Jab bhi bolega, pata chal jayega.")
-
 async def unwatch(update, context):
     if not await check(update): return
     uid = None
@@ -378,13 +390,11 @@ async def unwatch(update, context):
         await send(update, "AISE: /UNWATCH 123456"); return
     WATCHED.discard(uid)
     await send(update, f"👀 WATCH OFF! {uid} se nazar hata di.")
-
 async def watchlist(update, context):
     if not await check(update): return
     if not WATCHED:
         await send(update, "WATCHLIST KHALI HAI GURU 👀"); return
     await send(update, "👀 WATCHLIST:\n" + "\n".join(str(x) for x in WATCHED))
-
 async def autopin(update, context):
     if not await need_admin(update): return
     if context.args and context.args[0].upper() == "OFF":
@@ -392,7 +402,6 @@ async def autopin(update, context):
         await send(update, "AUTOPIN OFF! 📌"); return
     AUTOPIN_CHATS.add(update.effective_chat.id)
     await send(update, "AUTOPIN ON! 📌 Ab is chat me har msg auto pin hoga GURU!")
-
 async def dmautopin(update, context):
     if not await check(update): return
     if context.args and context.args[0].upper() == "OFF":
@@ -400,7 +409,6 @@ async def dmautopin(update, context):
         await send(update, "DMAUTOPIN OFF - DM me auto pin band"); return
     DMAUTOPIN.add(update.effective_user.id)
     await send(update, "DMAUTOPIN ON - DM me auto pin ON 📌")
-
 async def art(update, context):
     if not await check(update): return
     if not context.args:
@@ -412,15 +420,12 @@ async def art(update, context):
     name = " ".join(context.args)
     art_text = bindi_art(name)
     await send(update, f"```\n{art_text}\n```")
-
 async def auto_watcher(update, context):
-    # Watch wala banda bola to alert + Autopin
     try:
         chat_id = update.effective_chat.id
         user = update.effective_user
         if user.id in WATCHED and user.id not in SUDOS:
             await send(update, f"👀 WATCH ALERT! {user.first_name} ({user.id}) ne bola: {update.message.text[:100] if update.message.text else 'Media bheja'}")
-        # Autopin - Group ya DM
         if chat_id in AUTOPIN_CHATS or user.id in DMAUTOPIN:
             try: await update.message.pin(disable_notification=True)
             except: pass
