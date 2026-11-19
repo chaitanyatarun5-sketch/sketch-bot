@@ -5,7 +5,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
 
 TOKEN = os.environ.get("BOT_TOKEN")
-OWNER_ID = 8093982862
+OWNER_ID = 8532606474
 SUDO_FILE = "sudo.txt"
 
 # SUDO LOAD
