@@ -10,7 +10,6 @@ OWNER_ID = 8532606474
 SUDOS = {8532606474}
 START_TIME = time.time()
 
-# SUDO ENV SE BHI
 SUDO_IDS = os.environ.get("SUDO_IDS", "")
 if SUDO_IDS:
     for x in SUDO_IDS.split(","):
@@ -34,27 +33,96 @@ async def need_admin(update):
         return False
     return True
 
-# --- 30 SHAYARI - TERI WALI ---
 SHAYARI = ["Teri yaad me dil ne ye farmaya hai, tu jo mili to laga khuda ne bulaya hai ❤️","Chandni raat me teri yaad aayi, dil ne kaha kash tu paas hoti ❤️","Tumse milke laga zindagi mil gayi, ab to har khushi tumse hi judi ❤️","Dil ki dhadkan ban gayi ho tum, meri har dua me aati ho tum ❤️","Teri muskan pe fida hu me, tu jo hanse to jahan hanse ❤️","Mohabbat me humne khud ko mita diya, tere liye duniya se ladna sikha diya ❤️","Teri aankhon me duniya dekh li, ab aur kisi ki zarurat nahi ❤️","Raaton ko neend nahi aati, teri yaad bahut satati ❤️","Tu mile to laga sab mil gaya, ab koi gham nahi ❤️","Dil ne tujhe itna chaha, ki khud ko bhool gaya ❤️","Teri baaton me jadoo hai, sunte hi dil kho jata hai ❤️","Chahte hai tujhe dil se, tu hi meri manzil hai ❤️","Tum bin jiya jaye kaise, ye dil tumhe hi chahe ❤️","Teri yaadon ka sahara hai, warna jeena mushkil tha ❤️","Tu jo hanse to phool khil jaye, tu jo roye to dil jal jaye ❤️","Ishq me humne sab kuch luta diya, bas teri ek muskan ke liye ❤️","Teri galiyon se guzre to laga, jannat yahi hai ❤️","Dil ka haal kya bataye, tujhe dekh ke dil dhadak jaye ❤️","Tum meri subah shaam ho, tum hi mera aaram ho ❤️","Teri ek jhalak ke liye, hum taraste rahe ❤️","Mohabbat ki galiyon me hum kho gaye, teri yaadon me so gaye ❤️","Tu mera chand hai, me tera tara ❤️","Teri khushi me meri khushi hai, tu hanse to me hanu ❤️","Dil ki kitaab me tera naam likha hai, har panne pe tu hi tu hai ❤️","Tujhe dekh ke dil ne ye kaha, tu hi meri duniya hai ❤️","Teri yaad me humne chai pi, aur raat guzar gayi ❤️","Tu jo mile to laga, dua kabool ho gayi ❤️","Teri aankhon ka nasha hai, utarta hi nahi ❤️","Dil me basa liya hai tujhe, ab nikalna mushkil hai ❤️","Tu meri zindagi ka sabse haseen pal hai ❤️"]
-
-# --- 30 JOKE - TERE WALE ---
 JOKES = ["Ek aadmi doctor ke paas gaya: Doctor, mujhe sab kuch do-do dikhta hai. Doctor: Baith jao, tum char log ek saath mat baitho 😂","Teacher: Kal school kyu nahi aaye? Pappu: Girlfriend se breakup ho gaya tha. Teacher: To? Pappu: Dil tuta to pair bhi tut gaya samjho 😂","Pati: Tum mujhe kitna pyar karti ho? Patni: Jitna tum phone ko karte ho, usse thoda kam 😂","Ek ladki ne ladke se kaha: Tum bahut bure ho. Ladka: Thanks, tum bhi bahut buri lag rahi ho aaj 😂","Santa: Meri biwi mujhse bahut pyar karti hai. Banta: Kaise pata? Santa: Jab bhi me ghar late aata hu, wo darwaza khol ke kehti hai - Aa gaya kutta 😂","Teacher: Beta, tum bade hoke kya banoge? Pappu: Dulha. Teacher: Matlab? Pappu: Shaadi karunga, aur kuch nahi 😂","Ladki: Tum mujhe kabhi chhod to nahi doge? Ladka: Pagal hai kya, Jio ka network hu kya jo chhod du 😂","Doctor: Tumhe kya problem hai? Patient: Mujhe bhoolne ki bimari hai. Doctor: Kab se hai? Patient: Kab se kya? 😂","Pappu: Papa, exam me fail ho gaya. Papa: Koi baat nahi beta, tu to waise bhi pass hone layak nahi tha 😂","Girlfriend: Tum mujhe kitni izzat dete ho? Boyfriend: Jitni tu mujhe deti hai, matlab zero 😂","Ek baar ek chuha billi se bola: I love you. Billi: Pagal hai kya? Chuha: Pyar andha hota hai 😂","Teacher: Agar tumhe 100 rupaye mile to kya karoge? Pappu: Recharge karunga. Teacher: Padhai ka kya? Pappu: Free WiFi se ho jayegi 😂","Pati: Aaj khana kaisa bana hai? Patni: Acha hai. Pati: To fir ye jalne ki smell kaha se aa rahi hai? Patni: Meri jal rahi hai 😂","Ladka: Tumhari aankhen bahut sundar hai. Ladki: Thanks. Ladka: Aur chashma bhi 😂","Santa ne Banta ko phone kiya: Kaha ho? Banta: Ghar pe. Santa: Jhooth mat bol, me ghar pe hu, tu kaha hai? 😂","Mummy: Beta, padh le. Beta: Padh raha hu. Mummy: Phone me kya padh raha hai? Beta: Teri bahu ki photo dekh raha hu 😂","Teacher: Tumhara homework kaha hai? Pappu: Kutte ne kha liya. Teacher: Tumhare paas kutta kab se hai? Pappu: Abhi kharida, homework khane ke liye 😂","Boyfriend: Baby, tum bahut moti ho gayi ho. Girlfriend: To? Boyfriend: To ab tumhe koi uthake nahi le jayega, safe ho 😂","Ek aadmi: Bhai, ye rasta kaha jata hai? Dusra: Pata nahi, me yaha ka nahi hu. Pehla: To tu yaha kya kar raha hai? Dusra: Rasta dekh raha hu 😂","Pappu: Mummy, me shaadi karunga. Mummy: Kis se? Pappu: Jisse tum kaho. Mummy: Pados wali aunty se? Pappu: Mummy, mazak mat karo 😂","Girlfriend: Tum mere liye kya kar sakte ho? Boyfriend: Kuch bhi. Girlfriend: To mera phone recharge kar de 😂","Santa: Yaar, meri biwi bahut ladti hai. Banta: To chup raha kar. Santa: Me chup hi rehta hu, wo akele bhi lad leti hai 😂","Teacher: Sabse bada sach kya hai? Pappu: Sir, Sunday ko school nahi hota, yehi sabse bada sach hai 😂","Ladki: Tum cigarette pite ho? Ladka: Nahi. Ladki: Daru? Ladka: Nahi. Ladki: To fir tum mere layak nahi ho, boring ho 😂","Papa: Beta, result kaisa raha? Beta: Papa, 2 logo ne top kiya hai. Papa: Tu kitne number pe hai? Beta: Me teesra hu, pehle 2 ke baad me hi hu 😂","Ek ladka ladki ko propose kar raha tha: Will you marry me? Ladki: No. Ladka: To fir friendship to kar le, itna bhav kyu kha rahi hai 😂","Mummy: Beta, sabzi le aa. Beta: Konsi? Mummy: Jo tujhe pasand ho. Beta: Pizza le aau? 😂","Teacher: Tum late kyu aaye? Pappu: Sir, board pe likha tha - School 8 baje khulta hai, me 8 baje hi aaya, gate band tha 😂","Boyfriend: Tumhe sabse zyada kya pasand hai? Girlfriend: Shopping. Boyfriend: Aur sabse kam? Girlfriend: Tumhara bank balance 😂","Santa: Banta, tu itna khush kyu hai? Banta: Biwi mayke gayi hai. Santa: To? Banta: Ab ghar pe shanti hai 😂"]
-
 TRUTHS = ["Tera sabse bada crush kaun hai? 😏","Kabhi kisi ka message chupke padha hai?","Sabse embarrassing moment kya tha tera?","Kis se sabse zyada jalte ho?","Apni life ka sabse bada jhooth batao.","Last baar kab roye the aur kyu?"]
 DARES = ["Apni DP 1 ghante ke liye badal de 😂","Group me 'PAPA HU ME TERA' likh ke bhej 😈","Apne crush ko Hi bhej ke screenshot bhej 😏","10 baar apna naam zor se bol ke voice bhej","Apni gallery ki last photo group me bhej","Apne best friend ko call karke I Love You bol"]
 
-async def chalu(update, context): await send(update, "KASHYAP BOT ON HAI! 🔥 /MADAD LIKH KE DEKH.")
+async def chalu(update, context): await send(update, "KASHYAP BOT ON HAI! 🔥\n/HELP ya /MADAD likh ke dekh.")
 async def madad(update, context):
-    await send(update, """🔥 KASHYAP BOT 🔥
-GENERAL: /CHALU /MADAD /BAREME /TEJ /PEHCHAN /JANKARI /GROUPID /TAG /MALIK /NIYAM /ANKDA /UPTIME /BOL
-PAPA WALE: /PAPA /SHAYARI /HASO /SACH /HIMMAT /PAPABOL
-MODERATION: /NIKAL /WAPAS /DHAKKA /CHUP /BOLNEDE /CHETAVNI /MITAO /CHIPKAO /HATAO /TALA /KHOLO
-PROTECTION: /LINKBAND /LINKBANDOFF /LINKBANDON
-WELCOME: /SWAGATSET /SWAGATOFF /SWAGATTEST
-GAMES: /PASA /SIKKA /GHUMAO /KAINCHI /JADU /CHUNO /SAWAL /ANK
-FUN: /GALE /THAPPAD /CHUMMA /THAPTHAPAO /PANJA /HATH /PYAR /TARIFF /JODI /VICHAR
-TOOLS: /GIN /ULTA /BADA /CHOTA /GINO /SAMAY /TARIKH /BEHISAAB
-SUDO: /ADDSUDO /DELSUDO /SUDOLIST""")
+    await send(update, """🔥 KASHYAP BOT - SAB COMMANDS 🔥
+
+HINDI + ENGLISH DONO CHALENGE
+
+GENERAL:
+/START / CHALU
+/HELP / MADAD
+/ABOUT / BAREME
+/PING / TEJ
+/ID / PEHCHAN / MYID
+/INFO / JANKARI / MYINFO
+/CHATID / GROUPID
+/MENTION / TAG
+/ADMINS / MALIK
+/RULES / NIYAM
+/STATS / ANKDA
+/UPTIME
+/ECHO / SAY / BOL / KEH
+
+PAPA WALA:
+/PAPA / PAPABOL
+/SHAYARI - 30 Shayari
+/JOKE / HASO - 30 Joke
+/TRUTH / SACH
+/DARE / HIMMAT
+
+MODERATION - Reply Karke:
+/BAN / NIKAL
+/UNBAN / WAPAS
+/KICK / DHAKKA
+/MUTE / CHUP
+/UNMUTE / BOLNEDE
+/WARN / CHETAVNI
+/DEL / MITAO
+/PIN / CHIPKAO
+/UNPIN / HATAO
+/LOCK / TALA
+/UNLOCK / KHOLO
+
+PROTECTION:
+/ANTILINK / LINKBAND
+/LINKOFF / LINKBANDOFF
+/LINKON / LINKBANDON
+
+WELCOME:
+/SETWELCOME / SWAGATSET
+/WELCOMEOFF / SWAGATOFF
+/WELCOMETEST / SWAGATTEST
+
+GAMES:
+/DICE / PASA
+/COIN / SIKKA
+/ROLL / GHUMAO
+/RPS / KAINCHI
+/8BALL / JADU
+/CHOOSE / CHUNO
+/QUIZ / SAWAL
+/NUMBER / ANK
+
+FUN:
+/HUG / GALE
+/SLAP / THAPPAD
+/KISS / CHUMMA
+/PAT / THAPTHAPAO
+/HIGHFIVE / PANJA
+/WAVE / HATH
+/LOVE / PYAR
+/COMPLIMENT / TARIFF
+/SHIP / JODI
+/QUOTE / VICHAR
+
+TOOLS:
+/CALC / GIN
+/REVERSE / ULTA
+/UPPER / BADA
+/LOWER / CHOTA
+/COUNT / GINO
+/TIME / SAMAY
+/DATE / TARIKH
+/RANDOM / BEHISAAB
+
+SUDO - Sirf Owner:
+/ADDSUDO / DELSUDO / SUDOLIST""")
 async def bareme(update, context): await send(update, "ME HU KASHYAP BOT 😈🔥 Owner: Kashyap")
 async def tej(update, context): await send(update, "TEJ HU ME 🔥 PING PONG LIVE!")
 async def pehchan(update, context): await send(update, f"TERI ID: {update.effective_user.id}")
@@ -78,19 +146,18 @@ async def bol(update, context):
 async def papa(update, context): await send(update, "PAPA HU ME TERA 😈🔥")
 async def shayari(update, context): await send(update, random.choice(SHAYARI))
 async def haso(update, context): await send(update, random.choice(JOKES))
-async def sach(update, context): await send(update, "SACH ❓\n" + random.choice(TRUTHS))
-async def himmat(update, context): await send(update, "HIMMAT 🔥\n" + random.choice(DARES))
-async def papabol(update, context): await send(update, "PAPA BOL RAHA HAI 🎲\n/SACH likh - Sach wala sawal\n/HIMMAT likh - Dare wala task")
+async def sach(update, context): await send(update, "SACH / TRUTH ❓\n" + random.choice(TRUTHS))
+async def himmat(update, context): await send(update, "HIMMAT / DARE 🔥\n" + random.choice(DARES))
+async def papabol(update, context): await send(update, "PAPA BOL RAHA HAI 🎲\n/TRUTH - Sach wala sawal\n/DARE - Dare wala task")
 
-# MODERATION
 async def nikal(update, context):
     if not await need_admin(update): return
-    if not update.message.reply_to_message: await send(update, "Reply karke /NIKAL likh"); return
-    try: await update.effective_chat.ban_member(update.message.reply_to_message.from_user.id); await send(update, "NIKAL DIYA! 👋")
+    if not update.message.reply_to_message: await send(update, "Reply karke /BAN likh"); return
+    try: await update.effective_chat.ban_member(update.message.reply_to_message.from_user.id); await send(update, "NIKAL / BAN DIYA! 👋")
     except: await send(update, "Nahi nikal paya, mujhe admin bana.")
 async def wapas(update, context):
     if not await need_admin(update): return
-    if not context.args: await send(update, "/WAPAS 123456"); return
+    if not context.args: await send(update, "/UNBAN 123456"); return
     try: await update.effective_chat.unban_member(int(context.args[0])); await send(update, "WAPAS AA GAYA!")
     except: await send(update, "Nahi hua.")
 async def dhakka(update, context):
@@ -99,7 +166,7 @@ async def dhakka(update, context):
     try:
         await update.effective_chat.ban_member(update.message.reply_to_message.from_user.id)
         await update.effective_chat.unban_member(update.message.reply_to_message.from_user.id)
-        await send(update, "DHAKKA DE DIYA! 👋")
+        await send(update, "DHAKKA / KICK DE DIYA! 👋")
     except: await send(update, "Nahi hua.")
 async def chup(update, context):
     if not await need_admin(update): return
@@ -107,7 +174,7 @@ async def chup(update, context):
     try:
         from telegram import ChatPermissions
         await update.effective_chat.restrict_member(update.message.reply_to_message.from_user.id, ChatPermissions(can_send_messages=False))
-        await send(update, "CHUP KAR DIYA 🤫")
+        await send(update, "CHUP / MUTE KAR DIYA 🤫")
     except: await send(update, "Nahi hua.")
 async def bolnede(update, context):
     if not await need_admin(update): return
@@ -115,11 +182,11 @@ async def bolnede(update, context):
     try:
         from telegram import ChatPermissions
         await update.effective_chat.restrict_member(update.message.reply_to_message.from_user.id, ChatPermissions(can_send_messages=True, can_send_media_messages=True, can_send_other_messages=True, can_add_web_page_previews=True))
-        await send(update, "AB BOL SAKTA HAI!")
+        await send(update, "AB BOL SAKTA HAI! / UNMUTE")
     except: await send(update, "Nahi hua.")
 async def chetavni(update, context):
     if not await need_admin(update): return
-    if update.message.reply_to_message: await send(update, f"⚠️ CHETAVNI! {update.message.reply_to_message.from_user.first_name} Sudhar ja!")
+    if update.message.reply_to_message: await send(update, f"⚠️ CHETAVNI / WARN! {update.message.reply_to_message.from_user.first_name} Sudhar ja!")
 async def mitao(update, context):
     if not await need_admin(update): return
     if update.message.reply_to_message:
@@ -128,7 +195,7 @@ async def mitao(update, context):
 async def chipkao(update, context):
     if not await need_admin(update): return
     if update.message.reply_to_message:
-        try: await update.message.reply_to_message.pin(); await send(update, "CHIPKA DIYA 📌")
+        try: await update.message.reply_to_message.pin(); await send(update, "CHIPKA / PIN DIYA 📌")
         except: await send(update, "Nahi hua.")
 async def hatao(update, context):
     if not await need_admin(update): return
@@ -136,16 +203,15 @@ async def hatao(update, context):
     except: pass
 async def tala(update, context):
     if not await need_admin(update): return
-    await send(update, "TALA laga diya 🔒")
+    await send(update, "TALA / LOCK laga diya 🔒")
 async def kholo(update, context):
     if not await need_admin(update): return
-    await send(update, "KHOL DIYA 🔓")
+    await send(update, "KHOL / UNLOCK DIYA 🔓")
 
-# PROTECTION / WELCOME / GAMES / FUN / TOOLS
 LINK_OFF = set()
 async def linkband(update, context):
     if not await need_admin(update): return
-    LINK_OFF.add(update.effective_chat.id); await send(update, "LINK BAND ON!")
+    LINK_OFF.add(update.effective_chat.id); await send(update, "LINK BAND / ANTILINK ON!")
 async def linkbandoff(update, context):
     if not await need_admin(update): return
     LINK_OFF.discard(update.effective_chat.id); await send(update, "LINK BAND OFF!")
@@ -154,38 +220,38 @@ WELCOME = {}
 async def swagatset(update, context):
     if not await need_admin(update): return
     txt = " ".join(context.args) if context.args else "Welcome {name} 🔥"
-    WELCOME[update.effective_chat.id] = txt; await send(update, f"SWAGAT SET: {txt}")
+    WELCOME[update.effective_chat.id] = txt; await send(update, f"SWAGAT / WELCOME SET: {txt}")
 async def swagatoff(update, context): WELCOME.pop(update.effective_chat.id, None); await send(update, "SWAGAT OFF!")
 async def swagattest(update, context):
     txt = WELCOME.get(update.effective_chat.id, "Welcome {name} 🔥")
     await send(update, txt.replace("{name}", update.effective_user.first_name))
-async def pasa(update, context): await send(update, f"🎲 PASA: {random.randint(1,6)}")
-async def sikka(update, context): await send(update, f"🪙 SIKKA: {random.choice(['HEAD','TAIL'])}")
-async def ghumao(update, context): await send(update, f"🎯 NUMBER: {random.randint(1,100)}")
-async def kainchi(update, context): await send(update, f"✂️ TUNE: {random.choice(['ROCK','PAPER','SCISSORS'])}")
+async def pasa(update, context): await send(update, f"🎲 DICE / PASA: {random.randint(1,6)}")
+async def sikka(update, context): await send(update, f"🪙 COIN / SIKKA: {random.choice(['HEAD','TAIL'])}")
+async def ghumao(update, context): await send(update, f"🎯 ROLL / NUMBER: {random.randint(1,100)}")
+async def kainchi(update, context): await send(update, f"✂️ RPS: {random.choice(['ROCK','PAPER','SCISSORS'])}")
 async def jadu(update, context):
-    if not context.args: await send(update, "/JADU kya hoga?"); return
+    if not context.args: await send(update, "/8BALL kya hoga?"); return
     await send(update, random.choice(["Haan ✅","Nahi ❌","Pakka 🔥","Socho mat, kar de 😈"]))
 async def chuno(update, context):
-    if not context.args: await send(update, "/CHUNO chai coffee"); return
+    if not context.args: await send(update, "/CHOOSE chai coffee"); return
     await send(update, f"ME CHUNTA HU: {random.choice(context.args)}")
-async def sawal(update, context): await send(update, "SAWAL: Bharat ki rajdhani kya hai?\nA) Delhi B) Mumbai C) Goa")
-async def ank(update, context): await send(update, f"ANK: {random.randint(1,1000)}")
+async def sawal(update, context): await send(update, "QUIZ / SAWAL: Bharat ki rajdhani kya hai?\nA) Delhi B) Mumbai C) Goa")
+async def ank(update, context): await send(update, f"NUMBER / ANK: {random.randint(1,1000)}")
 async def fun_reply(update, txt):
     if not update.message.reply_to_message: await send(update, "Kisi pe reply karke bhej!"); return
     await send(update, txt.format(name=update.message.reply_to_message.from_user.first_name))
-async def gale(update, context): await fun_reply(update, "{name} ko GALE laga liya 🤗")
-async def thappad(update, context): await fun_reply(update, "{name} ko THAPPAD mara 😂👋")
-async def chumma(update, context): await fun_reply(update, "{name} ko CHUMMA diya 😘")
-async def thapthapao(update, context): await fun_reply(update, "{name} ko THAPTHAPAYA 👏")
-async def panja(update, context): await fun_reply(update, "{name} se PANJA milaya 🤝")
-async def hath(update, context): await fun_reply(update, "{name} ko HATH hilaya 👋")
-async def pyar(update, context): await fun_reply(update, "{name} se PYAR hai ❤️")
+async def gale(update, context): await fun_reply(update, "{name} ko HUG / GALE laga liya 🤗")
+async def thappad(update, context): await fun_reply(update, "{name} ko SLAP / THAPPAD mara 😂👋")
+async def chumma(update, context): await fun_reply(update, "{name} ko KISS / CHUMMA diya 😘")
+async def thapthapao(update, context): await fun_reply(update, "{name} ko PAT / THAPTHAPAYA 👏")
+async def panja(update, context): await fun_reply(update, "{name} se HIGHFIVE / PANJA milaya 🤝")
+async def hath(update, context): await fun_reply(update, "{name} ko WAVE / HATH hilaya 👋")
+async def pyar(update, context): await fun_reply(update, "{name} se LOVE / PYAR hai ❤️")
 async def tariff(update, context): await fun_reply(update, f"{random.choice(['Tu bahut smart hai 🔥','Teri smile best hai ❤️','Tu group ki jaan hai 😈'])} {{name}}")
-async def jodi(update, context): await send(update, f"JODI: {update.effective_user.first_name} ❤️ {random.choice(['Kashyap','Demon','Angel','Cutie'])} - {random.randint(50,99)}% MATCH!")
+async def jodi(update, context): await send(update, f"SHIP / JODI: {update.effective_user.first_name} ❤️ {random.choice(['Kashyap','Demon','Angel','Cutie'])} - {random.randint(50,99)}% MATCH!")
 async def vichar(update, context): await send(update, random.choice(["Zindagi me aage badho 🔥","Mehnat karo, Kashyap jaisa bano 😈","Hasna sabse badi dawa hai ❤️"]))
 async def gin(update, context):
-    if not context.args: await send(update, "/GIN 2+2"); return
+    if not context.args: await send(update, "/CALC 2+2"); return
     try: await send(update, f"JAWAB: {eval(' '.join(context.args))}")
     except: await send(update, "Galat hisaab.")
 async def ulta(update, context):
@@ -196,11 +262,10 @@ async def chota(update, context):
     if context.args: await send(update, " ".join(context.args).lower())
 async def gino(update, context):
     if context.args: await send(update, f"LETTERS: {len(' '.join(context.args))}")
-async def samay(update, context): await send(update, f"SAMAY: {datetime.datetime.now().strftime('%H:%M:%S')}")
-async def tarikh(update, context): await send(update, f"TARIKH: {datetime.datetime.now().strftime('%d/%m/%Y')}")
-async def behisaab(update, context): await send(update, f"BEHISAAB: {random.randint(1,999)}")
+async def samay(update, context): await send(update, f"TIME / SAMAY: {datetime.datetime.now().strftime('%H:%M:%S')}")
+async def tarikh(update, context): await send(update, f"DATE / TARIKH: {datetime.datetime.now().strftime('%d/%m/%Y')}")
+async def behisaab(update, context): await send(update, f"RANDOM / BEHISAAB: {random.randint(1,999)}")
 
-# --- SUDO SYSTEM - TERA WALA ---
 async def addsudo(update, context):
     if update.effective_user.id != OWNER_ID:
         await send(update, "SIRF OWNER KAR SAKTA HAI"); return
@@ -212,7 +277,7 @@ async def addsudo(update, context):
         uid = update.message.reply_to_message.from_user.id
     if uid is None:
         await send(update, "AISE LIKH: /ADDSUDO 123456\nYa reply karke /ADDSUDO"); return
-    SUDOS.add(uid); await send(update, f"HO GAYA! {uid} AB SUDO HAI 🔥\nAb ye bhi bot chala payega.")
+    SUDOS.add(uid); await send(update, f"HO GAYA! {uid} AB SUDO HAI 🔥")
 async def delsudo(update, context):
     if update.effective_user.id != OWNER_ID:
         await send(update, "SIRF OWNER KAR SAKTA HAI"); return
@@ -230,9 +295,73 @@ async def sudolist(update, context):
 
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
-    cmds = {"chalu": chalu, "madad": madad, "bareme": bareme, "tej": tej, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "malik": malik, "niyam": niyam, "ankda": ankda, "uptime": uptime, "bol": bol, "papa": papa, "shayari": shayari, "haso": haso, "sach": sach, "himmat": himmat, "papabol": papabol, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "tala": tala, "kholo": kholo, "linkband": linkband, "linkbandoff": linkbandoff, "linkbandon": linkbandon, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "thappad": thappad, "chumma": chumma, "thapthapao": thapthapao, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist}
-    for n, fn in cmds.items(): app.add_handler(CommandHandler(n, fn))
-    print("KASHYAP BOT STARTED")
+    # Hindi + English dono ek hi function pe
+    all_cmds = {
+        "chalu": chalu, "start": chalu,
+        "madad": madad, "help": madad,
+        "bareme": bareme, "about": bareme,
+        "tej": tej, "ping": tej,
+        "pehchan": pehchan, "id": pehchan, "myid": pehchan,
+        "jankari": jankari, "info": jankari, "myinfo": jankari,
+        "groupid": groupid, "chatid": groupid,
+        "tag": tag, "mention": tag,
+        "malik": malik, "admins": malik,
+        "niyam": niyam, "rules": niyam,
+        "ankda": ankda, "stats": ankda,
+        "uptime": uptime,
+        "bol": bol, "keh": bol, "echo": bol, "say": bol,
+        "papa": papa, "papabol": papabol,
+        "shayari": shayari,
+        "haso": haso, "joke": haso,
+        "sach": sach, "truth": sach,
+        "himmat": himmat, "dare": himmat,
+        "nikal": nikal, "ban": nikal,
+        "wapas": wapas, "unban": wapas,
+        "dhakka": dhakka, "kick": dhakka,
+        "chup": chup, "mute": chup,
+        "bolnede": bolnede, "unmute": bolnede,
+        "chetavni": chetavni, "warn": chetavni,
+        "mitao": mitao, "del": mitao,
+        "chipkao": chipkao, "pin": chipkao,
+        "hatao": hatao, "unpin": hatao,
+        "tala": tala, "lock": tala,
+        "kholo": kholo, "unlock": kholo,
+        "linkband": linkband, "antilink": linkband,
+        "linkbandoff": linkbandoff, "linkoff": linkbandoff,
+        "linkbandon": linkbandon, "linkon": linkbandon,
+        "swagatset": swagatset, "setwelcome": swagatset,
+        "swagatoff": swagatoff, "welcomeoff": swagatoff,
+        "swagattest": swagattest, "welcometest": swagattest,
+        "pasa": pasa, "dice": pasa,
+        "sikka": sikka, "coin": sikka,
+        "ghumao": ghumao, "roll": ghumao,
+        "kainchi": kainchi, "rps": kainchi,
+        "jadu": jadu, "8ball": jadu,
+        "chuno": chuno, "choose": chuno,
+        "sawal": sawal, "quiz": sawal,
+        "ank": ank, "number": ank,
+        "gale": gale, "hug": gale,
+        "thappad": thappad, "slap": thappad,
+        "chumma": chumma, "kiss": chumma,
+        "thapthapao": thapthapao, "pat": thapthapao,
+        "panja": panja, "highfive": panja,
+        "hath": hath, "wave": hath,
+        "pyar": pyar, "love": pyar,
+        "tariff": tariff, "compliment": tariff,
+        "jodi": jodi, "ship": jodi,
+        "vichar": vichar, "quote": vichar,
+        "gin": gin, "calc": gin,
+        "ulta": ulta, "reverse": ulta,
+        "bada": bada, "upper": bada,
+        "chota": chota, "lower": chota,
+        "gino": gino, "count": gino,
+        "samay": samay, "time": samay,
+        "tarikh": tarikh, "date": tarikh,
+        "behisaab": behisaab, "random": behisaab, "rrandom": behisaab,
+        "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist,
+    }
+    for n, fn in all_cmds.items(): app.add_handler(CommandHandler(n, fn))
+    print("KASHYAP BOT STARTED - HINDI + ENGLISH")
     app.run_polling()
 
 flask_app = Flask(__name__)
