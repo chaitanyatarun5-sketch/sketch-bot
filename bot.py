@@ -26,18 +26,12 @@ async def is_admin(update):
         return m.status in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]
     except: return False
 
-# ===== AESTHETIC ENGINE - YAHI MAST WALA HAI =====
+# ===== AESTHETIC ENGINE =====
 FANCY_MAP = str.maketrans("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", "𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗")
 def fancy(t: str):
     return t.translate(FANCY_MAP)
-
 def box(text: str):
-    # Aesthetic box - har reply isme aayega
     return f"╭━━━━━━━━━━━━╮\n┃ {text} ┃\n╰━━━━━━━━━━━━╯"
-
-def style_reply(text: str):
-    # Emoji ko chhod ke text ko fancy kar de
-    return f"✦ {fancy(text)} ✦"
 
 async def send(update, text):
     try:
@@ -78,6 +72,45 @@ AUTOGN_CHATS = set()
 AUTOANSWER_ON = set()
 AUTOPROTECT_CHATS = set()
 WELCOME = {}
+
+# ===== TARUN DADA BUSY MODE - FINAL =====
+TARUN_BUSY_ON = True
+TARUN_BUSY_MSG = "╭━━━━━━━━━━━━━━━━━━━━━╮\n┃ 😈 TARUN DADA ABHI BUSY HAI BACCHO! ┃\n┃ BAAD ME AAYENGE VO, TAB BAAT KAR LENA! 🔥 ┃\n╰━━━━━━━━━━━━━━━━━━━━━╯"
+TARUN_IDS_USERNAMES = ["sm302mp17", "u_r_not_type"]
+TARUN_TRIGGERS = [
+    "@sm302mp17", "@u_r_not_type",
+    "sm302mp17", "u_r_not_type",
+    "tarun", "tallu", "tarun kaha hai", "tarun kaha", "tarun kaha ho",
+    "billa", "bhaii", "bebyy", "bebby", "bebyy bhaii", "bebby bhaii",
+    "tarun bebby", "tarun bebby sun na", "tarun bebby sun na", "tarun dada", "dada"
+]
+
+# ===== BIO ROTATION - ALAG ALAG MAST BIO =====
+AUTOBIO_ON = False
+AUTOBIO_INDEX = 0
+AUTOBIO_LIST = [
+    "🔥 KASHYAP BOT 😈 | PAPA HU ME TERA",
+    "💀 DEMON MODE ON | KASHYAP IS HERE",
+    "👑 KING OF TELEGRAM | KASHYAP 👑",
+    "❤️ PYAR MOHABBAT SAB DHOKA HAI",
+    "😈 CHAOTIC ENERGY | DON'T MESS WITH ME",
+    "⚡ TEJ HU ME | KASHYAP BOT LIVE 🔥",
+    "🌙 RAAT KA RAJA | DIN KA BADSHAH",
+    "🎭 DUNIA GOL HAI | ME USKA CENTRE HU",
+    "💔 DIL TUTA HUA | PAR ATTITUDE FULL HAI",
+    "🚀 ROCKET JAISE UDEGA | KASHYAP BOT",
+    "🦁 SHER HU ME | JUNGLE KA RAJA",
+    "😎 ATTITUDE KING | KASHYAP BOT 😎",
+    "🔥 JALNE WALO JALO | ME TO CHAMKUNGA",
+    "💯 100% REAL | NO FAKE | KASHYAP",
+    "🎲 ZINDAGI EK GAME HAI | ME USKA PLAYER",
+    "🖤 BLACK HEART | WHITE SOUL | KASHYAP",
+    "⚔️ WARRIOR MODE ON | KASHYAP BOT",
+    "🌟 STAR HU ME | AASMAN KA SABSE BRIGHT",
+    "😂 HASI KE LIYE BANA HU | RULANE KE LIYE NAHI",
+    "👊 DUSHMANO KE LIYE KHATRA | DOSTO KE LIYE JAAN",
+    "😈 TARUN DADA ABHI BUSY HAI BACCHO! 🔥",
+]
 
 def get_smart_emoji(text: str):
     t = text.lower()
@@ -146,7 +179,7 @@ ALL_COMMANDS_TEXT = """╔══════════════════
 /WATCH /UNWATCH /WATCHLIST /AUTOPIN /DMAUTOPIN /ART
 ━━━━━━━━━━━━━━━━━━
 🤖 𝐀𝐔𝐓𝐎 - 𝐒𝐌𝐀𝐑𝐓
-/AUTOREACT /AUTOREACTSET /SMARTREACT /AUTODELETE /AUTOREPLY /AUTOBAN /AUTOWARN /AFK /BACK /AUTOTYPE /AUTOSAVE /AUTOPURGE /AUTOSHAYARI /AUTOGM /AUTOGN /GM /GN /AUTOBIO /AUTOANSWER /AUTOPROTECT
+/AUTOREACT /AUTOREACTSET /SMARTREACT /AUTODELETE /AUTOREPLY /AUTOBAN /AUTOWARN /AFK /BACK /AUTOTYPE /AUTOSAVE /AUTOPURGE /AUTOSHAYARI /AUTOGM /AUTOGN /GM /GN /AUTOBIO /AUTOANSWER /AUTOPROTECT /TARUNBUSY /TARUNFREE
 ━━━━━━━━━━━━━━━━━━
 👑 𝐒𝐔𝐃𝐎
 /ADDSUDO /DELSUDO /SUDOLIST
@@ -591,9 +624,72 @@ async def gm(update, context):
 async def gn(update, context):
     if not await check(update): return
     await send(update, box("Good Night GURU! 😴❤️ Kal milte hai!"))
-async def autobio(update, context):
+
+# ===== TARUN BUSY COMMANDS =====
+async def tarunbusy(update, context):
+    global TARUN_BUSY_ON
     if not await check(update): return
-    await send(update, box(f"AUTOBIO: Bot bio nahi badal sakta! Time: {datetime.datetime.now().strftime('%H:%M')}"))
+    if context.args and context.args[0].upper() == "OFF":
+        TARUN_BUSY_ON = False
+        await send(update, box("TARUN BUSY MODE OFF! ❌"))
+        return
+    TARUN_BUSY_ON = True
+    await send(update, box("TARUN BUSY MODE ON! 😈🔥\n@SM302MP17 / @U_R_NOT_TYPE ko tag karne pe Bot bolega!"))
+async def tarunfree(update, context):
+    global TARUN_BUSY_ON
+    if not await check(update): return
+    TARUN_BUSY_ON = False
+    await send(update, box("TARUN DADA FREE HAI AB! 🔥\nAb sab baat kar sakte hai!"))
+
+# ===== ASLI AUTOBIO - HAR 1 MIN ME ALAG BIO =====
+async def autobio(update, context):
+    global AUTOBIO_ON, AUTOBIO_INDEX
+    if not await check(update): return
+    if context.args and context.args[0].upper() == "OFF":
+        AUTOBIO_ON = False
+        await send(update, box("AUTOBIO OFF! ❌\nAb bio change nahi hogi!"))
+        return
+    if context.args and context.args[0].upper() == "ADD":
+        if len(context.args) > 1:
+            new_one = " ".join(context.args[1:])
+            AUTOBIO_LIST.append(new_one)
+            await send(update, box(f"NAYI BIO ADD HO GAYI! ✅\n{new_one}\nTotal Bio: {len(AUTOBIO_LIST)}"))
+            return
+        else:
+            await send(update, box("AISE LIKH: /AUTOBIO ADD Meri nayi bio"))
+            return
+    if context.args and context.args[0].upper() == "LIST":
+        txt = "📋 BIO LIST:\n\n" + "\n".join([f"{i+1}. {b}" for i,b in enumerate(AUTOBIO_LIST)])
+        await send(update, box(txt[:3500]))
+        return
+    AUTOBIO_ON = True
+    AUTOBIO_INDEX = 0
+    try:
+        now = datetime.datetime.now().strftime('%H:%M | %d/%m/%Y')
+        first_bio = AUTOBIO_LIST[0]
+        new_bio = f"{first_bio}\n⏰ {now} | OWNER: KASHYAP 🔥"
+        await context.bot.set_my_description(new_bio)
+        await context.bot.set_my_short_description(first_bio[:250])
+        await send(update, box(f"AUTOBIO ON! ✅\nAb har 1 min me ALAG-ALAG Bio aayegi!\n\nAbhi wali Bio:\n{first_bio}\n\nTotal {len(AUTOBIO_LIST)} Bio hai!"))
+    except Exception as e:
+        await send(update, box(f"AUTOBIO FAIL: {e}"))
+
+async def autobio_loop(app):
+    global AUTOBIO_INDEX
+    while True:
+        await asyncio.sleep(60)
+        if AUTOBIO_ON:
+            try:
+                AUTOBIO_INDEX = (AUTOBIO_INDEX + 1) % len(AUTOBIO_LIST)
+                bio = AUTOBIO_LIST[AUTOBIO_INDEX]
+                now = datetime.datetime.now().strftime('%H:%M | %d/%m/%Y')
+                new_bio = f"{bio}\n⏰ {now} | OWNER: KASHYAP 🔥"
+                await app.bot.set_my_description(new_bio)
+                await app.bot.set_my_short_description(bio[:250])
+                print(f"AUTOBIO ROTATED [{AUTOBIO_INDEX}]: {bio}")
+            except Exception as e:
+                print(f"AUTOBIO LOOP FAIL: {e}")
+
 async def autoanswer(update, context):
     if not await need_admin(update): return
     if context.args and context.args[0].upper() == "OFF":
@@ -620,6 +716,32 @@ async def auto_watcher(update, context):
         user = update.effective_user
         text = (msg.text or "").lower() if msg.text else ""
         orig_text = msg.text or ""
+
+        # ===== TARUN DADA - KOI BHI TAG / NAAM LIKHE TO - SABSE PEHLE =====
+        if TARUN_BUSY_ON:
+            low = orig_text.lower().strip()
+            hit = False
+            for w in TARUN_TRIGGERS:
+                if w in low:
+                    hit = True
+                    break
+            if msg.entities:
+                for ent in msg.entities:
+                    if ent.type == "mention":
+                        m = orig_text[ent.offset:ent.offset+ent.length].lower().replace("@","")
+                        if m in TARUN_IDS_USERNAMES:
+                            hit = True
+                    if ent.type == "text_mention" and ent.user and ent.user.username and ent.user.username.lower() in TARUN_IDS_USERNAMES:
+                        hit = True
+            if msg.reply_to_message and msg.reply_to_message.from_user.username and msg.reply_to_message.from_user.username.lower() in TARUN_IDS_USERNAMES:
+                hit = True
+            # Khud Tarun bole to Bot chup rahega
+            if user.username and user.username.lower() in TARUN_IDS_USERNAMES:
+                hit = False
+            if hit:
+                await send(update, TARUN_BUSY_MSG)
+                return
+
         if orig_text.startswith("."):
             cmd = orig_text[1:].split()[0].lower()
             if cmd in ["command","commands","help","madad","menu","all"]:
@@ -690,11 +812,15 @@ def main():
     global app_bot
     app = ApplicationBuilder().token(TOKEN).build()
     app_bot = app.bot
-    cmds = {"start": start, "help": help_cmd, "command": command_cmd, "commands": command_cmd, "madad": madad, "menu": menu_cmd, "all": all_cmd, "myid": myid, "ping": ping, "papa": papa, "shayari": shayari, "joke": joke, "haso": haso, "papabol": papabol, "truth": truth, "sach": sach, "dare": dare, "himmat": himmat, "chalu": chalu, "bareme": bareme, "tej": tej, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "malik": malik, "niyam": niyam, "ankda": ankda, "uptime": uptime, "bol": bol, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "tala": tala, "kholo": kholo, "linkband": linkband, "linkbandoff": linkbandoff, "linkbandon": linkbandon, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "thappad": thappad, "chumma": chumma, "thapthapao": thapthapao, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist, "watch": watch, "unwatch": unwatch, "watchlist": watchlist, "autopin": autopin, "dmautopin": dmautopin, "art": art, "autoreact": autoreact, "smartreact": smartreact, "autoreactset": autoreactset, "autodelete": autodelete, "autoreply": autoreply, "autoban": autoban, "autowarn": autowarn, "afk": afk, "back": back, "autotype": autotype, "autosave": autosave, "autopurge": autopurge, "purge": purge, "autoshayari": autoshayari, "autogm": autogm, "autogn": autogn, "gm": gm, "gn": gn, "autobio": autobio, "autoanswer": autoanswer, "autoprotect": autoprotect}
+    cmds = {"start": start, "help": help_cmd, "command": command_cmd, "commands": command_cmd, "madad": madad, "menu": menu_cmd, "all": all_cmd, "myid": myid, "ping": ping, "papa": papa, "shayari": shayari, "joke": joke, "haso": haso, "papabol": papabol, "truth": truth, "sach": sach, "dare": dare, "himmat": himmat, "chalu": chalu, "bareme": bareme, "tej": tej, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "malik": malik, "niyam": niyam, "ankda": ankda, "uptime": uptime, "bol": bol, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "tala": tala, "kholo": kholo, "linkband": linkband, "linkbandoff": linkbandoff, "linkbandon": linkbandon, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "thappad": thappad, "chumma": chumma, "thapthapao": thapthapao, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist, "watch": watch, "unwatch": unwatch, "watchlist": watchlist, "autopin": autopin, "dmautopin": dmautopin, "art": art, "autoreact": autoreact, "smartreact": smartreact, "autoreactset": autoreactset, "autodelete": autodelete, "autoreply": autoreply, "autoban": autoban, "autowarn": autowarn, "afk": afk, "back": back, "autotype": autotype, "autosave": autosave, "autopurge": autopurge, "purge": purge, "autoshayari": autoshayari, "autogm": autogm, "autogn": autogn, "gm": gm, "gn": gn, "autobio": autobio, "autoanswer": autoanswer, "autoprotect": autoprotect, "tarunbusy": tarunbusy, "tarunfree": tarunfree}
     for n, fn in cmds.items(): app.add_handler(CommandHandler(n, fn))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_watcher), group=1)
     app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_member_handler))
     print("KASHYAP BOT STARTED - SUDOS:", SUDOS)
+    try:
+        asyncio.get_event_loop().create_task(autobio_loop(app))
+    except:
+        pass
     app.run_polling()
 
 flask_app = Flask(__name__)
