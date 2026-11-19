@@ -1,2 +1,4 @@
-python-telegram-bot==21.4
+pyTelegramBotAPI
+psutil
 Flask
+Pillow
