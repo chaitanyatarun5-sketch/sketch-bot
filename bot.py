@@ -9,6 +9,7 @@ TOKEN = os.environ.get("BOT_TOKEN")
 bot = telebot.TeleBot(TOKEN)
 START_TIME = time.time()
 BOT_NAME = "KASHYAP BOT"
+OWNER_ID = 0  # Yaha apni Telegram ID daal dena, /myid se pata chal jayegi
 
 app = Flask(__name__)
 @app.route('/')
@@ -22,11 +23,7 @@ SHAYARI = ["Teri yaad me humne chai bhi pee li, ab neend aaye to kya kare, KASHY
 def get_stats():
     uptime = int(time.time() - START_TIME)
     h, m, s = uptime//3600, (uptime%3600)//60, uptime%60
-    ping = random.randint(30, 120)
-    ram = psutil.virtual_memory().percent
-    cpu = psutil.cpu_percent()
-    disk = psutil.disk_usage('/').percent
-    return ping, f"{h}h:{m}m:{s}s", ram, cpu, disk
+    return random.randint(30, 120), f"{h}h:{m}m:{s}s", psutil.virtual_memory().percent, psutil.cpu_percent(), psutil.disk_usage('/').percent
 
 def main_menu():
     markup = InlineKeyboardMarkup(row_width=3)
@@ -45,20 +42,13 @@ def main_menu():
 
 def make_sketch(img_bytes, style="pencil"):
     img = Image.open(io.BytesIO(img_bytes)).convert("L")
-    if style == "pencil":
-        sketch = ImageOps.invert(img)
-        sketch = ImageEnhance.Contrast(sketch).enhance(1.5)
-        out = Image.blend(img, sketch, 0.5)
-    elif style == "cartoon":
+    if style == "cartoon":
         img2 = Image.open(io.BytesIO(img_bytes)).convert("RGB")
         out = ImageEnhance.Color(img2).enhance(2.0)
         out = ImageEnhance.Contrast(out).enhance(1.3)
     else:
         out = ImageOps.invert(img)
-    buf = io.BytesIO()
-    out.save(buf, format="JPEG")
-    buf.seek(0)
-    return buf
+    buf = io.BytesIO(); out.save(buf, format="JPEG"); buf.seek(0); return buf
 
 @bot.message_handler(commands=['start'])
 def start(m):
@@ -72,16 +62,20 @@ def start(m):
 
 @bot.message_handler(commands=['help'])
 def help_cmd(m):
-    bot.send_message(m.chat.id, "**KASHYAP BOT HELP MENU**\n\n/start - Start\n/help - Help\n/ping - Ping\n/id - ID\n/joke - 30 Joke\n/shayari - 30 Shayari\n/sketch - Photo ka sketch (photo pe reply karke)\n/pencil - Pencil sketch\n/cartoon - Cartoon style", reply_markup=main_menu())
+    bot.send_message(m.chat.id, "**KASHYAP BOT HELP MENU**\n\n/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - SHAYARI ❤️\n/JOKE - JOKE\n/SKETCH - PHOTO KA SKETCH\n/PENCIL - PENCIL SKETCH\n/CARTOON - CARTOON STYLE\n/INBOX - OWNER KE LIYE", reply_markup=main_menu())
 
 @bot.message_handler(commands=['ping'])
 def ping_cmd(m):
     ping, uptime, ram, cpu, disk = get_stats()
     bot.send_message(m.chat.id, f"**PONG!** 🏓\n\n● **PING:** {ping}ms\n● **UPTIME:** {uptime}\n● **RAM:** {ram}%\n● **CPU:** {cpu}%", parse_mode="Markdown")
 
-@bot.message_handler(commands=['id'])
+@bot.message_handler(commands=['myid','id'])
 def id_cmd(m):
     bot.send_message(m.chat.id, f"**Your ID:** `{m.from_user.id}`\n**Name:** {m.from_user.first_name}\n**Username:** @{m.from_user.username}", parse_mode="Markdown")
+
+@bot.message_handler(commands=['papa'])
+def papa_cmd(m):
+    bot.send_message(m.chat.id, "PAPA AA GAYE! 😎 Ab sab chup, KASHYAP BOT ka papa aa gaya hai. Kya hukum hai boss? 🔥")
 
 @bot.message_handler(commands=['joke'])
 def joke_cmd(m):
@@ -91,6 +85,17 @@ def joke_cmd(m):
 def shayari_cmd(m):
     bot.send_message(m.chat.id, random.choice(SHAYARI))
 
+@bot.message_handler(commands=['inbox'])
+def inbox_cmd(m):
+    msg = m.text.replace("/inbox","").strip()
+    if not msg:
+        bot.send_message(m.chat.id, "Aise likho: /inbox Hello bhai, bot mast hai!")
+        return
+    bot.send_message(m.chat.id, "Tera message owner tak pahunch gaya! ✅")
+    if OWNER_ID != 0:
+        try: bot.send_message(OWNER_ID, f"📩 INBOX from @{m.from_user.username} ({m.from_user.id}):\n{msg}")
+        except: pass
+
 @bot.message_handler(commands=['sketch','pencil','cartoon'])
 def sketch_cmd(m):
     if not m.reply_to_message or not m.reply_to_message.photo:
@@ -99,7 +104,7 @@ def sketch_cmd(m):
     bot.send_message(m.chat.id, "Bana raha hu... thoda wait karo 🔥")
     file_info = bot.get_file(m.reply_to_message.photo[-1].file_id)
     downloaded = bot.download_file(file_info.file_path)
-    style = "pencil" if m.text in ["/sketch","/pencil"] else "cartoon"
+    style = "cartoon" if "/cartoon" in m.text else "pencil"
     out = make_sketch(downloaded, style)
     bot.send_photo(m.chat.id, out, caption="Ho gaya! KASHYAP BOT ka sketch 🔥")
 
@@ -111,16 +116,15 @@ def photo_hint(m):
 def buttons(call):
     data = call.data
     if data == "close":
-        bot.delete_message(call.message.chat.id, call.message.message_id)
-        return
+        bot.delete_message(call.message.chat.id, call.message.message_id); return
     texts = {
-        "admin": "**ADMIN:**\n/ban - Ban\n/kick - Kick\n/mute - Mute\n/unmute - Unmute\n\nNote: Bot ko admin banana padega",
-        "profile": "**PROFILE:**\n/id - Apni ID dekho",
-        "extra": "**EXTRA:**\n/ping - Speed\n/start - Start",
-        "basic": "**BASIC:**\n/start\n/help\n/ping\n/id",
-        "tools": "**TOOLS:**\n/sketch - Photo ka sketch\n/pencil - Pencil sketch\n/cartoon - Cartoon\n/id - ID",
-        "fun": "**FUN:**\n/joke - 30 Joke\n/shayari - 30 Shayari",
-        "play": "**PLAY:**\n/joke - Joke\n/shayari - Shayari\n/sketch - Sketch Game",
+        "admin": "**ADMIN:**\n/ban - Ban\n/kick - Kick\n/mute - Mute",
+        "profile": "**PROFILE:**\n/MYID - Apni ID dekho\n/PAPA - Papa wala reply",
+        "extra": "**EXTRA:**\n/PING - Speed\n/START - Start\n/INBOX - Owner ke liye",
+        "basic": "**BASIC:**\n/START\n/HELP\n/PING\n/MYID",
+        "tools": "**TOOLS:**\n/SKETCH - Photo ka sketch\n/PENCIL - Pencil sketch\n/CARTOON - Cartoon\n/MYID - ID",
+        "fun": "**FUN:**\n/JOKE - 30 Joke\n/SHAYARI - 30 Shayari\n/PAPA - Papa Reply",
+        "play": "**PLAY:**\n/JOKE\n/SHAYARI\n/SKETCH",
     }
     bot.answer_callback_query(call.id)
     bot.send_message(call.message.chat.id, texts.get(data, "Coming Soon!"))
