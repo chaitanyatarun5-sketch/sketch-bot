@@ -5,7 +5,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 import random
 
-TOKEN = "APNA_TOKEN_YAHA_DALO"
+TOKEN = "9231054279:AAH_aBOKQmfHu4-cZMr4pxY-3ybQrHhFlQk"
 
 # ===== SUDO / OWNER =====
 SUDO_USERS = [123456789]  # Yaha apni Telegram ID dalo
