@@ -8,7 +8,6 @@ TOKEN = os.environ.get("BOT_TOKEN")
 OWNER_ID = 8532606474
 SUDO_FILE = "sudo.txt"
 
-# SUDO LOAD
 def load_sudos():
     try:
         with open(SUDO_FILE) as f:
@@ -22,14 +21,12 @@ def save_sudos(s):
 
 SUDOS = load_sudos()
 SUDOS.add(OWNER_ID)
-
-# WATCH WALA SYSTEM
 watched_groups = set()
+relay_map = {}
 
 def is_allowed(update: Update):
     return update.effective_user.id in SUDOS or update.effective_user.id == OWNER_ID
 
-# SAFE SEND - Kabhi crash nahi hoga, reply nahi karega
 async def send(update, text):
     try:
         await update.effective_chat.send_message(text)
@@ -40,7 +37,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await send(update, "KASHYAP BOT ON HAI! 🔥 /HELP LIKH KE COMMANDS DEKH.")
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await send(update, "/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - SHAYARI ❤️\n/JOKE - JOKE 😂\n/RAID 10 - 10 BAAR ROAST 😈\n/SPAM 5 BYYEE - JO LIKHOGE WO 5 BAAR BHEJEGA 🔥\n/WATCH - GROUP KI BAAT OWNER TAK JAYEGI 👀\n/UNWATCH - WATCH BAND KARO\n/INBOX - OWNER KE LIYE\n/ADDSUDO - REPLY KARKE SUDO BANAO (SIRF OWNER)\n/DELSUDO - REPLY KARKE SUDO HATAO\n/SUDOLIST - SUDO LIST DEKHO")
+    await send(update, "/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - SHAYARI ❤️\n/JOKE - JOKE 😂\n/RAID 5 - 5 BAAR ROAST 😈\n/SPAM 5 BYYEE - JO LIKHOGE WO 5 BAAR BHEJEGA 🔥\n/WATCH - GROUP KI BAAT OWNER TAK JAYEGI 👀\n/UNWATCH - WATCH BAND KARO\n/INBOX - OWNER KE LIYE\n/ADDSUDO - REPLY KARKE SUDO BANAO (SIRF OWNER)\n/DELSUDO - REPLY KARKE SUDO HATAO\n/SUDOLIST - SUDO LIST DEKHO")
 
 async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await send(update, f"TERI ID: {update.effective_user.id}")
@@ -51,7 +48,7 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def papa(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await send(update, "PAPA HU ME TERA 😈🔥")
 
-# --- WATCH SYSTEM START ---
+# ---- WATCH ----
 async def watch(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
     if chat.type == "private":
@@ -59,10 +56,7 @@ async def watch(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     keyboard = [[InlineKeyboardButton("✅ Approve", callback_data=f"approve_{chat.id}")]]
     try:
-        await chat.send_message(
-            "👀 CHAT RELAY REQUEST\n\nIs group ki saari messages bot ke owner tak jayengi.\nKoi bhi member Approve dabaye to shuru ho jayega.\nBand karna: /unwatch",
-            reply_markup=InlineKeyboardMarkup(keyboard)
-        )
+        await chat.send_message("👀 CHAT RELAY REQUEST\n\nIs group ki saari messages bot ke owner tak jayengi.\nApprove dabate hi shuru ho jayega.\nBand karna: /unwatch", reply_markup=InlineKeyboardMarkup(keyboard))
     except Exception as e:
         print("Watch fail:", e)
 
@@ -90,16 +84,27 @@ async def inbox(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     await send(update, f"INBOX 📩\nWatched Groups: {len(watched_groups)}\nJab bhi watched group me koi bolega, message yaha aayega.")
 
+# ---- RELAY + 2-WAY REPLY ----
 async def relay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
-    if chat.id in watched_groups:
-        user = update.effective_user
-        text = update.message.text or "Photo/Sticker bheja"
+    msg = update.message
+    user = update.effective_user
+    if not msg or not msg.text:
+        return
+    if chat.type in ["group", "supergroup"] and chat.id in watched_groups:
         try:
-            await context.bot.send_message(OWNER_ID, f"📩 {chat.title}\n👤 {user.first_name} (@{user.username}):\n{text}")
+            sent = await context.bot.send_message(OWNER_ID, f"📩 {chat.title}\n👤 {user.first_name} (@{user.username}):\n{msg.text}")
+            relay_map[sent.message_id] = chat.id
         except Exception as e:
             print("Relay fail:", e)
-# --- WATCH SYSTEM END ---
+        return
+    if chat.type == "private" and is_allowed(update):
+        if msg.reply_to_message and msg.reply_to_message.id in relay_map:
+            gid = relay_map[msg.reply_to_message.id]
+            await context.bot.send_message(gid, msg.text)
+            await send(update, "Bhej diya group me ✅")
+            return
+        return
 
 SHAYARI = ["Teri yaad me dil ne ye farmaya hai, tu jo mili to laga khuda ne bulaya hai ❤️","Chandni raat me teri yaad aayi, dil ne kaha kash tu paas hoti ❤️","Tumse milke laga zindagi mil gayi, ab to har khushi tumse hi judi ❤️","Dil ki dhadkan ban gayi ho tum, meri har dua me aati ho tum ❤️","Teri muskan pe fida hu me, tu jo hanse to jahan hanse ❤️","Mohabbat me humne khud ko mita diya, tere liye duniya se ladna sikha diya ❤️","Teri aankhon me duniya dekh li, ab aur kisi ki zarurat nahi ❤️","Raaton ko neend nahi aati, teri yaad bahut satati ❤️","Tu mile to laga sab mil gaya, ab koi gham nahi ❤️","Dil ne tujhe itna chaha, ki khud ko bhool gaya ❤️","Teri baaton me jadoo hai, sunte hi dil kho jata hai ❤️","Chahte hai tujhe dil se, tu hi meri manzil hai ❤️","Tum bin jiya jaye kaise, ye dil tumhe hi chahe ❤️","Teri yaadon ka sahara hai, warna jeena mushkil tha ❤️","Tu jo hanse to phool khil jaye, tu jo roye to dil jal jaye ❤️","Ishq me humne sab kuch luta diya, bas teri ek muskan ke liye ❤️","Teri galiyon se guzre to laga, jannat yahi hai ❤️","Dil ka haal kya bataye, tujhe dekh ke dil dhadak jaye ❤️","Tum meri subah shaam ho, tum hi mera aaram ho ❤️","Teri ek jhalak ke liye, hum taraste rahe ❤️","Mohabbat ki galiyon me hum kho gaye, teri yaadon me so gaye ❤️","Tu mera chand hai, me tera tara ❤️","Teri khushi me meri khushi hai, tu hanse to me hanu ❤️","Dil ki kitaab me tera naam likha hai, har panne pe tu hi tu hai ❤️","Tujhe dekh ke dil ne ye kaha, tu hi meri duniya hai ❤️","Teri yaad me humne chai pi, aur raat guzar gayi ❤️","Tu jo mile to laga, dua kabool ho gayi ❤️","Teri aankhon ka nasha hai, utarta hi nahi ❤️","Dil me basa liya hai tujhe, ab nikalna mushkil hai ❤️","Tu meri zindagi ka sabse haseen pal hai ❤️"]
 
@@ -160,19 +165,33 @@ def main():
     app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_cmd))
+    app.add_handler(CommandHandler("HELP", help_cmd))
     app.add_handler(CommandHandler("myid", myid))
+    app.add_handler(CommandHandler("MYID", myid))
     app.add_handler(CommandHandler("ping", ping))
+    app.add_handler(CommandHandler("PING", ping))
     app.add_handler(CommandHandler("papa", papa))
+    app.add_handler(CommandHandler("PAPA", papa))
     app.add_handler(CommandHandler("shayari", shayari))
+    app.add_handler(CommandHandler("SHAYARI", shayari))
     app.add_handler(CommandHandler("joke", joke))
+    app.add_handler(CommandHandler("JOKE", joke))
     app.add_handler(CommandHandler("raid", raid))
+    app.add_handler(CommandHandler("RAID", raid))
     app.add_handler(CommandHandler("spam", spam))
+    app.add_handler(CommandHandler("SPAM", spam))
     app.add_handler(CommandHandler("watch", watch))
+    app.add_handler(CommandHandler("WATCH", watch))
     app.add_handler(CommandHandler("unwatch", unwatch))
+    app.add_handler(CommandHandler("UNWATCH", unwatch))
     app.add_handler(CommandHandler("inbox", inbox))
+    app.add_handler(CommandHandler("INBOX", inbox))
     app.add_handler(CommandHandler("addsudo", addsudo))
+    app.add_handler(CommandHandler("ADDSUDO", addsudo))
     app.add_handler(CommandHandler("delsudo", delsudo))
+    app.add_handler(CommandHandler("DELSUDO", delsudo))
     app.add_handler(CommandHandler("sudolist", sudolist))
+    app.add_handler(CommandHandler("SUDOLIST", sudolist))
     app.add_handler(CallbackQueryHandler(approve))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, relay))
     print("KASHYAP BOT STARTED")
