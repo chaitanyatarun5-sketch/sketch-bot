@@ -75,18 +75,18 @@ GAALI_LIST = ["madarchod","behenchod","bhosdike","chutiya","gandu","randi","bhen
 REPLY_MAP = {
     "hi": "Hi GURU! Kaise ho? 🔥",
     "hello": "Hello GURU! 😈",
-    "hey": "Hey GURU! Bol kya kaam hai?",
+    "hey": "Hey GURU! BolO kya kaam hai?",
     "good morning": "Good Morning GURU! ☀️ Chai pi li?",
     "good night": "Good Night GURU! 😴 Kal milte hai!",
     "good evening": "Good Evening GURU! 🌆",
-    "kaise ho": "Ekdam mast GURU! Tu bata? 🔥",
+    "kaise ho": "Ekdam mast GURU! AAP batO? 🔥",
     "kaha ho": "GURU yahi hai, bas thoda busy hai! 😈",
     "demon kaha hai": "GURU aata hi hoga! Thoda ruk ja! 🔥",
     "kashyap kaha hai": "GURU aata hi hoga! Thoda ruk ja! 🔥",
-    "papa": "PAPA HU ME TERA 😈🔥",
+    "papa": "TARUN PAPA HAI MERE 😈🔥",
     "love you": "Love you too GURU! ❤️",
     "bye": "Bye GURU! Jaldi aana! 👋",
-    "kya kar rahe ho": "Teri yaad me shayari likh raha hu GURU! ❤️",
+    "kya kar rahe ho": "KUCH NAHI GURU KUCH KIDE KI GAND KO PEL RAHA HUU AAP ?! ❤️",
 }
 
 # ===== SARE COMMANDS KA FULL LIST - YAHI DIKHEGA =====
