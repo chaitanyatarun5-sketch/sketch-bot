@@ -46,19 +46,19 @@ async def need_admin(update):
         return False
     return True
 
-# ===== AUTO SYSTEMS - SAB YAHI HAI =====
+# ===== AUTO SYSTEMS =====
 WATCHED = set()
 AUTOPIN_CHATS = set()
 DMAUTOPIN = set()
 AUTOREACT_CHATS = set()
 AUTOREACT_EMOJI = "❤️"
-AUTODELETE_CHATS = {}  # chat_id -> seconds
+AUTODELETE_CHATS = {}
 AUTODELETE_MEDIA = set()
 AUTOREPLY_CHATS = set()
 AUTOBAN_LINK = set()
 AUTOBAN_GAALI = set()
-WARN_COUNT = {}  # user_id -> warns
-AFK_USERS = {}  # user_id -> reason
+WARN_COUNT = {}
+AFK_USERS = {}
 AUTOTYPE_CHATS = set()
 AUTOSAVE_ON = set()
 AUTOPURGE_CHATS = set()
@@ -89,6 +89,159 @@ REPLY_MAP = {
     "kya kar rahe ho": "Teri yaad me shayari likh raha hu GURU! ❤️",
 }
 
+# ===== SARE COMMANDS KA FULL LIST - YAHI DIKHEGA =====
+ALL_COMMANDS_TEXT = """🔥 KASHYAP BOT - SARE COMMANDS 🔥
+━━━━━━━━━━━━━━━━━━
+👤 ID / GENERAL (12)
+━━━━━━━━━━━━━━━━━━
+/MYID - Tera ID Card
+/PEHCHAN - Pehchan Card
+/JANKARI - Full Jankari
+/GROUPID - Group Ki ID
+/PING - Bot Speed Check
+/TEJ - Bot Tej Hai?
+/CHALU - Bot On Hai?
+/BAREME - Bot Ke Bare Me
+/UPTIME - Kitne Time Se On Hai
+/TAG - Kisi Ko Tag Kar
+/MALIK - Admin List
+/NIYAM - Group Ke Niyam
+/ANKDA - Group Ka Ankda
+/BOL - Bot Se Bulwao
+
+━━━━━━━━━━━━━━━━━━
+😈 PAPA WALE (7)
+━━━━━━━━━━━━━━━━━━
+/PAPA - Papa Hu Me Tera
+/SHAYARI - Shayari ❤️
+/JOKE - Joke 😂
+ /HASO - Haso Wala Joke
+/PAPABOL - Truth / Dare Khelo
+/TRUTH - Sach Wala Sawal
+/SACH - Sach Wala Sawal
+/DARE - Dare Wala Task
+/HIMMAT - Himmat Wala Dare
+
+━━━━━━━━━━━━━━━━━━
+🛡️ MODERATION (13)
+━━━━━━━━━━━━━━━━━━
+/NIKAL - Reply Karke Ban
+/WAPAS - Unban Kar
+/DHAKKA - Kick Kar
+/CHUP - Mute Kar
+/BOLNEDE - Unmute Kar
+/CHETAVNI - Warn De
+/MITAO - Msg Delete Kar
+/CHIPKAO - Msg Pin Kar
+/HATAO - Pin Hatao
+/TALA - Tala Laga
+/KHOLO - Tala Khol
+/LINKBAND - Link Band
+/LINKBANDOFF - Link Band Off
+/LINKBANDON - Link Band On
+
+━━━━━━━━━━━━━━━━━━
+👋 WELCOME (3)
+━━━━━━━━━━━━━━━━━━
+/SWAGATSET - Welcome Msg Set
+/SWAGATOFF - Welcome Off
+/SWAGATTEST - Welcome Test Kar
+
+━━━━━━━━━━━━━━━━━━
+🎲 GAMES (8)
+━━━━━━━━━━━━━━━━━━
+/PASA - Pasa Feko
+/SIKKA - Head / Tail
+/GHUMAO - Random Number
+/KAINCHI - Rock Paper Scissors
+/JADU - Haan / Nahi Batao
+/CHUNO - Koi Ek Chuno
+/SAWAL - Sawal Puchho
+/ANK - Lucky Ank
+
+━━━━━━━━━━━━━━━━━━
+❤️ FUN (10)
+━━━━━━━━━━━━━━━━━━
+/GALE - Gale Lagao
+/THAPPAD - Thappad Maro
+/CHUMMA - Chumma Do
+/THAPTHAPAO - Thapthapao
+/PANJA - Panja Milao
+/HATH - Hath Hilao
+/PYAR - Pyar Karo
+/TARIFF - Tariff Karo
+/JODI - Jodi Banao
+/VICHAR - Acha Vichar
+
+━━━━━━━━━━━━━━━━━━
+🧮 TOOLS (8)
+━━━━━━━━━━━━━━━━━━
+/GIN - Hisab Karo
+/ULTA - Ulta Likho
+/BADA - Bada Likho
+/CHOTA - Chota Likho
+/GINO - Letters Gino
+/SAMAY - Abhi Ka Time
+/TARIKH - Aaj Ki Tarikh
+/BEHISAAB - Random Number
+
+━━━━━━━━━━━━━━━━━━
+👀 WATCH / PIN / ART (7)
+━━━━━━━━━━━━━━━━━━
+/WATCH - Kisi Pe Nazar Rakho
+/UNWATCH - Nazar Hatao
+/WATCHLIST - Watch List Dekho
+/AUTOPIN - Auto Pin On
+/DMAUTOPIN - DM Me Auto Pin
+/ART - Bindi Art Banao
+/ART RAM - Ram Wala Art
+
+━━━━━━━━━━━━━━━━━━
+🤖 AUTO WALE - SABSE MAST (22)
+━━━━━━━━━━━━━━━━━━
+/AUTOREACT - Har Msg Pe React ❤️
+/AUTOREACTSET - React Emoji Badlo
+/AUTODELETE - Msg Auto Delete ⏳
+/AUTOREPLY - Hi/Hello Pe Auto Jawab
+/AUTOBAN - Link/Gaali Pe Auto Ban
+/AUTOWARN - Warn List Dekho
+/AFK - AFK Lagao 😴
+/BACK - AFK Se Wapas Aao
+/AUTOTYPE - Typing Dikhayega ⌨️
+/AUTOSAVE - Media Auto Save 💾
+/AUTOPURGE - Purge On Karo
+/PURGE - Chat Saaf Karo
+/AUTOSHAYARI - Auto Shayari ❤️
+/AUTOGM - Good Morning Auto
+/GM - Good Morning Bhejo
+/AUTOGN - Good Night Auto
+/GN - Good Night Bhejo
+/AUTOBIO - Auto Bio On
+/AUTOANSWER - Demon Kaha Hai? Auto Jawab
+/AUTOPROTECT - Naya Bot Aaye To Alert 🛡️
+
+━━━━━━━━━━━━━━━━━━
+👑 SUDO (3)
+━━━━━━━━━━━━━━━━━━
+/ADDSUDO - Naya Sudo Banao
+/DELSUDO - Sudo Hatao
+/SUDOLIST - Sudo List Dekho
+
+━━━━━━━━━━━━━━━━━━
+📋 HELP (5)
+━━━━━━━━━━━━━━━━━━
+/HELP - Ye List Dekho
+/MADAD - Ye List Dekho
+/COMMAND - Ye List Dekho
+/COMMANDS - Ye List Dekho
+/MENU - Ye List Dekho
+/ALL - Ye List Dekho
+
+━━━━━━━━━━━━━━━━━━
+TOTAL = 95+ COMMANDS 🔥
+OWNER: KASHYAP 😈👑
+"""
+
 FONT = {
 'A': [" . ",". .","...",". .",". ."],'B': [".. ",". .",".. ",". .",".. "],'C': [" ..",".  ",".  ",".  "," .."],'D': [".. ",". .",". .",". .",".. "],'E': ["...",".  ",".. ",".  ","..."],'F': ["...",".  ",".. ",".  ",".  "],'G': [" ..",".  ",". .",". ."," .."],'H': [". .",". .","...",". .",". ."],'I': ["..."," . "," . "," . ","..."],'J': ["..."," . "," . ",". ."," . "],'K': [". .",". .",".. ",". .",". ."],'L': [".  ",".  ",".  ",".  ","..."],'M': [". .","...",". .",". .",". ."],'N': [". .","...",". .",". .",". ."],'O': [" . ",". .",". .",". ."," . "],'P': [".. ",". .",".. ",".  ",".  "],'Q': [" . ",". .",". ."," ..","  ."],'R': [".. ",". .",".. ",". .",". ."],'S': [" ..",".  "," . ","  .",".. "],'T': ["..."," . "," . "," . "," . "],'U': [". .",". .",". .",". ."," . "],'V': [". .",". .",". .",". ."," . "],'W': [". .",". .",". .","...",". ."],'X': [". .",". ."," . ",". .",". ."],'Y': [". .",". ."," . "," . "," . "],'Z': ["...","  ."," . ",".  ","..."],' ': ["   ","   ","   ","   ","   "],
 }
@@ -109,10 +262,22 @@ DARES = ["Apni DP 1 ghante ke liye badal de 😂","Group me 'PAPA HU ME TERA' li
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not await check(update): return
-    await send(update, "KASHYAP BOT ON HAI! 🔥 /HELP LIKH KE COMMANDS DEKH.")
+    await send(update, "KASHYAP BOT ON HAI! 🔥 /COMMAND LIKH KE SARE COMMANDS DEKH.")
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not await check(update): return
-    await send(update, "/MYID - APNI ID DEKHO\n/PING - BOT SPEED CHECK\n/PAPA - PAPA WALA REPLY\n/SHAYARI - SHAYARI ❤️\n/JOKE - JOKE 😂\n/PAPABOL - TRUTH / DARE KHELO 🎲\n/TRUTH - SACH WALA SAWAL\n/DARE - DARE WALA TASK\n/ADDSUDO - /ADDSUDO 123456\n/DELSUDO - /DELSUDO 123456\n/SUDOLIST - SUDO LIST DEKHO")
+    await send(update, ALL_COMMANDS_TEXT)
+async def command_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not await check(update): return
+    await send(update, ALL_COMMANDS_TEXT)
+async def madad(update, context):
+    if not await check(update): return
+    await send(update, ALL_COMMANDS_TEXT)
+async def menu_cmd(update, context):
+    if not await check(update): return
+    await send(update, ALL_COMMANDS_TEXT)
+async def all_cmd(update, context):
+    if not await check(update): return
+    await send(update, ALL_COMMANDS_TEXT)
 async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
     u = update.effective_user
     name = u.first_name
@@ -153,20 +318,7 @@ async def himmat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await send(update, "HIMMAT 🔥\n" + random.choice(DARES))
 async def chalu(update, context):
     if not await check(update): return
-    await send(update, "KASHYAP BOT ON HAI! 🔥 /MADAD LIKH KE DEKH.")
-async def madad(update, context):
-    if not await check(update): return
-    await send(update, """🔥 KASHYAP BOT - 95 COMMANDS 🔥
-GENERAL: /CHALU /MADAD /BAREME /TEJ /PEHCHAN /JANKARI /GROUPID /TAG /MALIK /NIYAM /ANKDA /UPTIME /BOL
-PAPA: /PAPA /SHAYARI /HASO /SACH /HIMMAT /PAPABOL
-MOD: /NIKAL /WAPAS /DHAKKA /CHUP /BOLNEDE /CHETAVNI /MITAO /CHIPKAO /HATAO /TALA /KHOLO
-PROTECT: /LINKBAND /LINKBANDOFF /LINKBANDON
-WELCOME: /SWAGATSET /SWAGATOFF /SWAGATTEST
-GAMES: /PASA /SIKKA /GHUMAO /KAINCHI /JADU /CHUNO /SAWAL /ANK
-FUN: /GALE /THAPPAD /CHUMMA /THAPTHAPAO /PANJA /HATH /PYAR /TARIFF /JODI /VICHAR
-TOOLS: /GIN /ULTA /BADA /CHOTA /GINO /SAMAY /TARIKH /BEHISAAB
-AUTO: /WATCH /UNWATCH /WATCHLIST /AUTOPIN /DMAUTOPIN /ART /AUTOREACT /AUTOREACTSET /AUTODELETE /AUTOREPLY /AUTOBAN /AUTOWARN /AFK /AUTOTYPE /AUTOSAVE /AUTOPURGE /AUTOSHAYARI /AUTOGM /AUTOGN /AUTOBIO /AUTOANSWER /AUTOPROTECT
-SUDO: /ADDSUDO /DELSUDO /SUDOLIST""")
+    await send(update, "KASHYAP BOT ON HAI! 🔥 /COMMAND LIKH KE DEKH.")
 async def bareme(update, context):
     if not await check(update): return
     await send(update, "ME HU KASHYAP BOT 😈🔥 Owner: Kashyap")
@@ -440,8 +592,6 @@ async def art(update, context):
         txt += "\nYa /ART apna naam likh"; await send(update, txt); return
     name = " ".join(context.args); art_text = bindi_art(name)
     await send(update, f"```\n{art_text}\n```")
-
-# ===== NAYE AUTO COMMANDS =====
 async def autoreact(update, context):
     if not await need_admin(update): return
     if context.args and context.args[0].upper() == "OFF":
@@ -554,33 +704,29 @@ async def auto_watcher(update, context):
         user = update.effective_user
         msg = update.message
         text = (msg.text or "").lower() if msg.text else ""
-        # WATCH
+        # DOT COMMAND - .command bhi kaam karega GURU!
+        if msg.text and msg.text.startswith("."):
+            cmd = msg.text[1:].split()[0].lower()
+            if cmd in ["command","commands","help","madad","menu","all"]:
+                await send(update, ALL_COMMANDS_TEXT)
+                return
         if user.id in WATCHED and user.id not in SUDOS:
             await send(update, f"👀 WATCH ALERT! {user.first_name} ({user.id}) ne bola: {msg.text[:100] if msg.text else 'Media bheja'}")
-        # AFK - kisi ne AFK wale ko tag kiya
         if msg.reply_to_message and msg.reply_to_message.from_user.id in AFK_USERS:
             await send(update, f"😴 {msg.reply_to_message.from_user.first_name} abhi AFK hai GURU! Wajah: {AFK_USERS[msg.reply_to_message.from_user.id]}")
-        # AFK wapas aaya to auto back
-        if user.id in AFK_USERS and text not in ["/afk", "/back"]:
-            pass
-        # AUTOTYPE
         if chat_id in AUTOTYPE_CHATS:
             try: await context.bot.send_chat_action(chat_id, "typing")
             except: pass
-        # AUTOREACT
         if chat_id in AUTOREACT_CHATS:
             try: await context.bot.set_message_reaction(chat_id, msg.message_id, reaction=[{"type": "emoji", "emoji": AUTOREACT_EMOJI}])
             except: pass
-        # AUTOPIN
         if chat_id in AUTOPIN_CHATS or user.id in DMAUTOPIN:
             try: await msg.pin(disable_notification=True)
             except: pass
-        # AUTOBAN - LINK
         if chat_id in AUTOBAN_LINK and ("http" in text or "t.me" in text or "www." in text) and user.id not in SUDOS:
             try: await msg.delete(); await send(update, f"⚠️ {user.first_name} Link bhejna mana hai GURU! Msg delete kar diya!")
             except: pass
             return
-        # AUTOBAN - GAALI + WARN
         if chat_id in AUTOBAN_GAALI and user.id not in SUDOS:
             for g in GAALI_LIST:
                 if g in text:
@@ -595,17 +741,14 @@ async def auto_watcher(update, context):
                         except: pass
                         await send(update, f"⚠️ WARN {w}/3 {user.first_name}! Gaali mat de GURU! Agli baar ban!")
                     return
-        # AUTOREPLY + AUTOANSWER
         if chat_id in AUTOREPLY_CHATS or chat_id in AUTOANSWER_ON:
             for k, v in REPLY_MAP.items():
                 if k in text:
                     await send(update, v); break
-        # AUTOSAVE - photo/video aaya to owner ko forward
         if user.id in AUTOSAVE_ON or OWNER_ID in AUTOSAVE_ON:
             if msg.photo or msg.video or msg.document:
                 try: await context.bot.send_message(OWNER_ID, f"💾 AUTOSAVE! {user.first_name} ne media bheja - Chat: {update.effective_chat.title}")
                 except: pass
-        # AUTODELETE
         if chat_id in AUTODELETE_CHATS:
             sec = AUTODELETE_CHATS[chat_id]
             await asyncio.sleep(sec)
@@ -620,7 +763,6 @@ async def auto_watcher(update, context):
         print("Watcher error:", e)
 
 async def new_member_handler(update, context):
-    # AUTOPROTECT + WELCOME
     try:
         for m in update.message.new_chat_members:
             if m.is_bot and update.effective_chat.id in AUTOPROTECT_CHATS:
@@ -632,7 +774,7 @@ async def new_member_handler(update, context):
 
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
-    cmds = {"start": start, "help": help_cmd, "myid": myid, "ping": ping, "papa": papa, "shayari": shayari, "joke": joke, "haso": haso, "papabol": papabol, "truth": truth, "sach": sach, "dare": dare, "himmat": himmat, "chalu": chalu, "madad": madad, "bareme": bareme, "tej": tej, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "malik": malik, "niyam": niyam, "ankda": ankda, "uptime": uptime, "bol": bol, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "tala": tala, "kholo": kholo, "linkband": linkband, "linkbandoff": linkbandoff, "linkbandon": linkbandon, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "thappad": thappad, "chumma": chumma, "thapthapao": thapthapao, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist, "watch": watch, "unwatch": unwatch, "watchlist": watchlist, "autopin": autopin, "dmautopin": dmautopin, "art": art, "autoreact": autoreact, "autoreactset": autoreactset, "autodelete": autodelete, "autoreply": autoreply, "autoban": autoban, "autowarn": autowarn, "afk": afk, "back": back, "autotype": autotype, "autosave": autosave, "autopurge": autopurge, "purge": purge, "autoshayari": autoshayari, "autogm": autogm, "autogn": autogn, "gm": gm, "gn": gn, "autobio": autobio, "autoanswer": autoanswer, "autoprotect": autoprotect}
+    cmds = {"start": start, "help": help_cmd, "command": command_cmd, "commands": command_cmd, "madad": madad, "menu": menu_cmd, "all": all_cmd, "myid": myid, "ping": ping, "papa": papa, "shayari": shayari, "joke": joke, "haso": haso, "papabol": papabol, "truth": truth, "sach": sach, "dare": dare, "himmat": himmat, "chalu": chalu, "bareme": bareme, "tej": tej, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "malik": malik, "niyam": niyam, "ankda": ankda, "uptime": uptime, "bol": bol, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "tala": tala, "kholo": kholo, "linkband": linkband, "linkbandoff": linkbandoff, "linkbandon": linkbandon, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "thappad": thappad, "chumma": chumma, "thapthapao": thapthapao, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist, "watch": watch, "unwatch": unwatch, "watchlist": watchlist, "autopin": autopin, "dmautopin": dmautopin, "art": art, "autoreact": autoreact, "autoreactset": autoreactset, "autodelete": autodelete, "autoreply": autoreply, "autoban": autoban, "autowarn": autowarn, "afk": afk, "back": back, "autotype": autotype, "autosave": autosave, "autopurge": autopurge, "purge": purge, "autoshayari": autoshayari, "autogm": autogm, "autogn": autogn, "gm": gm, "gn": gn, "autobio": autobio, "autoanswer": autoanswer, "autoprotect": autoprotect}
     for n, fn in cmds.items(): app.add_handler(CommandHandler(n, fn))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_watcher))
     app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_member_handler))
