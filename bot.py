@@ -1,6 +1,4 @@
-# ===== FULL BOT - FINAL FIXED WALA =====
-# pip install python-telegram-bot
-
+# FULL BOT - NAYA CLEAN WALA
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 import random
@@ -8,40 +6,38 @@ import os
 
 TOKEN = os.getenv("BOT_TOKEN", "APNA_TOKEN_YAHA_DALO")
 
-# ===== SUDO / OWNER =====
-SUDO_USERS = [123456789]  # Yaha apni Telegram ID dalo
+SUDO_USERS = [123456789]
 
 def is_sudo(user_id):
     return user_id in SUDO_USERS
 
-# ===== BINDI FONT =====
 FONT = {
-'A': [" • ","• •","•••","• •","• •"],
-'B': ["•• ","• •","•• ","• •","•• "],
-'C': [" ••","•  ","•  ","•  "," ••"],
-'D': ["•• ","• •","• •","• •","•• "],
-'E': ["•••","•  ","•• ","•  ","•••"],
-'F': ["•••","•  ","•• ","•  ","•  "],
-'G': [" ••","•  ","• •","• •"," ••"],
-'H': ["• •","• •","•••","• •","• •"],
-'I': ["•••"," • "," • "," • ","•••"],
-'J': ["•••"," • "," • ","• •"," • "],
-'K': ["• •","• •","•• ","• •","• •"],
-'L': ["•  ","•  ","•  ","•  ","•••"],
-'M': ["• •","•••","• •","• •","• •"],
-'N': ["• •","•••","• •","• •","• •"],
-'O': [" • ","• •","• •","• •"," • "],
-'P': ["•• ","• •","•• ","•  ","•  "],
-'Q': [" • ","• •","• •"," ••","  •"],
-'R': ["•• ","• •","•• ","• •","• •"],
-'S': [" ••","•  "," • ","  •","•• "],
-'T': ["•••"," • "," • "," • "," • "],
-'U': ["• •","• •","• •","• •"," • "],
-'V': ["• •","• •","• •","• •"," • "],
-'W': ["• •","• •","• •","•••","• •"],
-'X': ["• •","• •"," • ","• •","• •"],
-'Y': ["• •","• •"," • "," • "," • "],
-'Z': ["•••","  •"," • ","•  ","•••"],
+'A': [" . ",". .","...",". .",". ."],
+'B': [".. ",". .",".. ",". .",".. "],
+'C': [" ..",".  ",".  ",".  "," .."],
+'D': [".. ",". .",". .",". .",".. "],
+'E': ["...",".  ",".. ",".  ","..."],
+'F': ["...",".  ",".. ",".  ",".  "],
+'G': [" ..",".  ",". .",". ."," .."],
+'H': [". .",". .","...",". .",". ."],
+'I': ["..."," . "," . "," . ","..."],
+'J': ["..."," . "," . ",". ."," . "],
+'K': [". .",". .",".. ",". .",". ."],
+'L': [".  ",".  ",".  ",".  ","..."],
+'M': [". .","...",". .",". .",". ."],
+'N': [". .","...",". .",". .",". ."],
+'O': [" . ",". .",". .",". ."," . "],
+'P': [".. ",". .",".. ",".  ",".  "],
+'Q': [" . ",". .",". ."," ..","  ."],
+'R': [".. ",". .",".. ",". .",". ."],
+'S': [" ..",".  "," . ","  .",".. "],
+'T': ["..."," . "," . "," . "," . "],
+'U': [". .",". .",". .",". ."," . "],
+'V': [". .",". .",". .",". ."," . "],
+'W': [". .",". .",". .","...",". ."],
+'X': [". .",". ."," . ",". .",". ."],
+'Y': [". .",". ."," . "," . "," . "],
+'Z': ["...","  ."," . ",".  ","..."],
 ' ': ["   ","   ","   ","   ","   "],
 }
 
@@ -66,69 +62,64 @@ def pretty_name(key):
     m = {"JAISHREERAM":"JAI SHREE RAM","ILOVEYOU":"I LOVE YOU","MISSYOU":"MISS YOU","GOODMORNING":"GOOD MORNING","GOODNIGHT":"GOOD NIGHT","HAPPYBIRTHDAY":"HAPPY BIRTHDAY","THANKYOU":"THANK YOU"}
     return m.get(key, key)
 
-# ===== JOKE LIST =====
 JOKES = [
-"Teacher: Tum itne late kyu aaye?\nStudent: Sir, board pe likha tha 'School Ahead, Go Slow' 😂",
-"Pappu: Mummy, aaj school me mujhe 100 me se 90 mile!\nMummy: Wah! Kis me?\nPappu: 50 Hindi me, 40 English me 😂",
-"Boy: Tumhari smile bahut pyari hai\nGirl: Thanks\nBoy: Main to apni wali ki baat kar raha tha jab tumhe dekhta hu to aa jati hai 😍",
-"Ek baar ek aadmi ne Google se pucha - Meri biwi kaha hai?\nGoogle bola - Teri himmat kaise hui mujhse puchne ki, main khud usi se darta hu 😂",
-"Pati: Aaj khana kaisa bana hai?\nPatni: Acha hai\nPati: To fir roz aisa hi bana diya kar, jaisa aaj hotel se mangwaya hai 😂",
-"Dost: Bhai, teri GF kaisi hai?\nDusra: Bilkul WiFi jaisi, sabke saath connect ho jati hai 😂",
-"Girlfriend: Baby, tum mujhe kitna pyar karte ho?\nBoyfriend: Jitna Jio ka net, kabhi khatam nahi hota 😂",
-"Teacher: Agar tumhe 100 rupaye mile to kya karoge?\nPappu: Udhari chuka dunga\nTeacher: Aur 1000 mile to?\nPappu: Udhari badha dunga 😂",
-"Ek ladki ne ladke se kaha - Tum bahut bure ho\nLadka bola - To fir tum mere peeche kyu padi ho\nLadki - Kyunki bure logo se hi to pyar hota hai 😍",
-"Bhai ne pucha - Exam kaisa gaya?\nMaine bola - Bilkul mere future jaisa, andhera hi andhera 😂",
-"Biwi: Suno ji, agar main kho gayi to kya karoge?\nPati: Main newspaper me add dunga\nBiwi: Kis page pe?\nPati: Us page pe jise tum kabhi nahi padhti - Sports page 😂",
-"Doctor: Tumhe kya problem hai?\nPatient: Sir, mujhe sab kuch bhool jata hai\nDoctor: Kab se?\nPatient: Kab se kya sir? 😂",
-"Ek baar Santa ne 100 rupaye ka note jala diya\nKyu? Kyunki uspe likha tha - I Promise To Pay 😂",
-"GF: Tum mujhe kabhi surprise nahi dete\nBF: Surprise! Main tumhara BF nahi hu, tumhara dost hu 😂",
-"Teacher: Batao, duniya gol kyu hai?\nStudent: Taaki koi kone me jaake chup na sake 😂",
+"Teacher: Tum itne late kyu aaye? Student: Sir, board pe likha tha School Ahead, Go Slow",
+"Pappu: Mummy, aaj school me mujhe 100 me se 90 mile! Mummy: Wah! Kis me? Pappu: 50 Hindi me, 40 English me",
+"Boy: Tumhari smile bahut pyari hai. Girl: Thanks. Boy: Main to apni wali ki baat kar raha tha jab tumhe dekhta hu to aa jati hai",
+"Ek baar ek aadmi ne Google se pucha - Meri biwi kaha hai? Google bola - Teri himmat kaise hui mujhse puchne ki, main khud usi se darta hu",
+"Pati: Aaj khana kaisa bana hai? Patni: Acha hai. Pati: To fir roz aisa hi bana diya kar, jaisa aaj hotel se mangwaya hai",
+"Dost: Bhai, teri GF kaisi hai? Dusra: Bilkul WiFi jaisi, sabke saath connect ho jati hai",
+"Girlfriend: Baby, tum mujhe kitna pyar karte ho? Boyfriend: Jitna Jio ka net, kabhi khatam nahi hota",
+"Teacher: Agar tumhe 100 rupaye mile to kya karoge? Pappu: Udhari chuka dunga. Teacher: Aur 1000 mile to? Pappu: Udhari badha dunga",
+"Ek ladki ne ladke se kaha - Tum bahut bure ho. Ladka bola - To fir tum mere peeche kyu padi ho. Ladki - Kyunki bure logo se hi to pyar hota hai",
+"Bhai ne pucha - Exam kaisa gaya? Maine bola - Bilkul mere future jaisa, andhera hi andhera",
+"Biwi: Suno ji, agar main kho gayi to kya karoge? Pati: Main newspaper me add dunga. Biwi: Kis page pe? Pati: Us page pe jise tum kabhi nahi padhti - Sports page",
+"Doctor: Tumhe kya problem hai? Patient: Sir, mujhe sab kuch bhool jata hai. Doctor: Kab se? Patient: Kab se kya sir?",
+"Ek baar Santa ne 100 rupaye ka note jala diya. Kyu? Kyunki uspe likha tha - I Promise To Pay",
+"GF: Tum mujhe kabhi surprise nahi dete. BF: Surprise! Main tumhara BF nahi hu, tumhara dost hu",
+"Teacher: Batao, duniya gol kyu hai? Student: Taaki koi kone me jaake chup na sake",
 ]
 
-# ===== SHAYARI LIST =====
 SHAYARI = [
-"Teri yaad me humne jamana bhoola diya,\nTere pyar me humne khud ko bhoola diya,\nTu jo mili to laga zindagi mil gayi,\nPar tu jo gayi to laga zindagi hi chali gayi 💔",
-"Mohabbat me humne kya kuch nahi kiya,\nDin raat teri yaad me guzara kiya,\nTu jo mile to laga sab kuch mil gaya,\nTu jo na mile to laga sab kuch lut gaya 😔",
-"Tere chehre pe muskan humesha rahe,\nTeri zindagi me kabhi gam na aaye,\nTu jaha bhi rahe khush rahe,\nBas yehi dua hai meri rab se ❤️",
-"Dosti me duri to aati rehti hai,\nFir bhi dosti dilo ko mila deti hai,\nJo dost dil se sacche hote hai,\nUnki yaad har pal tadpati hai 🤝",
-"Raat bhar chandni me teri yaad aayi,\nDil ne kaha aaj fir teri kami mehsoos hui,\nTu jo paas hota to ye raat kitni haseen hoti,\nTu jo dur hai to ye raat kitni lambi lagti hai 🌙",
-"Zindagi me har koi pyar karta hai,\nKoi dil se karta hai, koi matlab se,\nJo dil se karta hai wo kabhi bhoolta nahi,\nJo matlab se karta hai wo kabhi yaad nahi karta 💔",
-"Tumse milke dil ko sukoon mila,\nTumse bichad ke dil ko dard mila,\nTum jo mile to laga jannat mil gayi,\nTum jo gaye to laga sab kuch lut gaya 😢",
-"Chand ko dekh ke yaad teri aayi,\nTaro ko dekh ke yaad teri aayi,\nHar cheez me bas tu hi tu nazar aayi,\nAb to saanso me bhi bas tu hi tu samayi ❤️",
-"Pyar me humne dil laga liya,\nDil laga ke humne dil gawa diya,\nAb to bas teri yaad hi reh gayi,\nJisme humne khud ko mita diya 💔",
-"Jab se tu mili hai, zindagi badal gayi,\nHar khushi ab teri muskan se jud gayi,\nTu jo hanse to duniya hasin lage,\nTu jo roye to duniya veeran lage 😍",
-"Dost wo jo har pal saath de,\nMuskil me bhi haath thaam le,\nKhushi me bhi saath hasse,\nGum me bhi saath roye 🤝",
-"Teri muskan pe hum fida ho gaye,\nTeri adao pe hum kurban ho gaye,\nTu jo mili to laga sab kuch mil gaya,\nTu jo gayi to hum barbad ho gaye 💔",
-"Waqt guzar jayega, yaadein reh jayengi,\nLog bhool jayenge, baatein reh jayengi,\nBas tu hi tu yaad aayegi,\nAur teri yaad me ye aankhein nam ho jayengi 😔",
-"Zindagi ek safar hai, isme sab milte hai,\nKoi dil me bas jata hai, koi dil tod jata hai,\nJo dil me bas jata hai wo kabhi bhoolta nahi,\nJo dil tod jata hai wo kabhi yaad nahi aata 💔",
-"Meri har dua me bas tu hi tu hai,\nMeri har khushi me bas tu hi tu hai,\nTu jo mile to laga rab mil gaya,\nTu jo na mile to laga sab kuch lut gaya ❤️",
+"Teri yaad me humne jamana bhoola diya, Tere pyar me humne khud ko bhoola diya, Tu jo mili to laga zindagi mil gayi, Par tu jo gayi to laga zindagi hi chali gayi",
+"Mohabbat me humne kya kuch nahi kiya, Din raat teri yaad me guzara kiya, Tu jo mile to laga sab kuch mil gaya, Tu jo na mile to laga sab kuch lut gaya",
+"Tere chehre pe muskan humesha rahe, Teri zindagi me kabhi gam na aaye, Tu jaha bhi rahe khush rahe, Bas yehi dua hai meri rab se",
+"Dosti me duri to aati rehti hai, Fir bhi dosti dilo ko mila deti hai, Jo dost dil se sacche hote hai, Unki yaad har pal tadpati hai",
+"Raat bhar chandni me teri yaad aayi, Dil ne kaha aaj fir teri kami mehsoos hui, Tu jo paas hota to ye raat kitni haseen hoti, Tu jo dur hai to ye raat kitni lambi lagti hai",
+"Zindagi me har koi pyar karta hai, Koi dil se karta hai, koi matlab se, Jo dil se karta hai wo kabhi bhoolta nahi, Jo matlab se karta hai wo kabhi yaad nahi karta",
+"Tumse milke dil ko sukoon mila, Tumse bichad ke dil ko dard mila, Tum jo mile to laga jannat mil gayi, Tum jo gaye to laga sab kuch lut gaya",
+"Chand ko dekh ke yaad teri aayi, Taro ko dekh ke yaad teri aayi, Har cheez me bas tu hi tu nazar aayi, Ab to saanso me bhi bas tu hi tu samayi",
+"Pyar me humne dil laga liya, Dil laga ke humne dil gawa diya, Ab to bas teri yaad hi reh gayi, Jisme humne khud ko mita diya",
+"Jab se tu mili hai, zindagi badal gayi, Har khushi ab teri muskan se jud gayi, Tu jo hanse to duniya hasin lage, Tu jo roye to duniya veeran lage",
+"Dost wo jo har pal saath de, Muskil me bhi haath thaam le, Khushi me bhi saath hasse, Gum me bhi saath roye",
+"Teri muskan pe hum fida ho gaye, Teri adao pe hum kurban ho gaye, Tu jo mili to laga sab kuch mil gaya, Tu jo gayi to hum barbad ho gaye",
+"Waqt guzar jayega, yaadein reh jayengi, Log bhool jayenge, baatein reh jayengi, Bas tu hi tu yaad aayegi, Aur teri yaad me ye aankhein nam ho jayengi",
+"Zindagi ek safar hai, isme sab milte hai, Koi dil me bas jata hai, koi dil tod jata hai, Jo dil me bas jata hai wo kabhi bhoolta nahi, Jo dil tod jata hai wo kabhi yaad nahi aata",
+"Meri har dua me bas tu hi tu hai, Meri har khushi me bas tu hi tu hai, Tu jo mile to laga rab mil gaya, Tu jo na mile to laga sab kuch lut gaya",
 ]
 
-# ===== WATCH + AUTOPIN STORAGE =====
 WATCH_LIST = {}
 AUTOPIN_GROUPS = {}
 AUTOPIN_DM = set()
 
-# ===== COMMANDS =====
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "🔥 FULL BOT ON HAI BHAI 🔥\n\n"
-        "• • • BINDI ART • • •\n"
+        "FULL BOT ON HAI BHAI\n\n"
+        "BINDI ART\n"
         "/ART RAM - Bindi se RAM\n"
         "/ART ILOVEYOU - Bindi se I LOVE YOU\n"
-        "/ART HUG - Bindi se HUG\n"
         "/ART - 40 ki list\n\n"
-        "😂 JOKE / SHAYARI\n"
+        "JOKE / SHAYARI\n"
         "/JOKE - Naya Joke\n"
         "/SHAYARI - Nayi Shayari\n\n"
-        "👀 WATCH\n"
+        "WATCH\n"
         "/WATCH - Reply karke watch lagao\n"
         "/UNWATCH - Watch hatayo\n"
         "/WATCHLIST - List dekho\n\n"
-        "👑 SUDO / ADMIN\n"
+        "SUDO / ADMIN\n"
         "/ADD - Sudo add karo\n"
         "/SUDO - Sudo list\n\n"
-        "📌 AUTO-PIN\n"
+        "AUTO-PIN\n"
         "/AUTOPIN ON - Reply karke ON karo\n"
         "/AUTOPIN OFF - Reply karke OFF karo\n"
         "/DMAUTOPIN ON - DM me auto pin\n"
@@ -141,7 +132,7 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def art(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
-        txt = "• • • BINDI ART - 40 LIST • • •\n\n"
+        txt = "BINDI ART - 40 LIST\n\n"
         for a in ARTS_LIST:
             txt += f"/ART {a}\n"
         txt += "\nYa khud ka bhi likh - /ART TERA NAAM"
@@ -153,10 +144,10 @@ async def art(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"```\n{art_text}\n```", parse_mode="Markdown")
 
 async def joke(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"😂 JOKE:\n\n{random.choice(JOKES)}")
+    await update.message.reply_text(f"JOKE:\n\n{random.choice(JOKES)}")
 
 async def shayari(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"❤️ SHAYARI:\n\n{random.choice(SHAYARI)}")
+    await update.message.reply_text(f"SHAYARI:\n\n{random.choice(SHAYARI)}")
 
 async def watch(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message.reply_to_message:
@@ -164,7 +155,7 @@ async def watch(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     target = update.message.reply_to_message.from_user
     WATCH_LIST[target.id] = target.first_name
-    await update.message.reply_text(f"👀 {target.first_name} ko WATCH pe laga diya!")
+    await update.message.reply_text(f"{target.first_name} ko WATCH pe laga diya!")
 
 async def unwatch(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message.reply_to_message:
@@ -173,7 +164,7 @@ async def unwatch(update: Update, context: ContextTypes.DEFAULT_TYPE):
     target = update.message.reply_to_message.from_user
     if target.id in WATCH_LIST:
         del WATCH_LIST[target.id]
-        await update.message.reply_text(f"✅ {target.first_name} ko watch se hata diya!")
+        await update.message.reply_text(f"{target.first_name} ko watch se hata diya!")
     else:
         await update.message.reply_text("Ye to watch pe tha hi nahi!")
 
@@ -181,9 +172,9 @@ async def watchlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not WATCH_LIST:
         await update.message.reply_text("Koi watch pe nahi hai!")
         return
-    txt = "👀 WATCH LIST:\n\n"
+    txt = "WATCH LIST:\n\n"
     for name in WATCH_LIST.values():
-        txt += f"• {name}\n"
+        txt += f"- {name}\n"
     await update.message.reply_text(txt)
 
 async def add_sudo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -196,79 +187,52 @@ async def add_sudo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     target = update.message.reply_to_message.from_user
     if target.id not in SUDO_USERS:
         SUDO_USERS.append(target.id)
-        await update.message.reply_text(f"👑 {target.first_name} ko SUDO bana diya!")
+        await update.message.reply_text(f"{target.first_name} ko SUDO bana diya!")
     else:
         await update.message.reply_text("Ye pehle se hi sudo hai!")
 
 async def sudo_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    txt = "👑 SUDO LIST:\n\n"
+    txt = "SUDO LIST:\n\n"
     for uid in SUDO_USERS:
-        txt += f"• {uid}\n"
+        txt += f"- {uid}\n"
     await update.message.reply_text(txt)
 
-# ===== AUTO-PIN - FIXED WALA - REPLY + ON WALA BUG FIX =====
 async def autopin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
-        await update.message.reply_text(
-            "⌬  ᴀᴜᴛᴏ-ᴘɪɴ\n"
-            "──────────────────────────────────\n"
-            "▸ ɢʀᴏᴜᴘ ᴄʜᴀᴛ\n"
-            "  .ᴀᴜᴛᴏᴘɪɴ ᴏɴ <ɪᴅ>       ᴘɪɴ ɴᴇᴡ ᴍsɢs\n"
-            "  .ᴀᴜᴛᴏᴘɪɴ ᴏꜰꜰ <ɪᴅ>      sᴛᴏᴘ ᴘɪɴɴɪɴɢ\n"
-            "▸ ᴅɪʀᴇᴄᴛ ᴍᴇssᴀɢᴇs\n"
-            "  .ᴅᴍᴀᴜᴛᴏᴘɪɴ ᴏɴ <ᴛ>      ᴘɪɴ ɪɴ ᴅᴍ\n"
-            "  .ᴅᴍᴀᴜᴛᴏᴘɪɴ ᴏꜰꜰ <ᴛ>     sᴛᴏᴘ ᴅᴍ ᴘɪɴ\n"
-            "▸ ɴᴏᴛᴇ\n"
-            "  <ɪᴅ> ᴀᴄᴄᴇᴘᴛs ᴜsᴇʀ ɪᴅ, @ᴜsᴇʀɴᴀᴍᴇ\n"
-            "  ᴏʀ ɢʀᴏᴜᴘ ɪᴅ (ᴇ.ɢ. -100…)\n"
-            "──────────────────────────────────\n"
-            "  KASHYAP • ʙᴏᴛ • ᴘʀɪᴍᴇ
-            "\nUse: Reply karke /AUTOPIN ON likho ya /AUTOPIN ON PELU KAY"
-        )
+        await update.message.reply_text("AUTO-PIN\nGroup: Reply karke /AUTOPIN ON likho\nDM: Reply karke /DMAUTOPIN ON likho")
         return
-
     action = context.args[0].lower()
-
     target_id = None
     if len(context.args) >= 2:
-        target = context.args[1]
         try:
-            if target.startswith("@"):
-                if update.message.reply_to_message:
-                    target_id = update.message.reply_to_message.from_user.id
-                else:
-                    await update.message.reply_text("Reply karke likho bhai!")
-                    return
-            else:
-                target_id = int(target)
+            target_id = int(context.args[1])
         except:
-            await update.message.reply_text("ID sahi nahi hai!")
-            return
+            if update.message.reply_to_message:
+                target_id = update.message.reply_to_message.from_user.id
+            else:
+                await update.message.reply_text("Reply karke likho bhai!")
+                return
     else:
-        # Sirf ON likha hai - Reply wale ka ID lo - YEHI FIX HAI
         if update.message.reply_to_message:
             target_id = update.message.reply_to_message.from_user.id
         else:
             await update.message.reply_text("Bhai kisi ke message pe REPLY karke /AUTOPIN ON likho, ya ID do - /AUTOPIN ON 123456")
             return
-
     chat_id = update.effective_chat.id
     if chat_id not in AUTOPIN_GROUPS:
         AUTOPIN_GROUPS[chat_id] = set()
-
     if action == "on":
         AUTOPIN_GROUPS[chat_id].add(target_id)
-        await update.message.reply_text(f"✅ AUTO-PIN ON ho gaya!\nAb iska har naya message auto PIN hoga 📌")
+        await update.message.reply_text("AUTO-PIN ON ho gaya! Ab iska har naya message auto PIN hoga")
     elif action == "off":
         AUTOPIN_GROUPS[chat_id].discard(target_id)
-        await update.message.reply_text(f"❌ AUTO-PIN OFF ho gaya!")
+        await update.message.reply_text("AUTO-PIN OFF ho gaya!")
     else:
         await update.message.reply_text("Sirf ON ya OFF likh bhai! /AUTOPIN ON")
 
-# DM wala bhi same fix
 async def dmautopin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
-        await update.message.reply_text("Reply karke /DMAUTOPIN ON likho ya /DMAUTOPIN ON <id>")
+        await update.message.reply_text("Reply karke /DMAUTOPIN ON likho")
         return
     action = context.args[0].lower()
     if update.message.reply_to_message:
@@ -282,13 +246,12 @@ async def dmautopin_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("Reply karke /DMAUTOPIN ON likho!")
         return
-
     if action == "on":
         AUTOPIN_DM.add(target_id)
-        await update.message.reply_text(f"✅ DM AUTO-PIN ON ho gaya! 📌")
+        await update.message.reply_text("DM AUTO-PIN ON ho gaya!")
     else:
         AUTOPIN_DM.discard(target_id)
-        await update.message.reply_text(f"❌ DM AUTO-PIN OFF!")
+        await update.message.reply_text("DM AUTO-PIN OFF!")
 
 async def auto_pin_watcher(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = update.message
@@ -307,7 +270,6 @@ async def auto_pin_watcher(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except:
             pass
 
-# ===== MAIN =====
 def main():
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
