@@ -83,7 +83,7 @@ ALL_COMMANDS_TEXT = """╔══════════════════
 ALL_COMMANDS_TEXT = """
 🔥 KASHYAP BOT • ALL COMMAND 🔥
 ━━━━━━━━━━━━━━━━━━
-Total 150 Command | sudo mil gaya kay try ko baap bol diya
+Total 150 Command | sudo mil gaya kay tum ko baap bol diya
 le ab command dhek le!
 ━━━━━━━━━━━━━━━━━━
 
