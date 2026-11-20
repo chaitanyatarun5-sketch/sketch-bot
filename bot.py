@@ -56,7 +56,7 @@ MSG_COUNT = {}
 
 # ===== TARUN DADA BUSY =====
 TARUN_BUSY_ON = True
-TARUN_BUSY_MSG = "╭━━━━━━━━━━━━━━━━━━━━━╮\n┃ 😈 TARUN DADA ABHI BUSY HAI BACCHO! ┃\n┃ BAAD ME AAYENGE VO, TAB BAAT KAR LENA! 🔥 ┃\n╰━━━━━━━━━━━━━━━━━━━━━╯"
+TARUN_BUSY_MSG = "╭━━━━━━━━━━━━━━━━━━━━━╮\n┃ 😈 TARUN PAPA ABHI BUSY HAI BETAA!!┃ BAAD ME AAYENGE VO, TAB BAAT KAR LENA! 🔥 ┃\n╰━━━━━━━━━━━━━━━━━━━━━╯"
 TARUN_IDS_USERNAMES = ["sm302mp17", "u_r_not_type"]
 TARUN_TRIGGERS = ["@sm302mp17","@u_r_not_type","sm302mp17","u_r_not_type","tarun","tallu","tarun kaha hai","tarun kaha","tarun kaha ho","billa","bhaii","bebyy","bebby","bebyy bhaii","bebby bhaii","tarun bebby","tarun bebby sun na","tarun dada","dada"]
 
@@ -77,7 +77,7 @@ def get_smart_emoji(text: str):
     return random.choice(["❤️","🔥","😂","😍","👍","😊","🥰","😎"])
 
 GAALI_LIST = ["madarchod","behenchod","bhosdike","chutiya","gandu","randi","bhenchod","lund","gand"]
-REPLY_MAP = {"hi":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐢 𝐆𝐔𝐑𝐔! 𝐊𝐚𝐢𝐬𝐞 𝐇𝐨? 🔥 ┃\n╰━━━━━━━━━━━━╯","hello":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐥𝐥𝐨 𝐆𝐔𝐑𝐔! 😈 ┃\n╰━━━━━━━━━━━━╯","hey":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐲 𝐆𝐔𝐑𝐔! 𝐁𝐨𝐥 𝐊𝐲𝐚 𝐊𝐚𝐚𝐦 𝐇𝐚𝐢? ┃\n╰━━━━━━━━━━━━╯","good morning":"╭━━━━━━━━━━━━╮\n┃ ☀️ 𝐆𝐨𝐨𝐝 𝐌𝐨𝐫𝐧𝐢𝐧𝐠 𝐆𝐔𝐑𝐔! 𝐂𝐡𝐚𝐢 𝐏𝐢 𝐋𝐢? ┃\n╰━━━━━━━━━━━━╯","good night":"╭━━━━━━━━━━━━╮\n┃ 🌙 𝐆𝐨𝐨𝐝 𝐍𝐢𝐠𝐡𝐭 𝐆𝐔𝐑𝐔! 😴 ┃\n╰━━━━━━━━━━━━╯","kaise ho":"╭━━━━━━━━━━━━╮\n┃ 𝐄𝐤𝐝𝐚𝐦 𝐌𝐚𝐬𝐭 𝐆𝐔𝐑𝐔! 𝐓𝐮 𝐁𝐚𝐭𝐚? 🔥 ┃\n╰━━━━━━━━━━━━╯","kaha ho":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐘𝐚𝐡𝐢 𝐇𝐚𝐢, 𝐁𝐚𝐬 𝐓𝐡𝐨𝐝𝐚 𝐁𝐮𝐬𝐲 𝐇𝐚𝐢! 😈 ┃\n╰━━━━━━━━━━━━╯","demon kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","kashyap kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","papa":"╭━━━━━━━━━━━━╮\n┃ 𝐏𝐀𝐏𝐀 𝐇𝐔 𝐌𝐄 𝐓𝐄𝐑𝐀 😈🔥 ┃\n╰━━━━━━━━━━━━╯","love you":"╭━━━━━━━━━━━━╮\n┃ ❤️ 𝐋𝐨𝐯𝐞 𝐘𝐨𝐮 𝐓𝐨𝐨 𝐆𝐔𝐑𝐔! ┃\n╰━━━━━━━━━━━━╯","bye":"╭━━━━━━━━━━━━╮\n┃ 👋 𝐁𝐲𝐞 𝐆𝐔𝐑𝐔! 𝐉𝐚𝐥𝐝𝐢 𝐀𝐚𝐧𝐚! ┃\n╰━━━━━━━━━━━━╯"}
+REPLY_MAP = {"hi":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐢 𝐆𝐔𝐑𝐔! 𝐊𝐚𝐢𝐬𝐞 𝐇𝐨? 🔥 ┃\n╰━━━━━━━━━━━━╯","hello":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐥𝐥𝐨 𝐆𝐔𝐑𝐔! 😈 ┃\n╰━━━━━━━━━━━━╯","hey":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐲 𝐆𝐔𝐑𝐔! 𝐁𝐨𝐥 𝐊𝐲𝐚 𝐊𝐚𝐚𝐦 𝐇𝐚𝐢? ┃\n╰━━━━━━━━━━━━╯","good morning":"╭━━━━━━━━━━━━╮\n┃ ☀️ 𝐆𝐨𝐨𝐝 𝐌𝐨𝐫𝐧𝐢𝐧𝐠 𝐆𝐔𝐑𝐔! 𝐂𝐡𝐚𝐢 𝐏𝐢 𝐋𝐢? ┃\n╰━━━━━━━━━━━━╯","good night":"╭━━━━━━━━━━━━╮\n┃ 🌙 𝐆𝐨𝐨𝐝 𝐍𝐢𝐠𝐡𝐭 𝐆𝐔𝐑𝐔! 😴 ┃\n╰━━━━━━━━━━━━╯","kaise ho":"╭━━━━━━━━━━━━╮\n┃ 𝐄𝐤𝐝𝐚𝐦 𝐌𝐚𝐬𝐭 𝐆𝐔𝐑𝐔! 𝐓𝐮 𝐁𝐚𝐭𝐚? 🔥 ┃\n╰━━━━━━━━━━━━╯","kaha ho":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐘𝐚𝐡𝐢 𝐇𝐚𝐢, 𝐁𝐚𝐬 𝐓𝐡𝐨𝐝𝐚 𝐁𝐮𝐬𝐲 𝐇𝐚𝐢! 😈 ┃\n╰━━━━━━━━━━━━╯","demon kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","kashyap kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","papa":"╭━━━━━━━━━━━━╮\n┃ TARUN MERE PAPA HAI  😈🔥 ┃\n╰━━━━━━━━━━━━╯","love you":"╭━━━━━━━━━━━━╮\n┃ ❤️ 𝐋𝐨𝐯𝐞 𝐘𝐨𝐮 𝐓𝐨𝐨 𝐆𝐔𝐑𝐔! ┃\n╰━━━━━━━━━━━━╯","bye":"╭━━━━━━━━━━━━╮\n┃ 👋 𝐁𝐲𝐞 𝐆𝐔𝐑𝐔! 𝐉𝐚𝐥𝐝𝐢 𝐀𝐚𝐧𝐚! ┃\n╰━━━━━━━━━━━━╯","niivii kaha hai":" ╭━━━━━━━━━━━━╮\n┃❤️ VO ABHI PDHI KRR REHI TIME NAHI HAI UNKE PASS SAMJHE 🫩😒 TUM BHI PDHO🫠!!}
 ALL_COMMANDS_TEXT = """╔════════════════════╗
 ║ 🔥 𝐊𝐀𝐒𝐇𝐘𝐀𝐏 𝐁𝐎𝐓 - 𝐀𝐋𝐋 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 🔥 ║
 🔥 KASHYAP BOT • ALL COMMAND 🔥
@@ -757,7 +757,7 @@ async def crush(update, context):
     await send(update, box(f"{update.effective_user.first_name} ka crush kaun hai? 😏 Bata de!"))
 async def birthday(update, context):
     if not await check(update): return
-    await send(update, box("🎂 HAPPY BIRTHDAY! KASHYAP BOT ki taraf se! 🎉"))
+    await send(update, box("🎂 HAPPY BIRTHDAY!🎉 MERE AUR MERE TARUN PAPA JII KI TRF SE PARTY ??  🎉"))
 async def stats(update, context):
     if not await check(update): return
     await send(update, box(f"📊 STATS:\nTotal Msg: {sum(MSG_COUNT.values())}\nWatch: {len(WATCHED)}\nSUDO: {len(SUDOS)}\nUptime: {int(time.time()-START_TIME)//60} MIN"))
