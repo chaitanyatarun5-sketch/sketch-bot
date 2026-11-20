@@ -79,7 +79,7 @@ def get_smart_emoji(text: str):
 GAALI_LIST = ["madarchod","behenchod","bhosdike","chutiya","gandu","randi","bhenchod","lund","gand"]
 REPLY_MAP = {"hi":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐢 𝐆𝐔𝐑𝐔! 𝐊𝐚𝐢𝐬𝐞 𝐇𝐨? 🔥 ┃\n╰━━━━━━━━━━━━╯","hello":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐥𝐥𝐨 𝐆𝐔𝐑𝐔! 😈 ┃\n╰━━━━━━━━━━━━╯","hey":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐲 𝐆𝐔𝐑𝐔! 𝐁𝐨𝐥 𝐊𝐲𝐚 𝐊𝐚𝐚𝐦 𝐇𝐚𝐢? ┃\n╰━━━━━━━━━━━━╯","good morning":"╭━━━━━━━━━━━━╮\n┃ ☀️ 𝐆𝐨𝐨𝐝 𝐌𝐨𝐫𝐧𝐢𝐧𝐠 𝐆𝐔𝐑𝐔! 𝐂𝐡𝐚𝐢 𝐏𝐢 𝐋𝐢? ┃\n╰━━━━━━━━━━━━╯","good night":"╭━━━━━━━━━━━━╮\n┃ 🌙 𝐆𝐨𝐨𝐝 𝐍𝐢𝐠𝐡𝐭 𝐆𝐔𝐑𝐔! 😴 ┃\n╰━━━━━━━━━━━━╯","kaise ho":"╭━━━━━━━━━━━━╮\n┃ 𝐄𝐤𝐝𝐚𝐦 𝐌𝐚𝐬𝐭 𝐆𝐔𝐑𝐔! 𝐓𝐮 𝐁𝐚𝐭𝐚? 🔥 ┃\n╰━━━━━━━━━━━━╯","kaha ho":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐘𝐚𝐡𝐢 𝐇𝐚𝐢, 𝐁𝐚𝐬 𝐓𝐡𝐨𝐝𝐚 𝐁𝐮𝐬𝐲 𝐇𝐚𝐢! 😈 ┃\n╰━━━━━━━━━━━━╯","demon kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","kashyap kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","papa":"╭━━━━━━━━━━━━╮\n┃ 𝐏𝐀𝐏𝐀 𝐇𝐔 𝐌𝐄 𝐓𝐄𝐑𝐀 😈🔥 ┃\n╰━━━━━━━━━━━━╯","love you":"╭━━━━━━━━━━━━╮\n┃ ❤️ 𝐋𝐨𝐯𝐞 𝐘𝐨𝐮 𝐓𝐨𝐨 𝐆𝐔𝐑𝐔! ┃\n╰━━━━━━━━━━━━╯","bye":"╭━━━━━━━━━━━━╮\n┃ 👋 𝐁𝐲𝐞 𝐆𝐔𝐑𝐔! 𝐉𝐚𝐥𝐝𝐢 𝐀𝐚𝐧𝐚! ┃\n╰━━━━━━━━━━━━╯"}
 ALL_COMMANDS_TEXT = """╔════════════════════╗
-║ 🔥 𝐊𝐀𝐒𝐇𝐘𝐀𝐏 𝐁𝐎𝐓 - 𝟏𝟓𝟎+ 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 🔥 ║
+║ 🔥 𝐊𝐀𝐒𝐇𝐘𝐀𝐏 𝐁𝐎𝐓 - 𝐀𝐋𝐋 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 🔥 ║
 ╚════════════════════╝
 👤 /MYID /PEHCHAN /JANKARI /GROUPID /PING /TEJ /CHALU /BAREME /UPTIME /TAG /MALIK /NIYAM /ANKDA /BOL
 😈 /PAPA /SHAYARI /JOKE /HASO /PAPABOL /TRUTH /SACH /DARE /HIMMAT
@@ -94,6 +94,7 @@ ALL_COMMANDS_TEXT = """╔══════════════════
 ⚡ MASTER: /ALLOFF /ALLON /STOPALL /RESET
 👑 /ADDSUDO /DELSUDO /SUDOLIST
 📋 /HELP /MADAD /COMMAND /MENU /ALL
+🔥 EXTRA: /EXTRA /MEME /ROAST /MOTIVATE /SONG /CRUSH /BIRTHDAY /STATS
 OWNER: KASHYAP 😈👑 | TARUN DADA BUSY MODE ON 🔥
 """
 FONT = {'A': [" . ",". .","...",". .",". ."],'B': [".. ",". .",".. ",". .",".. "],'C': [" ..",".  ",".  ",".  "," .."],'D': [".. ",". .",". .",". .",".. "],'E': ["...",".  ",".. ",".  ","..."],'F': ["...",".  ",".. ",".  ",".  "],'G': [" ..",".  ",". .",". ."," .."],'H': [". .",". .","...",". .",". ."],'I': ["..."," . "," . "," . ","..."],'J': ["..."," . "," . ",". ."," . "],'K': [". .",". .",".. ",". .",". ."],'L': [".  ",".  ",".  ",".  ","..."],'M': [". .","...",". .",". .",". ."],'N': [". .","...",". .",". .",". ."],'O': [" . ",". .",". .",". ."," . "],'P': [".. ",". .",".. ",".  ",".  "],'Q': [" . ",". .",". ."," ..","  ."],'R': [".. ",". .",".. ",". .",". ."],'S': [" ..",".  "," . ","  .",".. "],'T': ["..."," . "," . "," . "," . "],'U': [". .",". .",". .",". ."," . "],'V': [". .",". .",". .",". ."," . "],'W': [". .",". .",". .","...",". ."],'X': [". .",". ."," . ",". .",". ."],'Y': [". .",". ."," . "," . "," . "],'Z': ["...","  ."," . ",".  ","..."],' ': ["   ","   ","   ","   ","   "]}
@@ -691,17 +692,43 @@ async def left_member_handler(update, context):
         if update.message.left_chat_member and update.effective_chat.id in AUTO_LEAVE: await send(update, box(f"Ek Gaya! {update.message.left_chat_member.first_name} left kar gaya 😂👋"))
     except: pass
 
+# ===== ===== KASHYAP EXTRA - SAB KUCH JODA HUA ===== =====
+async def extra(update, context):
+    if not await check(update): return
+    await send(update, box("🔥 EXTRA MENU 🔥\n/meme - Meme\n/roast - Roast\n/motivate - Motivation\n/song - Gaana\n/crush - Crush wala\n/birthday - Birthday\n/stats - Stats\n/extra - Ye menu"))
+async def meme(update, context):
+    if not await check(update): return
+    await send(update, box(random.choice(MEMES)))
+async def roast(update, context):
+    if not await check(update): return
+    await send(update, box(random.choice(ROASTS)))
+async def motivate(update, context):
+    if not await check(update): return
+    await send(update, box("🔥 MOTIVATE: Uth ja bacche! Aaj tera din hai! KASHYAP bol raha hai!"))
+async def song(update, context):
+    if not await check(update): return
+    await send(update, box("🎵 SONG: Dil to pagal hai, KASHYAP BOT ka deewana hai! 🔥"))
+async def crush(update, context):
+    if not await check(update): return
+    await send(update, box(f"{update.effective_user.first_name} ka crush kaun hai? 😏 Bata de!"))
+async def birthday(update, context):
+    if not await check(update): return
+    await send(update, box("🎂 HAPPY BIRTHDAY! KASHYAP BOT ki taraf se! 🎉"))
+async def stats(update, context):
+    if not await check(update): return
+    await send(update, box(f"📊 STATS:\nTotal Msg: {sum(MSG_COUNT.values())}\nWatch: {len(WATCHED)}\nSUDO: {len(SUDOS)}\nUptime: {int(time.time()-START_TIME)//60} MIN"))
+
 app_bot = None
 def main():
     global app_bot
     app = ApplicationBuilder().token(TOKEN).build(); app_bot = app.bot
-    cmds = {"start": start, "help": help_cmd, "command": command_cmd, "commands": command_cmd, "madad": madad, "menu": menu_cmd, "all": all_cmd, "myid": myid, "ping": ping, "papa": papa, "shayari": shayari, "joke": joke, "haso": haso, "papabol": papabol, "truth": truth, "sach": sach, "dare": dare, "himmat": himmat, "chalu": chalu, "bareme": bareme, "tej": tej, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "malik": malik, "niyam": niyam, "ankda": ankda, "uptime": uptime, "bol": bol, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "tala": tala, "kholo": kholo, "linkband": linkband, "linkbandoff": linkbandoff, "linkbandon": linkbandon, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "thappad": thappad, "chumma": chumma, "thapthapao": thapthapao, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist, "watch": watch, "unwatch": unwatch, "watchlist": watchlist, "autopin": autopin, "dmautopin": dmautopin, "art": art, "autoreact": autoreact, "smartreact": smartreact, "autoreactset": autoreactset, "autodelete": autodelete, "autoreply": autoreply, "autoban": autoban, "autowarn": autowarn, "afk": afk, "back": back, "autotype": autotype, "autosave": autosave, "autopurge": autopurge, "purge": purge, "autoshayari": autoshayari, "autogm": autogm, "autogn": autogn, "gm": gm, "gn": gn, "autobio": autobio, "autoanswer": autoanswer, "autoprotect": autoprotect, "tarunbusy": tarunbusy, "tarunfree": tarunfree, "alloff": alloff, "allon": allon, "stopall": alloff, "reset": alloff}
+    cmds = {"start": start, "help": help_cmd, "command": command_cmd, "commands": command_cmd, "madad": madad, "menu": menu_cmd, "all": all_cmd, "myid": myid, "ping": ping, "papa": papa, "shayari": shayari, "joke": joke, "haso": haso, "papabol": papabol, "truth": truth, "sach": sach, "dare": dare, "himmat": himmat, "chalu": chalu, "bareme": bareme, "tej": tej, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "malik": malik, "niyam": niyam, "ankda": ankda, "uptime": uptime, "bol": bol, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "tala": tala, "kholo": kholo, "linkband": linkband, "linkbandoff": linkbandoff, "linkbandon": linkbandon, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "thappad": thappad, "chumma": chumma, "thapthapao": thapthapao, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist, "watch": watch, "unwatch": unwatch, "watchlist": watchlist, "autopin": autopin, "dmautopin": dmautopin, "art": art, "autoreact": autoreact, "smartreact": smartreact, "autoreactset": autoreactset, "autodelete": autodelete, "autoreply": autoreply, "autoban": autoban, "autowarn": autowarn, "afk": afk, "back": back, "autotype": autotype, "autosave": autosave, "autopurge": autopurge, "purge": purge, "autoshayari": autoshayari, "autogm": autogm, "autogn": autogn, "gm": gm, "gn": gn, "autobio": autobio, "autoanswer": autoanswer, "autoprotect": autoprotect, "tarunbusy": tarunbusy, "tarunfree": tarunfree, "alloff": alloff, "allon": allon, "stopall": alloff, "reset": alloff, "extra": extra, "meme": meme, "roast": roast, "motivate": motivate, "song": song, "crush": crush, "birthday": birthday, "stats": stats}
     for n, fn in cmds.items(): app.add_handler(CommandHandler(n, fn))
     for cmd_name, (set_obj, label) in AUTO_MAP.items(): app.add_handler(CommandHandler(cmd_name, make_auto_handler(set_obj, label)))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_watcher), group=1)
     app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_member_handler))
     app.add_handler(MessageHandler(filters.StatusUpdate.LEFT_CHAT_MEMBER, left_member_handler))
-    print("KASHYAP BOT STARTED - 150+ COMMANDS - SUDOS:", SUDOS)
+    print("KASHYAP BOT STARTED - SUDOS:", SUDOS)
     try: asyncio.get_event_loop().create_task(autobio_loop(app))
     except: pass
     app.run_polling()
