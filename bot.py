@@ -29,7 +29,7 @@ async def send(update, text):
     except Exception as e: print("Send fail:", e)
 async def check(update):
     if not is_allowed(update.effective_user.id):
-        await send(update, "╭━━━━━━━━━━━━╮\n┃ 🔒 𝐒𝐎𝐑𝐑𝐘 𝐆𝐔𝐑𝐔! 𝐎𝐍𝐋𝐘 𝐎𝐖𝐍𝐄𝐑 / 𝐒𝐔𝐃𝐎 ┃\n╰━━━━━━━━━━━━╯")
+        await send(update, "╭━━━━━━━━━━━━╮\n┃ 🔒 OOYE BHKK BSDK BAAP KA BOT NAHI HAI 𝐎𝐍𝐋𝐘 𝐎𝐖𝐍𝐄𝐑 / 𝐒𝐔𝐃𝐎 ┃\n╰━━━━━━━━━━━━╯")
         return False
     return True
 async def need_admin(update):
