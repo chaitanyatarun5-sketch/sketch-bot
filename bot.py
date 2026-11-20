@@ -80,22 +80,66 @@ GAALI_LIST = ["madarchod","behenchod","bhosdike","chutiya","gandu","randi","bhen
 REPLY_MAP = {"hi":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐢 𝐆𝐔𝐑𝐔! 𝐊𝐚𝐢𝐬𝐞 𝐇𝐨? 🔥 ┃\n╰━━━━━━━━━━━━╯","hello":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐥𝐥𝐨 𝐆𝐔𝐑𝐔! 😈 ┃\n╰━━━━━━━━━━━━╯","hey":"╭━━━━━━━━━━━━╮\n┃ 𝐇𝐞𝐲 𝐆𝐔𝐑𝐔! 𝐁𝐨𝐥 𝐊𝐲𝐚 𝐊𝐚𝐚𝐦 𝐇𝐚𝐢? ┃\n╰━━━━━━━━━━━━╯","good morning":"╭━━━━━━━━━━━━╮\n┃ ☀️ 𝐆𝐨𝐨𝐝 𝐌𝐨𝐫𝐧𝐢𝐧𝐠 𝐆𝐔𝐑𝐔! 𝐂𝐡𝐚𝐢 𝐏𝐢 𝐋𝐢? ┃\n╰━━━━━━━━━━━━╯","good night":"╭━━━━━━━━━━━━╮\n┃ 🌙 𝐆𝐨𝐨𝐝 𝐍𝐢𝐠𝐡𝐭 𝐆𝐔𝐑𝐔! 😴 ┃\n╰━━━━━━━━━━━━╯","kaise ho":"╭━━━━━━━━━━━━╮\n┃ 𝐄𝐤𝐝𝐚𝐦 𝐌𝐚𝐬𝐭 𝐆𝐔𝐑𝐔! 𝐓𝐮 𝐁𝐚𝐭𝐚? 🔥 ┃\n╰━━━━━━━━━━━━╯","kaha ho":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐘𝐚𝐡𝐢 𝐇𝐚𝐢, 𝐁𝐚𝐬 𝐓𝐡𝐨𝐝𝐚 𝐁𝐮𝐬𝐲 𝐇𝐚𝐢! 😈 ┃\n╰━━━━━━━━━━━━╯","demon kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","kashyap kaha hai":"╭━━━━━━━━━━━━╮\n┃ 𝐆𝐔𝐑𝐔 𝐀𝐚𝐭𝐚 𝐇𝐢 𝐇𝐨𝐠𝐚! 𝐓𝐡𝐨𝐝𝐚 𝐑𝐮𝐤 𝐉𝐚! 🔥 ┃\n╰━━━━━━━━━━━━╯","papa":"╭━━━━━━━━━━━━╮\n┃ 𝐏𝐀𝐏𝐀 𝐇𝐔 𝐌𝐄 𝐓𝐄𝐑𝐀 😈🔥 ┃\n╰━━━━━━━━━━━━╯","love you":"╭━━━━━━━━━━━━╮\n┃ ❤️ 𝐋𝐨𝐯𝐞 𝐘𝐨𝐮 𝐓𝐨𝐨 𝐆𝐔𝐑𝐔! ┃\n╰━━━━━━━━━━━━╯","bye":"╭━━━━━━━━━━━━╮\n┃ 👋 𝐁𝐲𝐞 𝐆𝐔𝐑𝐔! 𝐉𝐚𝐥𝐝𝐢 𝐀𝐚𝐧𝐚! ┃\n╰━━━━━━━━━━━━╯"}
 ALL_COMMANDS_TEXT = """╔════════════════════╗
 ║ 🔥 𝐊𝐀𝐒𝐇𝐘𝐀𝐏 𝐁𝐎𝐓 - 𝐀𝐋𝐋 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 🔥 ║
-╚════════════════════╝
-👤 /MYID /PEHCHAN /JANKARI /GROUPID /PING /TEJ /CHALU /BAREME /UPTIME /TAG /MALIK /NIYAM /ANKDA /BOL
-😈 /PAPA /SHAYARI /JOKE /HASO /PAPABOL /TRUTH /SACH /DARE /HIMMAT
-🛡️ /NIKAL /WAPAS /DHAKKA /CHUP /BOLNEDE /CHETAVNI /MITAO /CHIPKAO /HATAO /TALA /KHOLO /LINKBAND
-👋 /SWAGATSET /SWAGATOFF /SWAGATTEST
-🎲 /PASA /SIKKA /GHUMAO /KAINCHI /JADU /CHUNO /SAWAL /ANK
-❤️ /GALE /THAPPAD /CHUMMA /THAPTHAPAO /PANJA /HATH /PYAR /TARIFF /JODI /VICHAR
-🧮 /GIN /ULTA /BADA /CHOTA /GINO /SAMAY /TARIKH /BEHISAAB
-👀 /WATCH /UNWATCH /WATCHLIST /AUTOPIN /DMAUTOPIN /ART
-🤖 OLD AUTO: /AUTOREACT /SMARTREACT /AUTODELETE /AUTOREPLY /AUTOBAN /AUTOWARN /AFK /BACK /AUTOTYPE /AUTOSAVE /AUTOPURGE /AUTOSHAYARI /AUTOGM /AUTOGN /GM /GN /AUTOBIO /AUTOANSWER /AUTOPROTECT /TARUNBUSY /TARUNFREE
-🔥 NEW 50 AUTO: /AUTOTAGALL /AUTOSTICKER /AUTOTRANSLATE /AUTOWELCOMEPHOTO /AUTOANTILINK /AUTOGOODMORNING /AUTOAFKREPLY /AUTOKICKINACTIVE /AUTOFORWARD /AUTOCOUNTER /AUTOVOICE /AUTOGAME /AUTOSHOUT /AUTOMEME /AUTOFILTER /AUTOPOLL /AUTOQUIZ /AUTOBIRTHDAY /AUTOSTATS /AUTOBACKUP /AUTOJOIN /AUTOLEAVE /AUTOREPEAT /AUTONIGHTMODE /AUTOCRUSH /AUTOPAPABOL /AUTODP /AUTODELETEPHOTO /AUTORESPECT /AUTOSHY /AUTOGAALIREPLY /AUTOMOTIVATE /AUTOFIGHT /AUTOTHANK /AUTOOFFLINE /AUTOONLINE /AUTOSHOUTOUT /AUTOHELLO /AUTOBYE /AUTOGHOST /AUTOTRUTH /AUTOROAST /AUTOCOMPLIMENT /AUTOPROMOTE /AUTOWARN2 /AUTOEMOJI /AUTOCHANGENAME /AUTOPHOTO /AUTOLOVE
-⚡ MASTER: /ALLOFF /ALLON /STOPALL /RESET
-👑 /ADDSUDO /DELSUDO /SUDOLIST
-📋 /HELP /MADAD /COMMAND /MENU /ALL
-🔥 EXTRA: /EXTRA /MEME /ROAST /MOTIVATE /SONG /CRUSH /BIRTHDAY /STATS
-OWNER: KASHYAP 😈👑 | TARUN DADA BUSY MODE ON 🔥
+ALL_COMMANDS_TEXT = """
+🔥 KASHYAP BOT • ALL COMMAND 🔥
+━━━━━━━━━━━━━━━━━━
+Total 150 Command | sudo mil gaya kay try ko baap bol diya
+le ab command dhek le!
+━━━━━━━━━━━━━━━━━━
+
+ℹ️ INFO / BASIC
+/MYID /PEHCHAN /JANKARI /GROUPID
+/PING /TEJ /CHALU /BAREME /UPTIME
+/TAG /MALIK /NIYAM /ANKDA /BOL
+
+🎭 FUN / MASTI
+/PAPA /SHAYARI /JOKE /HASO /PAPABOL
+/TRUTH /SACH /DARE /HIMMAT
+/PASA /SIKKA /GHUMAO /KAINCHI /JADU
+/CHUNO /SAWAL /ANK
+/GALE /THAPPAD /CHUMMA /THAPTHAPAO
+/PANJA /HATH /PYAR /TARIFF /JODI /VICHAR
+/GIN /ULTA /BADA /CHOTA /GINO
+/SAMAY /TARIKH /BEHISAAB
+
+👋 SWAGAT
+/SWAGATSET /SWAGATOFF /SWAGATTEST
+
+👑 ADMIN
+/NIKAL /WAPAS /DHAKKA /CHUP /BOLNEDE
+/CHETAVNI /MITAO /CHIPKAO /HATAO
+/TALA /KHOLO /LINKBAND
+
+👁️ WATCH
+/WATCH /UNWATCH /WATCHLIST
+/AUTOPIN /DMAUTOPIN /ART
+
+⚙️ OLD AUTO
+/AUTOREACT /SMARTREACT /AUTODELETE
+/AUTOREPLY /AUTOBAN /AUTOWARN /AFK /BACK
+/AUTOTYPE /AUTOSAVE /AUTOPURGE /AUTOSHAYARI
+/AUTOGM /AUTOGN /GM /GN /AUTOBIO /AUTOANSI
+
+⚙️ NEW 50 AUTO
+/AUTOTAGALL /AUTOSTICKER /AUTOTRANSLATE
+/AUTOWELCOMEPHOTO /AUTOANTILINK
+/AUTOGOODMORNING /AUTOAFKREPLY
+/AUTOKICKINACTIVE /AUTOFORWARD
+/AUTOCOUNTER /AUTOVOICE
+
+👑 MASTER
+/ALLOFF /ALLON /STOPALL /RESET
+/ADDSUDO /DELSUDO /SUDOLIST
+
+🛠️ HELP
+/HELP /MADAD /COMMAND /MENU /ALL
+
+✨ EXTRA
+/EXTRA /MEME /ROAST /MOTIVATE
+/SONG /CRUSH /BIRTHDAY /STATS
+
+━━━━━━━━━━━━━━━━━━
+OWNER: KASHYAP 👑 | TARUN DADA BUSY MODE ON 🔥
 """
 FONT = {'A': [" . ",". .","...",". .",". ."],'B': [".. ",". .",".. ",". .",".. "],'C': [" ..",".  ",".  ",".  "," .."],'D': [".. ",". .",". .",". .",".. "],'E': ["...",".  ",".. ",".  ","..."],'F': ["...",".  ",".. ",".  ",".  "],'G': [" ..",".  ",". .",". ."," .."],'H': [". .",". .","...",". .",". ."],'I': ["..."," . "," . "," . ","..."],'J': ["..."," . "," . ",". ."," . "],'K': [". .",". .",".. ",". .",". ."],'L': [".  ",".  ",".  ",".  ","..."],'M': [". .","...",". .",". .",". ."],'N': [". .","...",". .",". .",". ."],'O': [" . ",". .",". .",". ."," . "],'P': [".. ",". .",".. ",".  ",".  "],'Q': [" . ",". .",". ."," ..","  ."],'R': [".. ",". .",".. ",". .",". ."],'S': [" ..",".  "," . ","  .",".. "],'T': ["..."," . "," . "," . "," . "],'U': [". .",". .",". .",". ."," . "],'V': [". .",". .",". .",". ."," . "],'W': [". .",". .",". .","...",". ."],'X': [". .",". ."," . ",". .",". ."],'Y': [". .",". ."," . "," . "," . "],'Z': ["...","  ."," . ",".  ","..."],' ': ["   ","   ","   ","   ","   "]}
 def bindi_art(text):
