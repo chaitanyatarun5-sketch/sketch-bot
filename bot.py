@@ -82,6 +82,7 @@ ALL_COMMANDS_TEXT = """╔══════════════════
 ║ 🔥 𝐊𝐀𝐒𝐇𝐘𝐀𝐏 𝐁𝐎𝐓 - 𝐀𝐋𝐋 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 🔥 ║
 ALL_COMMANDS_TEXT = """
 🔥 KASHYAP BOT • ALL COMMAND 🔥
+COMMAND DHEKNE AAYA HAI GARIB DHEK LE !!
 ━━━━━━━━━━━━━━━━━━
 Total 150 Command | sudo mil gaya kay tum ko baap bol diya
 le ab command dhek le!
