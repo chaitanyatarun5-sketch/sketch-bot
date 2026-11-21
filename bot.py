@@ -39,13 +39,12 @@ async def need_admin(update):
         return False
     return True
 
-# ===== STORAGE - FIX WALA =====
+# ===== STORAGE =====
 WELCOME = {}; AFK_USERS = {}; MSG_COUNT = {}; WARN_COUNT = {}
 KNOWN_USERS = {}
 AUTOREACT_CHATS = set(); AUTOREPLY_CHATS = set(); AUTOPIN_CHATS = set(); AUTOSHAYARI_CHATS = set(); AUTOGM_CHATS = set(); AUTOGN_CHATS = set()
 AUTO_TAGALL = set(); AUTO_STICKER = set(); AUTO_MOTIVATE = set(); AUTO_THANK = set(); AUTO_HELLO = set(); AUTO_BYE = set(); AUTO_MEME = set(); AUTO_GAME = set(); AUTO_SHOUT = set(); AUTO_REPEAT = set(); AUTO_TRUTH_AUTO = set(); AUTO_POLL = set(); AUTO_QUIZ = set(); AUTO_BIRTHDAY = set(); AUTO_STATS = set(); AUTO_JOIN = set(); AUTO_LEAVE = set(); AUTO_SHOUTOUT = set(); AUTO_COMPLIMENT = set(); AUTO_EMOJI = set(); AUTO_PHOTO = set(); AUTO_VOICE = set()
 
-# ===== DATA =====
 SHAYARI = ["Teri yaad me dil ne ye farmaya hai, tu jo mili to laga khuda ne bulaya hai ❤️","Chandni raat me teri yaad aayi, dil ne kaha kash tu paas hoti ❤️","Tumse milke laga zindagi mil gayi, ab to har khushi tumse hi judi ❤️","Dil ki dhadkan ban gayi ho tum, meri har dua me aati ho tum ❤️","Teri muskan pe fida hu me, tu jo hanse to jahan hanse ❤️","Raaton ko neend nahi aati, teri yaad bahut satati ❤️","Tu mile to laga sab mil gaya, ab koi gham nahi ❤️","Dil ne tujhe itna chaha, ki khud ko bhool gaya ❤️"]
 JOKES = ["Ek aadmi doctor ke paas gaya: Doctor, mujhe sab kuch do-do dikhta hai. Doctor: Baith jao, tum char log ek saath mat baitho 😂","Teacher: Kal school kyu nahi aaye? Pappu: Dil tuta to pair bhi tut gaya samjho 😂","Pati: Tum mujhe kitna pyar karti ho? Patni: Jitna tum phone ko karte ho, usse thoda kam 😂","Dost: Bhai exam me kya likha? Me: Jo aata tha wo likha, jo nahi aata tha wo bhi likha 😂"]
 TRUTHS = ["Tera sabse bada crush kaun hai? 😏","Kabhi kisi ka message chupke padha hai?","Sabse embarrassing moment kya tha tera?","Apni life ka sabse bada jhooth batao.","Last baar kab roye the aur kyu?","Kis cheez se sabse zyada dar lagta hai?"]
@@ -68,24 +67,7 @@ def bindi_art(text):
         for i in range(5): lines[i] += f[i] + "  "
     return "\n".join(lines)
 ARTS_LIST = ["RAM","JAISHREERAM","HANUMAN","MAHAKAL","SHIV","OM","RADHE","KRISHNA","ILOVEYOU","LOVE","HUG","JAAN","BABY","CRUSH","CUTE","PYAR","MISSYOU","HELLO","BYEE","KING","QUEEN","KASHYAP","INDIA","BHARAT","SORRY","THANKYOU","GOODMORNING","GOODNIGHT","HAPPYBIRTHDAY"]
-ALL_COMMANDS_TEXT = """╔════════════════════╗
-║ 🔥 DEMON BOT - ALL COMMAND 🔥 ║
-━━━━━━━━━━━━━━━━━━
-Total 170+ Command | Sirf Owner / Sudo
-━━━━━━━━━━━━━━━━━━
-ℹ️ /MYID /PEHCHAN /JANKARI /GROUPID /PING /CHALU /BAREME /UPTIME /TAG /TAGALL /MALIK /NIYAM /BOL
-🎭 /SHAYARI /JOKE /HASO /TRUTH /SACH /DARE /HIMMAT /PASA /SIKKA /GHUMAO /KAINCHI /JADU /CHUNO /SAWAL /ANK /GALE /PANJA /HATH /PYAR /TARIFF /JODI /VICHAR /GIN /ULTA /BADA /CHOTA /GINO /SAMAY /TARIKH /BEHISAAB
-✨ NEW 30: /POLL /QUIZ /WYR /NHIE /RIDDLE /8BALL /FACT /QUOTE /GUESS /RPS /SLOT /LOVECALC /FONT /ART /SHOUT /MOVIE /CRICKET /NEWS /HOROSCOPE /WARN /MUTE /UNMUTE /PURGE /GIVEAWAY /COUNT /REMINDER /NOTE /TRANSLATE /AI
-🔥 MAST 40: /DICE /COIN /TOSS /LUDO /KING /QUEEN /TOP /ACTIVE /IDCARD /PROFILE /LUCKY /ZODIAC /TODAY /PARTY /DANCE /SING /STORY /RAP /POEM /ECHO /SAY /MIMIC /VS /BATTLE /TEAM /WINNER /LOSER /RESPECT /SHOUTOUT2 /WELCOME2 /BYE2 /GM2 /GN2 /PASSWORD /RANDOMNAME /AGE /COUNTWORD /REVERSE2 /UPPER2 /LOWER2
-👋 /SWAGATSET /SWAGATOFF /SWAGATTEST
-👑 /NIKAL /WAPAS /DHAKKA /CHUP /BOLNEDE /CHETAVNI /MITAO /CHIPKAO /HATAO
-⚙️ AUTO: /AUTOPIN /AUTOREACT /AUTOREPLY /AUTOSHAYARI /AUTOGM /AUTOGN /AUTOTAGALL /AUTOSTICKER /AUTOMOTIVATE /AUTOTHANK /AUTOHELLO /AUTOBYE /AUTOMEME /AUTOGAME /AUTOSHOUT /AUTOREPEAT /AUTOTRUTH /AUTOPOLL /AUTOQUIZ /AUTOBIRTHDAY /AUTOSTATS /AUTOJOIN /AUTOLEAVE /AUTOSHOUTOUT /AUTOCOMPLIMENT /AUTOEMOJI /AUTOPHOTO /AUTOVOICE /AUTOBIO /AFK /BACK
-👑 /ALLOFF /ALLON /ADDSUDO /DELSUDO /SUDOLIST
-🛠️ /HELP /MADAD /COMMAND /MENU /ALL
-✨ /EXTRA /MEME /MOTIVATE /SONG /BIRTHDAY /STATS
-━━━━━━━━━━━━━━━━━━
-OWNER: KASHYAP 👑 | BOT: 𝒹𝑒𝓂𝑜𝓃_17_099_𝒷𝑜𝓉
-"""
+ALL_COMMANDS_TEXT = "🔥 DEMON BOT - 170+ COMMAND 🔥\n/MYID /PING /TAGALL /SHAYARI /JOKE /TRUTH /DARE /POLL /QUIZ /DICE /KING /TOP /VS /BATTLE /NIKAL /CHUP /MITAO /AUTOPIN /AUTOREACT /ALLON /ALLOFF /HELP"
 
 # ===== BASIC =====
 async def start(update, context):
@@ -149,33 +131,46 @@ async def bol(update, context):
     if not await check(update): return
     if context.args: await send(update, box(fancy(" ".join(context.args))))
 
-# ===== TAGALL - FIX WALA, AB ERROR NAHI AAYEGA =====
+# ===== TAGALL - EK EK KARKE - TERA WALA FINAL =====
 async def tagall(update, context):
     if not await check(update): return
     if update.effective_chat.type == "private":
         await send(update, box("Ye command sirf group me chalegi!")); return
-    await send(update, box("TAG KAR RAHA HU SABKO... 🔥\nRuk ja thoda!"))
+
+    chat_id = update.effective_chat.id
+
+    # Jo tu /TAGALL ke baad likhega, wahi har ek ko bolega
+    # Kuch nahi likha to auto ye bolega
+    custom_text = " ".join(context.args) if context.args else "Hello Haayy 👋🔥"
+
+    await context.bot.send_message(chat_id, "TAG KAR RAHA HU SABKO... 🔥\nEk-ek karke tag kar raha hu,!")
+
     try:
         if not KNOWN_USERS:
-            await send(update, box("Abhi koi naam save nahi hai!\nPehle sabko 1 baar Hi likhne ko bolo, fir /TAGALL karo!"))
+            await context.bot.send_message(chat_id, "Abhi koi naam save nahi hai!\nPehle sabko 1 baar Hi likhne ko bolo, fir /TAGALL karo!")
             return
+
         members = list(KNOWN_USERS.items())
-        batch = []
-        for uid, name in members:
-            safe_name = str(name).replace("[","").replace("]","")
-            batch.append(f"[{safe_name}](tg://user?id={uid})")
-            if len(batch) == 5:
-                text = " ".join(batch) + "\n\nHello Haayy 👋🔥"
-                await update.effective_message.reply_text(text, parse_mode="Markdown")
-                batch = []
-                await asyncio.sleep(1)
-        if batch:
-            text = " ".join(batch) + "\n\nHello Haayy 👋🔥"
-            await update.effective_message.reply_text(text, parse_mode="Markdown")
         total = len(members)
-        await send(update, f"✨ Tag All Completed Successfully ✨\n👥 Total Members Tagged: {total}\n💫 Powered by your 𝒹𝑒𝓂𝑜𝓃_17_099_𝒷𝑜𝓉")
+        count = 0
+
+        # YAHAN EK-EK KARKE TAG HOGA
+        for uid, name in members:
+            safe_name = str(name).replace("[","").replace("]","").replace("\n"," ")
+            # Har ek ko alag msg me tag + tera msg
+            text = f"[{safe_name}](tg://user?id={uid})\n\n{custom_text}"
+            try:
+                await context.bot.send_message(chat_id, text, parse_mode="Markdown")
+                count += 1
+            except Exception:
+                pass
+            await asyncio.sleep(0.7)
+
+        # LAST ME TERA WALA MSG
+        await context.bot.send_message(chat_id, f"✨ Tag All Completed Successfully ✨\n👥 Total Members Tagged: {count}\n💫 Powered by your 𝒹𝑒𝓂𝑜𝓃_17_099_𝒷𝑜𝓉")
+
     except Exception as e:
-        await send(update, box(f"Tag nahi ho paya!\nError: {e}"))
+        await context.bot.send_message(chat_id, f"Tag nahi ho paya!\nError: {e}")
 
 # ===== FUN =====
 async def shayari(update, context):
@@ -679,20 +674,20 @@ def make_auto_handler(set_obj, label):
         cid = update.effective_chat.id
         if context.args and context.args[0].upper()=="OFF": set_obj.discard(cid); await send(update, box(f"{label} OFF! ❌")); return
         set_obj.add(cid); await send(update, box(f"{label} ON! 🔥\nAb ye auto kaam karega!"))
-        if label=="AUTO POLL": await send(update, box("📊 POLL: Aaj Ka Best Kaun?\n1. Kashyap 2. Demon 3. Sab"))
-        if label=="AUTO QUIZ": await send(update, box("❓ QUIZ: Bharat ki Rajdhani?\nA) Delhi B) Mumbai"))
-        if label=="AUTO GAME": await send(update, box("🎲 GAME TIME! /PASA ya /SIKKA likh!"))
-        if label=="AUTO TRUTH": await send(update, box("❓ TRUTH: Tera crush kaun hai? 😏"))
-        if label=="AUTO MOTIVATE": await send(update, box("🔥 MOTIVATE: Uth Ja! Aaj Tera Din Hai!"))
     return h
+async def collect_user(update, context):
+    try:
+        if update.effective_user and not update.effective_user.is_bot:
+            KNOWN_USERS[update.effective_user.id] = update.effective_user.first_name
+    except: pass
 async def auto_watcher(update, context):
     try:
+        await collect_user(update, context)
         msg = update.message
         if not msg or (msg.from_user and msg.from_user.is_bot): return
         chat_id = update.effective_chat.id; user = update.effective_user
         text = (msg.text or "").lower(); orig = msg.text or ""
         MSG_COUNT[user.id] = MSG_COUNT.get(user.id,0)+1
-        KNOWN_USERS[user.id] = user.first_name
         if msg.reply_to_message and msg.reply_to_message.from_user.id in AFK_USERS:
             await send(update, box(f"😴 {msg.reply_to_message.from_user.first_name} abhi AFK hai! Wajah: {AFK_USERS[msg.reply_to_message.from_user.id]}"))
         if chat_id in AUTO_HELLO and "hi" in text: await send(update, box(f"Hi {user.first_name}! Welcome! 🔥"))
@@ -755,13 +750,12 @@ async def stats(update, context):
     if not await check(update): return
     await send(update, box(f"📊 STATS:\nTotal Msg: {sum(MSG_COUNT.values())}\nSUDO: {len(SUDOS)}\nUptime: {int(time.time()-START_TIME)//60} MIN"))
 
-app_bot = None
 def main():
-    global app_bot
-    app = ApplicationBuilder().token(TOKEN).build(); app_bot = app.bot
+    app = ApplicationBuilder().token(TOKEN).build()
     cmds = {"start": start, "help": help_cmd, "command": command_cmd, "commands": command_cmd, "madad": madad, "menu": menu_cmd, "all": all_cmd, "myid": myid, "ping": ping, "chalu": chalu, "bareme": bareme, "pehchan": pehchan, "jankari": jankari, "groupid": groupid, "tag": tag, "tagall": tagall, "malik": malik, "niyam": niyam, "uptime": uptime, "bol": bol, "shayari": shayari, "joke": joke, "haso": haso, "truth": truth, "sach": sach, "dare": dare, "himmat": himmat, "pasa": pasa, "sikka": sikka, "ghumao": ghumao, "kainchi": kainchi, "jadu": jadu, "chuno": chuno, "sawal": sawal, "ank": ank, "gale": gale, "panja": panja, "hath": hath, "pyar": pyar, "tariff": tariff, "jodi": jodi, "vichar": vichar, "gin": gin_safe, "ulta": ulta, "bada": bada, "chota": chota, "gino": gino, "samay": samay, "tarikh": tarikh, "behisaab": behisaab, "art": art, "poll": poll, "quiz": quiz, "wyr": wyr, "nhie": nhie, "riddle": riddle, "8ball": eightball, "fact": fact, "quote": quote, "guess": guess, "rps": rps, "slot": slot, "lovecalc": lovecalc, "font": font, "shout": shout, "movie": movie, "cricket": cricket, "news": news, "horoscope": horoscope, "warn": warn, "mute": mute, "unmute": unmute, "purge": purge, "giveaway": giveaway, "count": count, "reminder": reminder, "note": note, "translate": translate, "ai": ai, "dice": dice, "coin": coin, "toss": toss, "ludo": ludo, "king": king, "queen": queen, "top": top, "active": active, "idcard": idcard, "profile": profile, "lucky": lucky, "zodiac": zodiac, "today": today, "party": party, "dance": dance, "sing": sing, "story": story, "rap": rap, "poem": poem, "echo": echo, "say": say, "mimic": mimic, "vs": vs, "battle": battle, "team": team, "winner": winner, "loser": loser, "respect": respect, "shoutout2": shoutout2, "welcome2": welcome2, "bye2": bye2, "gm2": gm2, "gn2": gn2, "password": password, "randomname": randomname, "age": age, "countword": countword, "reverse2": reverse2, "upper2": upper2, "lower2": lower2, "nikal": nikal, "wapas": wapas, "dhakka": dhakka, "chup": chup, "bolnede": bolnede, "chetavni": chetavni, "mitao": mitao, "chipkao": chipkao, "hatao": hatao, "swagatset": swagatset, "swagatoff": swagatoff, "swagattest": swagattest, "autopin": autopin, "autoreact": autoreact, "autoreply": autoreply, "autoshayari": autoshayari, "autogm": autogm, "autogn": autogn, "gm": gm, "gn": gn, "afk": afk, "back": back, "addsudo": addsudo, "delsudo": delsudo, "sudolist": sudolist, "autobio": autobio, "alloff": alloff, "allon": allon, "stopall": alloff, "reset": alloff, "extra": extra, "meme": meme, "motivate": motivate, "song": song, "birthday": birthday, "stats": stats}
     for n, fn in cmds.items(): app.add_handler(CommandHandler(n, fn))
     for cmd_name, (set_obj, label) in AUTO_MAP.items(): app.add_handler(CommandHandler(cmd_name, make_auto_handler(set_obj, label)))
+    app.add_handler(MessageHandler(filters.ALL, collect_user), group=0)
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_watcher), group=1)
     app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_member_handler))
     app.add_handler(MessageHandler(filters.StatusUpdate.LEFT_CHAT_MEMBER, left_member_handler))
