@@ -39,8 +39,9 @@ async def need_admin(update):
         return False
     return True
 
-# ===== STORAGE =====
+# ===== STORAGE - FIX WALA =====
 WELCOME = {}; AFK_USERS = {}; MSG_COUNT = {}; WARN_COUNT = {}
+KNOWN_USERS = {}
 AUTOREACT_CHATS = set(); AUTOREPLY_CHATS = set(); AUTOPIN_CHATS = set(); AUTOSHAYARI_CHATS = set(); AUTOGM_CHATS = set(); AUTOGN_CHATS = set()
 AUTO_TAGALL = set(); AUTO_STICKER = set(); AUTO_MOTIVATE = set(); AUTO_THANK = set(); AUTO_HELLO = set(); AUTO_BYE = set(); AUTO_MEME = set(); AUTO_GAME = set(); AUTO_SHOUT = set(); AUTO_REPEAT = set(); AUTO_TRUTH_AUTO = set(); AUTO_POLL = set(); AUTO_QUIZ = set(); AUTO_BIRTHDAY = set(); AUTO_STATS = set(); AUTO_JOIN = set(); AUTO_LEAVE = set(); AUTO_SHOUTOUT = set(); AUTO_COMPLIMENT = set(); AUTO_EMOJI = set(); AUTO_PHOTO = set(); AUTO_VOICE = set()
 
@@ -51,7 +52,7 @@ TRUTHS = ["Tera sabse bada crush kaun hai? 😏","Kabhi kisi ka message chupke p
 DARES = ["Apni DP 1 ghante ke liye badal de 😂","Group me apni favourite shayari likh ke bhej ❤️","10 baar apna naam zor se bol ke voice bhej","Apne dost ki tareef me 3 line likh","Kal subah sabko Good Morning bolna"]
 MEMES = ["Meme 1: Jab teacher bole kal test hai aur tune kuch padha nahi 😂","Meme 2: Jab mummy bole phone rakh de aur tu chupke chala raha ho 😂","Meme 3: Jab dost bole party meri taraf se aur bill aane pe bhag jaye 😂"]
 MOTIVATES = ["Uth ja bacche! Aaj tera din hai! Mehnat kar, result khud bolega 🔥","Zindagi me aage badho, rukna mana hai 🔥","Hasna sabse badi dawa hai, haste raho ❤️","Mehnat karo, Kashyap jaisa bano 😈"]
-FACTS = ["Octopus ke 3 dil hote hai 🐙","Honey kabhi kharab nahi hota 🍯","Banana berry hota hai, strawberry nahi 🍌","Shark 400 saal tak jee sakta hai 🦈","Tumhare muh me 700 tarah ke bacteria hote hai 😂"]
+FACTS = ["Octopus ke 3 dil hote hai 🐙","Honey kabhi kharab nahi hota 🍯","Banana berry hota hai, strawberry nahi 🍌","Shark 400 saal tak jee sakta hai 🦈"]
 QUOTES = ["Mehnat itni khamoshi se karo ki safalta shor macha de 🔥","Jo ruk gaya wo haar gaya, jo chalta raha wo jeet gaya","Kal se nahi, aaj se shuru karo"]
 RIDDLES = [("Aisa kaun sa phal hai jo khaya nahi jata?","Badam ka chilka 😂"),("Wo kya hai jo aage badhta hai par peeche nahi hat ta?","Umar"),("Aisi kaun si cheez hai jo paani me girne pe bhi geeli nahi hoti?","Parchhai")]
 WYR_LIST = ["Paisa ya Pyar?","Phone ya Dost?","Pahad ya Samundar?","Din ya Raat?","Chai ya Coffee?"]
@@ -67,66 +68,21 @@ def bindi_art(text):
         for i in range(5): lines[i] += f[i] + "  "
     return "\n".join(lines)
 ARTS_LIST = ["RAM","JAISHREERAM","HANUMAN","MAHAKAL","SHIV","OM","RADHE","KRISHNA","ILOVEYOU","LOVE","HUG","JAAN","BABY","CRUSH","CUTE","PYAR","MISSYOU","HELLO","BYEE","KING","QUEEN","KASHYAP","INDIA","BHARAT","SORRY","THANKYOU","GOODMORNING","GOODNIGHT","HAPPYBIRTHDAY"]
-
 ALL_COMMANDS_TEXT = """╔════════════════════╗
 ║ 🔥 DEMON BOT - ALL COMMAND 🔥 ║
 ━━━━━━━━━━━━━━━━━━
 Total 170+ Command | Sirf Owner / Sudo
 ━━━━━━━━━━━━━━━━━━
-
-ℹ️ INFO / BASIC
-/MYID /PEHCHAN /JANKARI /GROUPID
-/PING /CHALU /BAREME /UPTIME
-/TAG /TAGALL /MALIK /NIYAM /BOL
-
-🎭 FUN / MASTI
-/SHAYARI /JOKE /HASO /TRUTH /SACH /DARE /HIMMAT
-/PASA /SIKKA /GHUMAO /KAINCHI /JADU
-/CHUNO /SAWAL /ANK
-/GALE /PANJA /HATH /PYAR /TARIFF /JODI /VICHAR
-/GIN /ULTA /BADA /CHOTA /GINO
-/SAMAY /TARIKH /BEHISAAB
-
-✨ NEW 30 COMMAND
-/POLL /QUIZ /WYR /NHIE /RIDDLE /8BALL /FACT /QUOTE /GUESS /RPS
-/SLOT /LOVECALC /FONT /ART /SHOUT
-/MOVIE /CRICKET /NEWS /HOROSCOPE
-/WARN /MUTE /UNMUTE /PURGE /GIVEAWAY
-/COUNT /REMINDER /NOTE /TRANSLATE /AI
-
-🔥 MAST 40 COMMAND
-/DICE /COIN /TOSS /LUDO /KING /QUEEN /TOP /ACTIVE
-/IDCARD /PROFILE /LUCKY /ZODIAC /TODAY /PARTY /DANCE /SING
-/STORY /RAP /POEM /ECHO /SAY /MIMIC /VS /BATTLE
-/TEAM /WINNER /LOSER /RESPECT /SHOUTOUT2 /WELCOME2 /BYE2
-/GM2 /GN2 /PASSWORD /RANDOMNAME /AGE /COUNTWORD
-/REVERSE2 /UPPER2 /LOWER2
-
-👋 SWAGAT
-/SWAGATSET /SWAGATOFF /SWAGATTEST
-
-👑 ADMIN
-/NIKAL /WAPAS /DHAKKA /CHUP /BOLNEDE
-/CHETAVNI /MITAO /CHIPKAO /HATAO
-
-⚙️ AUTO
-/AUTOPIN /AUTOREACT /AUTOREPLY /AUTOSHAYARI
-/AUTOGM /AUTOGN /AUTOTAGALL /AUTOSTICKER
-/AUTOMOTIVATE /AUTOTHANK /AUTOHELLO /AUTOBYE
-/AUTOMEME /AUTOGAME /AUTOSHOUT /AUTOREPEAT
-/AUTOTRUTH /AUTOPOLL /AUTOQUIZ /AUTOBIRTHDAY
-/AUTOSTATS /AUTOJOIN /AUTOLEAVE /AUTOSHOUTOUT
-/AUTOCOMPLIMENT /AUTOEMOJI /AUTOPHOTO /AUTOVOICE
-/AUTOBIO /AFK /BACK
-
-👑 MASTER
-/ALLOFF /ALLON /ADDSUDO /DELSUDO /SUDOLIST
-
-🛠️ HELP
-/HELP /MADAD /COMMAND /MENU /ALL
-
-✨ EXTRA
-/EXTRA /MEME /MOTIVATE /SONG /BIRTHDAY /STATS
+ℹ️ /MYID /PEHCHAN /JANKARI /GROUPID /PING /CHALU /BAREME /UPTIME /TAG /TAGALL /MALIK /NIYAM /BOL
+🎭 /SHAYARI /JOKE /HASO /TRUTH /SACH /DARE /HIMMAT /PASA /SIKKA /GHUMAO /KAINCHI /JADU /CHUNO /SAWAL /ANK /GALE /PANJA /HATH /PYAR /TARIFF /JODI /VICHAR /GIN /ULTA /BADA /CHOTA /GINO /SAMAY /TARIKH /BEHISAAB
+✨ NEW 30: /POLL /QUIZ /WYR /NHIE /RIDDLE /8BALL /FACT /QUOTE /GUESS /RPS /SLOT /LOVECALC /FONT /ART /SHOUT /MOVIE /CRICKET /NEWS /HOROSCOPE /WARN /MUTE /UNMUTE /PURGE /GIVEAWAY /COUNT /REMINDER /NOTE /TRANSLATE /AI
+🔥 MAST 40: /DICE /COIN /TOSS /LUDO /KING /QUEEN /TOP /ACTIVE /IDCARD /PROFILE /LUCKY /ZODIAC /TODAY /PARTY /DANCE /SING /STORY /RAP /POEM /ECHO /SAY /MIMIC /VS /BATTLE /TEAM /WINNER /LOSER /RESPECT /SHOUTOUT2 /WELCOME2 /BYE2 /GM2 /GN2 /PASSWORD /RANDOMNAME /AGE /COUNTWORD /REVERSE2 /UPPER2 /LOWER2
+👋 /SWAGATSET /SWAGATOFF /SWAGATTEST
+👑 /NIKAL /WAPAS /DHAKKA /CHUP /BOLNEDE /CHETAVNI /MITAO /CHIPKAO /HATAO
+⚙️ AUTO: /AUTOPIN /AUTOREACT /AUTOREPLY /AUTOSHAYARI /AUTOGM /AUTOGN /AUTOTAGALL /AUTOSTICKER /AUTOMOTIVATE /AUTOTHANK /AUTOHELLO /AUTOBYE /AUTOMEME /AUTOGAME /AUTOSHOUT /AUTOREPEAT /AUTOTRUTH /AUTOPOLL /AUTOQUIZ /AUTOBIRTHDAY /AUTOSTATS /AUTOJOIN /AUTOLEAVE /AUTOSHOUTOUT /AUTOCOMPLIMENT /AUTOEMOJI /AUTOPHOTO /AUTOVOICE /AUTOBIO /AFK /BACK
+👑 /ALLOFF /ALLON /ADDSUDO /DELSUDO /SUDOLIST
+🛠️ /HELP /MADAD /COMMAND /MENU /ALL
+✨ /EXTRA /MEME /MOTIVATE /SONG /BIRTHDAY /STATS
 ━━━━━━━━━━━━━━━━━━
 OWNER: KASHYAP 👑 | BOT: 𝒹𝑒𝓂𝑜𝓃_17_099_𝒷𝑜𝓉
 """
@@ -193,22 +149,21 @@ async def bol(update, context):
     if not await check(update): return
     if context.args: await send(update, box(fancy(" ".join(context.args))))
 
-# ===== TAGALL - TERA WALA =====
+# ===== TAGALL - FIX WALA, AB ERROR NAHI AAYEGA =====
 async def tagall(update, context):
     if not await check(update): return
     if update.effective_chat.type == "private":
         await send(update, box("Ye command sirf group me chalegi!")); return
     await send(update, box("TAG KAR RAHA HU SABKO... 🔥\nRuk ja thoda!"))
     try:
-        members = []
-        async for m in context.bot.get_chat_members(update.effective_chat.id):
-            if not m.user.is_bot:
-                members.append(m.user)
-        if not members:
-            await send(update, box("Koi member nahi mila!")); return
+        if not KNOWN_USERS:
+            await send(update, box("Abhi koi naam save nahi hai!\nPehle sabko 1 baar Hi likhne ko bolo, fir /TAGALL karo!"))
+            return
+        members = list(KNOWN_USERS.items())
         batch = []
-        for user in members:
-            batch.append(f"[{user.first_name}](tg://user?id={user.id})")
+        for uid, name in members:
+            safe_name = str(name).replace("[","").replace("]","")
+            batch.append(f"[{safe_name}](tg://user?id={uid})")
             if len(batch) == 5:
                 text = " ".join(batch) + "\n\nHello Haayy 👋🔥"
                 await update.effective_message.reply_text(text, parse_mode="Markdown")
@@ -220,7 +175,7 @@ async def tagall(update, context):
         total = len(members)
         await send(update, f"✨ Tag All Completed Successfully ✨\n👥 Total Members Tagged: {total}\n💫 Powered by your 𝒹𝑒𝓂𝑜𝓃_17_099_𝒷𝑜𝓉")
     except Exception as e:
-        await send(update, box(f"Tag nahi ho paya! Bot ko admin banao.\nError: {e}"))
+        await send(update, box(f"Tag nahi ho paya!\nError: {e}"))
 
 # ===== FUN =====
 async def shayari(update, context):
@@ -338,7 +293,7 @@ async def art(update, context):
         await send(update, box(txt)); return
     name = " ".join(context.args); await send(update, f"```\n{bindi_art(name)}\n```")
 
-# ===== NEW 30 COMMAND =====
+# ===== NEW 30 =====
 async def poll(update, context):
     if not await check(update): return
     q = " ".join(context.args) if context.args else "Aaj Best Kaun?"
@@ -389,10 +344,10 @@ async def shout(update, context):
     await send(update, box(" ".join(context.args).upper() + " !!! 🔊"))
 async def movie(update, context):
     if not await check(update): return
-    await send(update, box("🎬 MOVIE: Naam batao, main story bata dunga! Abhi ke liye - 3 Idiots dekh lo, mast hai!"))
+    await send(update, box("🎬 MOVIE: 3 Idiots dekh lo, mast hai!"))
 async def cricket(update, context):
     if not await check(update): return
-    await send(update, box("🏏 CRICKET: Aaj ka score check karne ke liye Cricbuzz dekh lo!"))
+    await send(update, box("🏏 CRICKET: Aaj ka score Cricbuzz pe dekh lo!"))
 async def news(update, context):
     if not await check(update): return
     await send(update, box("📰 AAJ KI NEWS:\n1. Group me bot full active hai 🔥\n2. Sab mast hai\n3. Kal party hai!"))
@@ -440,7 +395,7 @@ async def ai(update, context):
     if not context.args: await send(update, box("/AI tu kaun hai?")); return
     await send(update, box("🤖 AI: Main Demon Bot hu! Tu jo puchhega main mast jawab dunga!"))
 
-# ===== MAST 40 COMMAND =====
+# ===== MAST 40 =====
 async def dice(update, context):
     if not await check(update): return
     await send(update, box(f"🎲 DICE: {random.randint(1,6)} {random.randint(1,6)}"))
@@ -737,6 +692,7 @@ async def auto_watcher(update, context):
         chat_id = update.effective_chat.id; user = update.effective_user
         text = (msg.text or "").lower(); orig = msg.text or ""
         MSG_COUNT[user.id] = MSG_COUNT.get(user.id,0)+1
+        KNOWN_USERS[user.id] = user.first_name
         if msg.reply_to_message and msg.reply_to_message.from_user.id in AFK_USERS:
             await send(update, box(f"😴 {msg.reply_to_message.from_user.first_name} abhi AFK hai! Wajah: {AFK_USERS[msg.reply_to_message.from_user.id]}"))
         if chat_id in AUTO_HELLO and "hi" in text: await send(update, box(f"Hi {user.first_name}! Welcome! 🔥"))
@@ -772,6 +728,7 @@ async def new_member_handler(update, context):
     try:
         for m in update.message.new_chat_members:
             cid = update.effective_chat.id
+            KNOWN_USERS[m.id] = m.first_name
             if cid in WELCOME: await send(update, box(WELCOME[cid].replace("{name}", m.first_name)))
             elif cid in AUTO_JOIN: await send(update, box(f"Welcome {m.first_name}! 🔥"))
     except: pass
